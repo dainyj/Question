@@ -1,3 +1,4 @@
+package operator_Ex;
 public class OperatorExample7 {
 	public static void main(String[] args) {
 		int a = 10;

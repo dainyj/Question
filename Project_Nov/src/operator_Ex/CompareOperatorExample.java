@@ -1,3 +1,4 @@
+package operator_Ex;
 public class CompareOperatorExample {
 	public static void main(String[] args) {
 		int num1 = 10;

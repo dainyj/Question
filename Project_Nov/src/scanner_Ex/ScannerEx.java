@@ -1,3 +1,4 @@
+package scanner_Ex;
 import java.util.Scanner; // scanner 사용을 위해 추가
 // ctrl+shift+O 단축키, 아래 scanner변수 지정 후 사용
 

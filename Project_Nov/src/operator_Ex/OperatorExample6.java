@@ -1,3 +1,4 @@
+package operator_Ex;
 public class OperatorExample6 {
 	public static void main(String[] args) {
 		boolean bPlay = true;
