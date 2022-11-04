@@ -61,7 +61,10 @@ public class ifchangeswitch {
 //		case 70:
 //			System.out.println("C");
 //			break;
-		}
+//		}
+		
+		
 	}
+}
 
 
