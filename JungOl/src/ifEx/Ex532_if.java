@@ -2,7 +2,7 @@ package ifEx;
 
 import java.util.Scanner;
 
-public class Ex532 {
+public class Ex532_if {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		double n1 = sc.nextDouble();

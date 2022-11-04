@@ -1,6 +1,6 @@
 package repeat;
 
-public class Ex536 {
+public class Ex536_while_for_do {
 	public static void main(String[] args) {
 		int i = 1;
 				

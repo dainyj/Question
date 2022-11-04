@@ -2,19 +2,19 @@ package ifEx;
 
 import java.util.Scanner;
 
-public class Ex528 {
+public class Ex121 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		int i1 = sc.nextInt();
+		int num = sc.nextInt();
 		sc.close();
 
-		System.out.println(i1);
-
-		if (i1 < 0) {
+		if (num == 0) {
+			System.out.println("zero");
+		} else if (num > 0) {
+			System.out.println("plus");
+		} else {
 			System.out.println("minus");
-
 		}
-
 	}
 
 }

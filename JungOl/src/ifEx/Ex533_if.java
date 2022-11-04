@@ -2,7 +2,7 @@ package ifEx;
 
 import java.util.Scanner;
 
-public class Ex533 {
+public class Ex533_if {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		char gender = sc.next().charAt(0);
@@ -27,11 +27,12 @@ public class Ex533 {
 
 		}
 
+		//if (gender == 'M' && age>=18) {
+		//System.out.println("MAN");
+		//} else if (gender =='M' && age<18) {
+		//System.out.println("BOY");
+		//}		
+		
 	}
 }
 
-//if (gender == 'M' && age>=18) {
-//System.out.println("MAN");
-//} else if (gender =='M' && age<18) {
-//System.out.println("BOY");
-//}
