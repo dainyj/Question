@@ -14,22 +14,22 @@ public class Ex633 {
 //		System.out.println("4. China");
 //		System.out.print("number? ");
 //		int inp = sc.nextInt();
-	//
+//
 //		if (inp == 1) {
-//			System.out.println("Seoul" + "\n");
+//			System.out.println("Seoul");
 //		} else if (inp == 2) {
-//			System.out.println("Washington" + "\n");
+//			System.out.println("Washington");
 //		} else if (inp == 3) {
-//			System.out.println("Tokyo" + "\n");
+//			System.out.println("Tokyo");
 //		} else if (inp == 4) {
-//			System.out.println("Beijing" + "\n");
+//			System.out.println("Beijing");
 //		} else {
 //			System.out.println("none");
 //			sc.close();
 //			break;
-	//		}
-//		여기에 줄바꿈 넣기
-	//}		
+//		}
+//		System.out.println();
+//}		
 
 //	2번	
 //		int inp;
@@ -91,6 +91,6 @@ public class Ex633 {
 	
 }
 
-// if를 사용해서 벗어나게 if (!( 1 <= inp && inp <= 4)) { 
+// if를 사용해서 벗어나게 새로운 방법 if (!( 1 <= inp && inp <= 4)) { 
 //							System.out.println("none"); }
 
