@@ -1,4 +1,4 @@
-package p562_array;
+package q562_array;
 
 import java.util.Scanner;
 
