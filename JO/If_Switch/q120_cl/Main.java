@@ -1,4 +1,4 @@
-package q120;
+package q120_cl;
 
 import java.util.Scanner;
 
