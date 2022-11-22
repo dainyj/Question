@@ -7,12 +7,12 @@ class Score {
 	private Student[] stu;
 
 	public Score() {
-		stu = new Student[2];
+		stu = new Student[2];    // heap영역에 주소값이 들어가는 배열이 생성
 		for (int i = 0; i < stu.length; i++) {
 			String name = sc.next();
 			int kor = sc.nextInt();
 			int eng = sc.nextInt();
-			stu[i] = new Student(name, kor, eng);
+			stu[i] = new Student(name, kor, eng); // heap영역에 생성된 주소값이 들어가는 배열에 각각 heap영역에 생성
 		}
 
 		for (int i = 0; i < stu.length; i++) {
