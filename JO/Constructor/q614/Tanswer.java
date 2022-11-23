@@ -3,7 +3,6 @@ import java.util.Scanner;
 
 class Student1{
 	private String schoolName;
-	
 	private int grade;
 	
 	public void setSchoolName(String schoolName) {
