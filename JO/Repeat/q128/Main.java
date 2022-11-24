@@ -8,25 +8,31 @@ public class Main {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		int[] inp = new int[50];
-
-//		inp[i] 배열 입력
-		for (int i = 0; i < inp.length; i++) {
-			inp[i] = sc.nextInt();
-//			System.out.print(inp[i]+" ");
-			if (inp[i] == 0) {
+//		for문 사용
+		int count = 0;
+		for (;;) {
+			int inp = sc.nextInt();
+			if (inp == 0) {
 				break;
 			}
-		}
-		sc.close();
-		int count = 0;
-		for (int i = 0; i < inp.length; i++) {
-			if (inp[i] % 3 == 0 || inp[i] % 5 == 0) {
+			if (inp % 3 != 0 && inp % 5 != 0) {
 				count++;
 			}
 		}
-//		System.out.print(count + " ");
-		System.out.println(inp.length - count);
+//		do while문 사용
+		int cnt = 0;
+		do {
+			int inp = sc.nextInt();
+			if (inp == 0) {
+				break;
+			} else if (inp % 3 != 0 && inp % 5 != 0) {
+				cnt++;
+			}
+		} while (true);
+		sc.close();
+		
+		System.out.println(count);
+		System.out.println(cnt);
 
 	} //
 }
