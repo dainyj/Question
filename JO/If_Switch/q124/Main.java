@@ -1,8 +1,10 @@
+/*1~12사이의 정수를 입력받아 평년의 경우 입력받은 월을 입력받아 평년의 경우 해당 월의 날수를 출력하는 프로그램을 작성하시오.
+입력 2 출력 28*/
 package q124;
 
 import java.util.Scanner;
 
-public class Ex124 {
+public class Main {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int num = sc.nextInt();

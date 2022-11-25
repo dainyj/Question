@@ -2,9 +2,10 @@ package q615_2;
 
 import java.util.Scanner;
 
-class Score {
+class Score {   //클래스1
 	Scanner sc = new Scanner(System.in);
-	private Student[] stu;
+	
+	private Student[] stu; // 배열 Score의 멤버변수 
 
 	public Score() {
 		stu = new Student[2];    // heap영역에 주소값이 들어가는 배열이 생성
@@ -41,7 +42,7 @@ class Score {
 	}
 }
 
-class Student {
+class Student { //클래스2
 	private String name;
 	private int kor;
 	private int eng;
@@ -65,7 +66,7 @@ class Student {
 	}
 }
 
-public class Main {
+public class Main { //클래스3
 	public static void main(String[] args) {
 		Score sco = new Score();
 		sco.printAvg();

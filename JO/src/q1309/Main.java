@@ -37,6 +37,8 @@ public class Main {
 //	}// fac end
 
 /*
- * 재귀호출 void method(int n) { if(n==0) return; System.out.println(n);
+ * 재귀호출 void method(int n) {
+ *  if(n==0) return; 
+ *  System.out.println(n);
  * method(--n);
  */
