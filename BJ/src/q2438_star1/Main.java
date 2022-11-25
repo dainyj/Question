@@ -1,3 +1,10 @@
+/*
+*
+**
+***
+****
+*****
+*/
 package q2438_star1;
 
 import java.util.Scanner;
