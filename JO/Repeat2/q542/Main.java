@@ -9,21 +9,17 @@ public class Main {
 		}
 		System.out.println();
 //	2.
-		int i = 10;
-		while (true) {
-			System.out.print(i + " ");
-			i++;
-			if (i == 21) {
-				break;
-			}
+		int j = 10;
+		while (j <= 20) {
+			System.out.print(j++ + " ");
 		}
 		System.out.println();
+
 //	3.	
-		int j = 10;
+		int k = 10;
 		do {
-			System.out.print(j + " ");
-			j++;
-		} while (j >= 10 && j <= 20);
+			System.out.print(k++ + " ");
+		} while (k <= 20);
 
 	}
 }
