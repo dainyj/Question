@@ -10,26 +10,61 @@ public class Main {
 		int num = sc.nextInt();
 		sc.close();
 
-		switch (num) {
-		case 1:
-		case 3:
-		case 5:
-		case 7:
-		case 8:
-		case 10:
-		case 12:
-			System.out.println("31");
-			break;
-		case 4:
-		case 6:
-		case 9:
-		case 11:
-			System.out.println("30");
-			break;
-		case 2:
+//	방법1	
+//		if(num==2) {
+//			System.out.println("28");
+//		}else if(num <= 7 && num % 2 != 0) {
+//			System.out.println("31");
+//		} else if (num < 7 && num % 2 == 0) {
+//			System.out.println("30");
+//		} else if (num <= 12 && num % 2 == 0) {
+//			System.out.println("31");
+//		} else if (num < 12 && num % 2 != 0) {
+//			System.out.println("30");			
+//		}
+
+//	방법2
+		if (num == 2) {
 			System.out.println("28");
-			break;
+		} else if (num <= 7 && num != 2) {
+			switch (num % 2) {
+			case 0:
+				System.out.println("30");
+				break;
+			default:
+				System.out.println("31");
+			}
+		} else if (num > 7 && num <= 12) {
+			switch (num % 2) {
+			case 0:
+				System.out.println("31");
+				break;
+			default:
+				System.out.println("30");
+			}
 		}
+
+//	방법3
+//		switch (num) {
+//		case 1:
+//		case 3:
+//		case 5:
+//		case 7:
+//		case 8:
+//		case 10:
+//		case 12:
+//			System.out.println("31");
+//			break;
+//		case 4:
+//		case 6:
+//		case 9:
+//		case 11:
+//			System.out.println("30");
+//			break;
+//		case 2:
+//			System.out.println("28");
+//			break;
+//		}
 	}
 
 }
