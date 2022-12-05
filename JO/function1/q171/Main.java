@@ -5,8 +5,8 @@ package q171;
 
 import java.util.Scanner;
 
-class Add {
-	public Add(int n) {
+public class Main {
+	public void Add(int n) {
 		int sum = 0;
 		for (int i = 0; i <= n; i++) {
 			sum += i;
@@ -14,15 +14,13 @@ class Add {
 		System.out.println(sum);
 	}
 
-}// c_A end
-
-public class Main {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int inp = sc.nextInt();
 //		System.out.println(inp);
 		sc.close();
-		new Add(inp);
+		Main m = new Main();
+		m.Add(inp);
 
 	}
-}// c_M end
+}
