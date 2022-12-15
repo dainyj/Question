@@ -17,7 +17,7 @@ public class LoginDAO {
 	private ResultSet rs;
 
 //===연동 확인=============================================================		
-//	public MemberDAO() { // Logindata table 출력해봄.
+//	public LoginDAO() { // Logindata table 출력해봄.
 //		try {
 //		Class.forName(driver);
 //		conn = DriverManager.getConnection(url, user, password);
@@ -42,16 +42,28 @@ public class LoginDAO {
 			connDB();
 
 			String query = "SELECT * FROM LOGINDATA";
+			if (id != null) {
+				query += " where id='" + id + "'";
+			}
+			System.out.println("SQL : " + query);
 			rs = stmt.executeQuery(query); // 쿼리 실행
-//			System.out.println("SQL : " + query);
+			rs.last();// 마지막 레코드로 이동.
+			System.out.println("rs.getRow() : " + rs.getRow()); // 이동??? 뭐라고 말하지 단어 생각 좀 나라ㅜㅜㅜ
 
-			while (rs.next()) {// 한칸씩 이동
-				String did = rs.getString("id");
-				String dpwd = rs.getString("pwd");
+			if (rs.getRow() == 0) {
+				System.out.println("0 row selected.");
+			} else {
+				System.out.println(rs.getRow() + " rows selected.");
+				rs.previous(); // 이전으로 이동 아마 처음시작부분으로 이동하는듯 확인해보기
+
+				while (rs.next()) {// 한칸씩 이동
+					String did = rs.getString("id");
+					String dpwd = rs.getString("pwd");
 //				System.out.println(did + " " + dpwd + " ");
 
-				LoginVo data = new LoginVo(id, dpwd);
-				list.add(data);
+					LoginVo data = new LoginVo(did, dpwd);
+					list.add(data);
+				}
 			}
 
 		} catch (Exception e) {
