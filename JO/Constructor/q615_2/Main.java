@@ -1,3 +1,7 @@
+/*입력
+Junho 88 100
+Seonbin 95 96
+*/
 package q615_2;
 
 import java.util.Scanner;
