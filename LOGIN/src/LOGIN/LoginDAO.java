@@ -48,7 +48,7 @@ public class LoginDAO {
 			System.out.println("SQL : " + query);
 			rs = stmt.executeQuery(query); // 쿼리 실행
 			rs.last();// 마지막 레코드로 이동.
-			System.out.println("rs.getRow() : " + rs.getRow()); // 이동??? 뭐라고 말하지 단어 생각 좀 나라ㅜㅜㅜ
+			System.out.println("rs.getRow() : " + rs.getRow());
 
 			if (rs.getRow() == 0) {
 				System.out.println("0 row selected.");

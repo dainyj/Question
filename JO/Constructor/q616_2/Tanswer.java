@@ -44,7 +44,9 @@ class Triangle {
 		int x = 0, y = 0;
 		for (int i = 0; i < p.length; i++) {
 			x += p[i].getX();
+			System.out.println(x+" ");
 			y += p[i].getY();
+			System.out.println(y+" ");
 		}
 		System.out.printf("(%.1f, %.1f)\n", (double) x / 3, (double) y / 3);
 	}
