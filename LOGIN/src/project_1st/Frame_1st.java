@@ -61,9 +61,9 @@ public class Frame_1st extends WindowAdapter implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (blog.getLabel().equals("로그인")) {
-
-		} 
+//		if (blog.getLabel().equals("로그인")) {
+//
+//		} 
 		if (bsignUp.getLabel().equals("회원가입")) {
 			f1.setVisible(false);
 			f2.setVisible(true);
