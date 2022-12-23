@@ -6,7 +6,7 @@ package dialog;
 //import java.awt.Frame;
 //import java.awt.Label;
 // 
-//원래 코드
+////원래 코드
 //public class DialogTest {
 //    public static void main(String[] args) {
 //        Frame f = new Frame("Parent");
@@ -45,18 +45,20 @@ public class DialogTest extends WindowAdapter implements ActionListener {
 	private Dialog info;
 
 	public DialogTest() {
-		new Frame("Parent");
-		f.setSize(300, 200);
+		f = new Frame("Parent");
+		f.setSize(400,400);
+		f.setLocation(300, 300);
+
+		info = new Dialog(f, "Infomation", true); // modal 설정 true/false
+		info.setSize(140, 90);
+		info.setLocation(300, 300);
+		info.setLayout(new FlowLayout());
 
 		msg = new Label("This id monal Dialog", Label.CENTER);
 		ok = new Button("OK");
 		ok.addActionListener(this);
 		f.addWindowListener(this);
-		
-		info = new Dialog(f, "Infomation", true); // modal 설정 true/false
-		info.setSize(140, 90);
-		info.setLocation(50, 50);
-		info.setLayout(new FlowLayout());
+
 		info.add(msg);
 		info.add(ok);
 
@@ -78,8 +80,7 @@ public class DialogTest extends WindowAdapter implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("OK")) {
 //			System.exit(0);//전체 화면이 종료된다.
-			info.dispose(); //info창만 종료
+			info.dispose(); // info창만 종료
 		}
 	}
-
 }
