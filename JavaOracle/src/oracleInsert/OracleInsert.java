@@ -17,7 +17,7 @@ public class OracleInsert {
 
 			Statement stmt = conn.createStatement();
 
-			String sql = "SELECT * FROM dept";
+			String sql = "SELECT * FROM dept"; // 조회 쿼리
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				System.out.print(rs.getString("deptno") + " ");

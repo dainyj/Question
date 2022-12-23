@@ -18,13 +18,13 @@ public class Frame_1st extends WindowAdapter implements ActionListener {
 	private Label lid, lpwd;
 
 	public Frame_1st() {
-		f1 = new Frame("로그인"); // loginFrame
+		f1 = new Frame("1st Frame"); // loginFrame
 		f1.setLayout(new FlowLayout());
 		f1.setSize(400, 300);
 		f1.setLocation(500, 100);
 		f1.addWindowListener(this);
 
-		f2 = new Frame("회원가입");
+		f2 = new Frame("2nd Frame");
 		f2.setLayout(null);
 		f2.setSize(400, 300);
 		f2.setLocation(300, 100);
@@ -33,7 +33,7 @@ public class Frame_1st extends WindowAdapter implements ActionListener {
 		blog = new Button("로그인");
 		blog.addActionListener(this);
 
-		bsignUp = new Button("회원가입");
+		bsignUp = new Button("2nd Frame");
 		bsignUp.addActionListener(this);
 
 		lid = new Label("ID", Label.RIGHT);
@@ -62,9 +62,8 @@ public class Frame_1st extends WindowAdapter implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 //		if (blog.getLabel().equals("로그인")) {
-//
 //		} 
-		if (bsignUp.getLabel().equals("회원가입")) {
+		if (e.getActionCommand().equals("2nd Frame")) {
 			f1.setVisible(false);
 			f2.setVisible(true);
 		}
