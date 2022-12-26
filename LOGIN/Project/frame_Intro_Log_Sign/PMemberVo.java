@@ -13,6 +13,10 @@ public class PMemberVo {
 		this.email = email;
 	}
 
+	public PMemberVo() {
+		System.out.println(id + " " + password + " " + phnum + " " + email);
+	}
+
 	public String getId() {
 		return id;
 	}

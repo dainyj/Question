@@ -18,12 +18,13 @@ import frame_Menu.Menu;
 
 public class Login extends WindowAdapter implements ActionListener {
 	private Frame f3;
-	private Button blogin, ok;
-	private Label lid2, lpwd2, ls, lf;
+	private Button blogin, ok, sign;
+	private Label lid2, lpwd2, lf;
 	private TextField tfid2, tfpwd2;
 	private Dialog info;
 	private PMemberDAO dao;
-	
+
+	SignUp su = new SignUp();
 	Menu mn = new Menu();
 
 //	종료 메서드
@@ -36,37 +37,60 @@ public class Login extends WindowAdapter implements ActionListener {
 	}
 
 	public Login() { // setting
-		
+
 		dao = new PMemberDAO();
 
 //		Frame setting
 		f3 = new Frame("로그인");
-		f3.setLayout(new FlowLayout());
-		f3.setSize(400, 400);
+		f3.setLayout(null);
+//		f3.setLayout(new FlowLayout());
+		f3.setSize(300, 300);
 		f3.setLocation(300, 300);
 		f3.addWindowListener(this);
 
-//		Button setting
+//		Button setting O
 		blogin = new Button("로그인");
+		blogin.setSize(160, 30);
+		blogin.setLocation(100, 180);
 		blogin.addActionListener(this);
-		ok = new Button("OK");// Dialog 버튼
+
+		sign = new Button("회원가입");
+		sign.setSize(60, 30);
+		sign.setLocation(200, 230);
+		sign.addActionListener(this);
+
+		ok = new Button("확인");// Dialog 버튼
+		ok.setSize(30, 30);
+		ok.setLocation(60, 60);
 		ok.addActionListener(this);
 
-//		Label setting
-		lid2 = new Label("ID", Label.RIGHT);
-		lpwd2 = new Label("PASSWORD", Label.RIGHT);
-//		ls = new Label("로그인 성공", Label.CENTER); // Dialog
+//		Label setting O
+		lid2 = new Label("ID", Label.CENTER);
+		lid2.setSize(80, 20);
+		lid2.setLocation(30, 80);
+		lpwd2 = new Label("PASSWORD", Label.CENTER);
+		lpwd2.setSize(80, 20);
+		lpwd2.setLocation(30, 130);
+		
 		lf = new Label("로그인 실패", Label.CENTER); // Dialog
+		lf.setSize(60, 30);
+		lf.setLocation(45, 35);
 
-//		TextField setting
+//		TextField setting O
 		tfid2 = new TextField(10);
+		tfid2.setSize(100, 20);
+		tfid2.setLocation(150, 80);
 		tfpwd2 = new TextField(10);
+		tfpwd2.setSize(100, 20);
+		tfpwd2.setLocation(150, 130);
+		tfpwd2.setEchoChar('*');
 
 //		Dialog setting
 		info = new Dialog(f3, "Infomation", true); // modal 설정 true/false
-		info.setSize(140, 90);
+		info.setSize(150, 100);
 		info.setLocation(300, 300);
-		info.setLayout(new FlowLayout());
+		info.setLayout(null);
+//		info.setLayout(new FlowLayout());
 		info.addWindowListener(this);
 
 	}
@@ -77,6 +101,7 @@ public class Login extends WindowAdapter implements ActionListener {
 		f3.add(lpwd2);
 		f3.add(tfpwd2);
 		f3.add(blogin);
+		f3.add(sign);
 
 		info.add(ok);
 		f3.setVisible(true);
@@ -84,7 +109,7 @@ public class Login extends WindowAdapter implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 
-		if (e.getActionCommand().equals("OK")) {
+		if (e.getActionCommand().equals("확인")) {
 			info.dispose(); // info창만 종료
 		}
 
@@ -102,7 +127,7 @@ public class Login extends WindowAdapter implements ActionListener {
 			}
 
 //				Dialog 적용하기 
-			if (tfid2.getText() == "" && tfpwd2.getText() == ""){// 로그인창 비었을때 왜 성공뜸?
+			if (tfid2.getText() == "" && tfpwd2.getText() == "") {// 로그인창 비었을때 왜 성공뜸?
 				info.add(lf);
 				info.setVisible(true);
 			}
@@ -115,7 +140,11 @@ public class Login extends WindowAdapter implements ActionListener {
 				info.setVisible(true);
 			}
 		}
-
+		if (e.getActionCommand().equals("회원가입")) {
+			f3.setVisible(false);
+			su.startFrame();
+			su.getF2().setVisible(true);
+		}
 	}
 
 	public static void main(String[] args) {
