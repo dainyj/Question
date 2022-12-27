@@ -1,19 +1,13 @@
 package frame_Intro_Log_Sign;
 
 import java.awt.Button;
-import java.awt.FlowLayout;
-import java.awt.Frame;
 import java.awt.Label;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
+import javax.swing.JFrame;
 
 import InsertDelete.InDe;
 
@@ -21,32 +15,29 @@ import InsertDelete.InDe;
 // 정보 입력하고 bsignUp 버튼 클릭 시 DB에 저장되도록 연동, DB에 MEMBER TABLE 필요
 
 public class SignUp extends WindowAdapter implements ActionListener {
-	private Frame f2, fout;
+	private JFrame f2, fout;
 	private Button bsignUp, bout, bout2;
 	private Label lid, lpwd, lpn, lem, ltitle, lid2;
 	private TextField tfid, tfpwd, tfpn, tfem, tfid2;
 
-//	종료 메서드
-	public void windowClosing(WindowEvent e) {
-		System.exit(0);
-	}
 
 //	다른 클래스에서 프레임 불러오기에 사용하려고
-	public Frame getF2() {
+	public JFrame getF2() {
 		return f2;
 	}
 
 	public SignUp() {
 
 //		Frame setting 1개
-		f2 = new Frame("회원가입");
+		f2 = new JFrame("회원가입");
 		f2.setLayout(null);
 //		f2.setLayout(new FlowLayout());
 		f2.setSize(400, 400);
 		f2.setLocation(300, 300);
 		f2.addWindowListener(this);
+		f2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		fout = new Frame("탈퇴하기");
+		fout = new JFrame("탈퇴하기");
 		fout.setLayout(null);
 //		fout.setLayout(new FlowLayout());
 		fout.setSize(150, 150);
@@ -66,7 +57,7 @@ public class SignUp extends WindowAdapter implements ActionListener {
 
 		bout2 = new Button("탈퇴");	
 		bout2.setSize(100, 30);
-		bout2.setLocation(30, 90);
+		bout2.setLocation(30, 60);
 		bout2.addActionListener(this);
 
 //		Label setting 5개
@@ -92,7 +83,7 @@ public class SignUp extends WindowAdapter implements ActionListener {
 
 		lid2 = new Label("ID", Label.RIGHT); // 탈퇴프레임
 		lid2.setSize(30, 20);
-		lid2.setLocation(10, 60);
+		lid2.setLocation(10, 30);
 		
 //		TextField 4개
 		tfid = new TextField();
@@ -113,7 +104,7 @@ public class SignUp extends WindowAdapter implements ActionListener {
 		
 		tfid2 = new TextField(); // 탈퇴프레임
 		tfid2.setSize(80, 20);
-		tfid2.setLocation(50, 60);
+		tfid2.setLocation(50, 30);
 	}
 
 	public void startFrame() {

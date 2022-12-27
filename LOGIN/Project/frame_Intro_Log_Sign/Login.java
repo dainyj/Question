@@ -2,8 +2,6 @@ package frame_Intro_Log_Sign;
 
 import java.awt.Button;
 import java.awt.Dialog;
-import java.awt.FlowLayout;
-import java.awt.Frame;
 import java.awt.Label;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
@@ -12,12 +10,14 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
+
 import frame_Menu.Menu;
 
 // ID 라벨, 텍스트필드/ PWD 라벨, 텍스트필드/ 로그인 버튼
 
 public class Login extends WindowAdapter implements ActionListener {
-	private Frame f3;
+	private JFrame f3;
 	private Button blogin, ok, sign;
 	private Label lid2, lpwd2, lf;
 	private TextField tfid2, tfpwd2;
@@ -27,12 +27,7 @@ public class Login extends WindowAdapter implements ActionListener {
 	SignUp su = new SignUp();
 	Menu mn = new Menu();
 
-//	종료 메서드
-	public void windowClosing(WindowEvent e) {
-		System.exit(0);
-	}
-
-	public Frame getF3() {
+	public JFrame getF3() {
 		return f3;
 	}
 
@@ -41,12 +36,13 @@ public class Login extends WindowAdapter implements ActionListener {
 		dao = new PMemberDAO();
 
 //		Frame setting
-		f3 = new Frame("로그인");
+		f3 = new JFrame("로그인");
 		f3.setLayout(null);
 //		f3.setLayout(new FlowLayout());
 		f3.setSize(300, 300);
 		f3.setLocation(300, 300);
 		f3.addWindowListener(this);
+		f3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 //		Button setting O
 		blogin = new Button("로그인");
@@ -56,7 +52,7 @@ public class Login extends WindowAdapter implements ActionListener {
 
 		sign = new Button("회원가입");
 		sign.setSize(60, 30);
-		sign.setLocation(200, 230);
+		sign.setLocation(200, 220);
 		sign.addActionListener(this);
 
 		ok = new Button("확인");// Dialog 버튼

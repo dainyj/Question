@@ -8,27 +8,25 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.JFrame;
+
 // Q&A 추가하기
 public class Notice extends WindowAdapter implements ActionListener {
-	private Frame f6;
+	private JFrame f6;
 	private Label lnt, lq;
 
-//	종료 메서드
-	public void windowClosing(WindowEvent e) {
-		System.exit(0);
-	}
-
-	public Frame getF6() {
+	public JFrame getF6() {
 		return f6;
 	}
 
 	public Notice() {
 //		Frame setting
-		f6 = new Frame("Notice");
+		f6 = new JFrame("Notice");
 		f6.setLayout(new FlowLayout());
 		f6.setSize(400, 400);
 		f6.setLocation(300, 300);
 		f6.addWindowListener(this);
+		f6.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 //		Label setting
 		lnt = new Label("NOTICE");

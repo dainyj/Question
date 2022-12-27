@@ -1,18 +1,16 @@
 package frame_Menu;
 
 import java.awt.Button;
-import java.awt.FlowLayout;
-import java.awt.Frame;
 import java.awt.Label;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
 
 // 프레임 1, 메뉴- 버튼3/라벨1, 검색- 라벨/텍스트필드/버튼 1, 마이페이지- 라벨/버튼1, 공지사항 - 라벨/버튼1
 public class Menu extends WindowAdapter implements ActionListener {
-	private Frame f4;
+	private JFrame f4;
 	private Button bm1, bm2, bm3, bs, bmp, bnt;
 	private Label lm, ls, lmp, lnt;
 	private TextField tfs;
@@ -20,23 +18,21 @@ public class Menu extends WindowAdapter implements ActionListener {
 	Mypage mp = new Mypage();
 	Notice nt = new Notice();
 
-//	종료 메서드
-	public void windowClosing(WindowEvent e) {
-		System.exit(0);
-	}
 
-	public Frame getF4() {
+
+	public JFrame getF4() {
 		return f4;
 	}
 
 	public Menu() {
 //		Frame setting
-		f4 = new Frame();
+		f4 = new JFrame();
 		f4.setLayout(null);
 //		f4.setLayout(new FlowLayout());
 		f4.setSize(400, 400);
 		f4.setLocation(300, 300);
 		f4.addWindowListener(this);
+		f4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 //		Button setting
 		bm1 = new Button("박물관 & 미술관");
