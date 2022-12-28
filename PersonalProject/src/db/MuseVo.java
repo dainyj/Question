@@ -8,11 +8,10 @@ public class MuseVo {
 	private String BSN_STATE_NM;
 
 	public MuseVo() {
-		super();
+		super(); //#검색 정의 기억 잘 안남 다시 한번 확인하기
 	}
 
-	public MuseVo(String BIZPLC_NM, String SIGUN_NM, String BSN_STATE_NM, String LOCPLC_FACLT_TELNO,
-			String REFINE_ROADNM_ADDR, String MUSEUM_ARTGLRY_TYPE_NM) {
+	public MuseVo(String BIZPLC_NM, String MUSEUM_ARTGLRY_TYPE_NM, String SIGUN_NM, String REFINE_ROADNM_ADDR,String BSN_STATE_NM) {
 		super();
 		this.BIZPLC_NM = BIZPLC_NM;
 		this.MUSEUM_ARTGLRY_TYPE_NM = MUSEUM_ARTGLRY_TYPE_NM;
