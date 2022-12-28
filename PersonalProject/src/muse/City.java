@@ -120,152 +120,82 @@ public class City implements ActionListener {
 		b19.setLocation(60, 130);
 		b19.addActionListener(this);
 //20오산시 //21용인시 //22이천시 //23의왕시 //24의정부시
-//		bm1 = new Button("");
-//		bm1.setSize(100, 30);
-//		bm1.setLocation(60, 130);
-//		bm1.addActionListener(this);
-//		
-//		bm1 = new Button("");
-//		bm1.setSize(100, 30);
-//		bm1.setLocation(60, 130);
-//		bm1.addActionListener(this);
-//		
-//		bm1 = new Button("");
-//		bm1.setSize(100, 30);
-//		bm1.setLocation(60, 130);
-//		bm1.addActionListener(this);
-//		
-//		bm1 = new Button("");
-//		bm1.setSize(100, 30);
-//		bm1.setLocation(60, 130);
-//		bm1.addActionListener(this);
-//		
-//		bm1 = new Button("");
-//		bm1.setSize(100, 30);
-//		bm1.setLocation(60, 130);
-//		bm1.addActionListener(this);
-//		
-//		bm1 = new Button("");
-//		bm1.setSize(100, 30);
-//		bm1.setLocation(60, 130);
-//		bm1.addActionListener(this);
-//		
-//		bm1 = new Button("");
-//		bm1.setSize(100, 30);
-//		bm1.setLocation(60, 130);
-//		bm1.addActionListener(this);
-//		
-//		bm1 = new Button("");
-//		bm1.setSize(100, 30);
-//		bm1.setLocation(60, 130);
-//		bm1.addActionListener(this);
-//		
-//		bm1 = new Button("");
-//		bm1.setSize(100, 30);
-//		bm1.setLocation(60, 130);
-//		bm1.addActionListener(this);
-//		
-//		bm1 = new Button("");
-//		bm1.setSize(100, 30);
-//		bm1.setLocation(60, 130);
-//		bm1.addActionListener(this);
-//		
-//		bm1 = new Button("");
-//		bm1.setSize(100, 30);
-//		bm1.setLocation(60, 130);
-//		bm1.addActionListener(this);
-//		
-//		bm1 = new Button("");
-//		bm1.setSize(100, 30);
-//		bm1.setLocation(60, 130);
-//		bm1.addActionListener(this);
-//		
-//		bm1 = new Button("");
-//		bm1.setSize(100, 30);
-//		bm1.setLocation(60, 130);
-//		bm1.addActionListener(this);
-//		
-//		bm1 = new Button("");
-//		bm1.setSize(100, 30);
-//		bm1.setLocation(60, 130);
-//		bm1.addActionListener(this);
-//		
-//		bm1 = new Button("");
-//		bm1.setSize(100, 30);
-//		bm1.setLocation(60, 130);
-//		bm1.addActionListener(this);
-//		
-//		bm1 = new Button("");
-//		bm1.setSize(100, 30);
-//		bm1.setLocation(60, 130);
-//		bm1.addActionListener(this);
-//		
-//		bm1 = new Button("");
-//		bm1.setSize(100, 30);
-//		bm1.setLocation(60, 130);
-//		bm1.addActionListener(this);
-//		
-//		bm1 = new Button("");
-//		bm1.setSize(100, 30);
-//		bm1.setLocation(60, 130);
-//		bm1.addActionListener(this);
-//		
-//		bm1 = new Button("");
-//		bm1.setSize(100, 30);
-//		bm1.setLocation(60, 130);
-//		bm1.addActionListener(this);
-//		
-//		bm1 = new Button("");
-//		bm1.setSize(100, 30);
-//		bm1.setLocation(60, 130);
-//		bm1.addActionListener(this);
-//		
-//		bm1 = new Button("");
-//		bm1.setSize(100, 30);
-//		bm1.setLocation(60, 130);
-//		bm1.addActionListener(this);
-//		
-//		bm1 = new Button("");
-//		bm1.setSize(100, 30);
-//		bm1.setLocation(60, 130);
-//		bm1.addActionListener(this);
-//		
-//		bm1 = new Button("");
-//		bm1.setSize(100, 30);
-//		bm1.setLocation(60, 130);
-//		bm1.addActionListener(this);
+		b20 = new Button("오산시");
+		b20.setSize(100, 30);
+		b20.setLocation(60, 130);
+		b20.addActionListener(this);
+		
+		b21 = new Button("용인시");
+		b21.setSize(100, 30);
+		b21.setLocation(60, 130);
+		b21.addActionListener(this);
+		
+		b22 = new Button("이천시");
+		b22.setSize(100, 30);
+		b22.setLocation(60, 130);
+		b22.addActionListener(this);
+		
+		b23 = new Button("의왕시");
+		b23.setSize(100, 30);
+		b23.setLocation(60, 130);
+		b23.addActionListener(this);
+		
+		b24 = new Button("의정부시");
+		b24.setSize(100, 30);
+		b24.setLocation(60, 130);
+		b24.addActionListener(this);
+//25파주시 //26포천시 //27하남시 //28화성시
+		b25 = new Button("파주시");
+		b25.setSize(100, 30);
+		b25.setLocation(60, 130);
+		b25.addActionListener(this);
+		
+		b26 = new Button("포천시");
+		b26.setSize(100, 30);
+		b26.setLocation(60, 130);
+		b26.addActionListener(this);
+		
+		b27 = new Button("하남시");
+		b27.setSize(100, 30);
+		b27.setLocation(60, 130);
+		b27.addActionListener(this);
+		
+		b28 = new Button("화성시");
+		b28.setSize(100, 30);
+		b28.setLocation(60, 130);
+		b28.addActionListener(this);
 
 	}
 
 	public void startFrame() {
 		fc.add(b1);
 		fc.add(b2);
-//		fc.add(b3);
-//		fc.add(b4);
-//		fc.add(b5);
-//		fc.add(b6);
-//		fc.add(b7);
-//		fc.add(b8);
-//		fc.add(b9);
-//		fc.add(b10);
-//		fc.add(b11);
-//		fc.add(b12);
-//		fc.add(b13);
-//		fc.add(b14);
-//		fc.add(b15);
-//		fc.add(b16);
-//		fc.add(b17);
-//		fc.add(b18);
-//		fc.add(b19);
-//		fc.add(b20);
-//		fc.add(b21);
-//		fc.add(b22);
-//		fc.add(b23);
-//		fc.add(b24);
-//		fc.add(b25);
-//		fc.add(b26);
-//		fc.add(b27);
-//		fc.add(b28);
+		fc.add(b3);
+		fc.add(b4);
+		fc.add(b5);
+		fc.add(b6);
+		fc.add(b7);
+		fc.add(b8);
+		fc.add(b9);
+		fc.add(b10);
+		fc.add(b11);
+		fc.add(b12);
+		fc.add(b13);
+		fc.add(b14);
+		fc.add(b15);
+		fc.add(b16);
+		fc.add(b17);
+		fc.add(b18);
+		fc.add(b19);
+		fc.add(b20);
+		fc.add(b21);
+		fc.add(b22);
+		fc.add(b23);
+		fc.add(b24);
+		fc.add(b25);
+		fc.add(b26);
+		fc.add(b27);
+		fc.add(b28);
 		fc.setVisible(true);
 	}
 
