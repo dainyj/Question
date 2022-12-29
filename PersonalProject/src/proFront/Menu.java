@@ -86,9 +86,9 @@ public class Menu extends WindowAdapter implements ActionListener {
 
 //		Label setting
 		lm = new Label("MENU");
-		lm.setSize(80, 30);
-		lm.setLocation(50, 60);
-		lm.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 20));
+		lm.setSize(120, 30);
+		lm.setLocation(50, 40);
+		lm.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 40));
 
 //		TextField setting
 		tfs = new TextField();
