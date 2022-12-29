@@ -1,33 +1,26 @@
 package proFront;
 
-import java.awt.Button;
 import java.awt.Dialog;
+import java.awt.Font;
 import java.awt.Label;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 // ID 라벨, 텍스트필드/ PWD 라벨, 텍스트필드/ 로그인 버튼
 
 public class Login extends WindowAdapter implements ActionListener {
 	private JFrame f3;
-	private Button blogin, ok, sign;
+	private JButton blogin, ok, sign;
 	private Label lid2, lpwd2, lf;
 	private TextField tfid2, tfpwd2;
 	private Dialog info;
 	private PMemberDAO dao;
-
-	SignUp su = new SignUp();
-	Menu mn = new Menu();
-
-	public JFrame getF3() {
-		return f3;
-	}
 
 	public Login() { // setting
 
@@ -43,28 +36,33 @@ public class Login extends WindowAdapter implements ActionListener {
 		f3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 //		Button setting O
-		blogin = new Button("로그인");
-		blogin.setSize(160, 30);
-		blogin.setLocation(100, 180);
+		blogin = new JButton("로그인");
+		blogin.setSize(150, 30);
+		blogin.setLocation(100, 150);
 		blogin.addActionListener(this);
+		blogin.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 15));
 
-		sign = new Button("회원가입");
-		sign.setSize(60, 30);
-		sign.setLocation(200, 220);
+		sign = new JButton("회원가입");
+		sign.setSize(90, 30);
+		sign.setLocation(160, 200);
 		sign.addActionListener(this);
+		sign.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 15));
 
-		ok = new Button("확인");// Dialog 버튼
-		ok.setSize(30, 30);
-		ok.setLocation(60, 60);
+		ok = new JButton("확인");// Dialog 버튼
+		ok.setSize(70, 30);
+		ok.setLocation(40, 60);
 		ok.addActionListener(this);
+		ok.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 15));
 
 //		Label setting O
 		lid2 = new Label("ID", Label.CENTER);
 		lid2.setSize(80, 20);
-		lid2.setLocation(30, 80);
+		lid2.setLocation(30, 50);
+		lid2.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 		lpwd2 = new Label("PASSWORD", Label.CENTER);
 		lpwd2.setSize(80, 20);
-		lpwd2.setLocation(30, 130);
+		lpwd2.setLocation(30, 100);
+		lpwd2.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 		lf = new Label("로그인 실패", Label.CENTER); // Dialog
 		lf.setSize(60, 30);
@@ -73,10 +71,10 @@ public class Login extends WindowAdapter implements ActionListener {
 //		TextField setting O
 		tfid2 = new TextField(10);
 		tfid2.setSize(100, 20);
-		tfid2.setLocation(150, 80);
+		tfid2.setLocation(150, 50);
 		tfpwd2 = new TextField(10);
 		tfpwd2.setSize(100, 20);
-		tfpwd2.setLocation(150, 130);
+		tfpwd2.setLocation(150, 100);
 		tfpwd2.setEchoChar('*');
 
 //		Dialog setting
@@ -86,6 +84,7 @@ public class Login extends WindowAdapter implements ActionListener {
 		info.setLayout(null);
 //		info.setLayout(new FlowLayout());
 		info.addWindowListener(this);
+		
 
 	}
 
@@ -127,8 +126,7 @@ public class Login extends WindowAdapter implements ActionListener {
 			}
 
 			if (tfid2.getText().equals(id) && tfpwd2.getText().equals(password)) {
-				mn.startFrame();
-				mn.getF4().setVisible(true);
+				Menu.main(null);
 			} else {
 				info.add(lf);
 				info.setVisible(true);
@@ -136,8 +134,7 @@ public class Login extends WindowAdapter implements ActionListener {
 		}
 		if (e.getActionCommand().equals("회원가입")) {
 			f3.setVisible(false);
-			su.startFrame();
-			su.getF2().setVisible(true);
+			SignUp.main(null);
 		}
 	}
 
