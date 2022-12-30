@@ -17,6 +17,8 @@ public class SignUp extends WindowAdapter implements ActionListener {
 	private JButton bsignUp, bout, bout2;
 	private JLabel lid, lpwd, lpn, lem, ltitle, lid2;
 	private TextField tfid, tfpwd, tfpn, tfem, tfid2;
+	
+	PMemberDAO dao = new PMemberDAO();
 
 //	다른 클래스에서 프레임 불러오기에 사용하려고 // 사용되는 부분 정리 후 삭제 예정.
 //	public JFrame getF2() {
@@ -139,15 +141,13 @@ public class SignUp extends WindowAdapter implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		SignUp su= new SignUp();
-		InDe it = new InDe();
 
 		if (e.getActionCommand().equals("가입하기")) { // 버튼 클릭시 회원정보 DB테이블에 저장
 			f2.setVisible(false);
-			it.insert(tfid.getText(), tfpwd.getText(), tfpn.getText(), tfem.getText());
+			dao.insert(tfid.getText(), tfpwd.getText(), tfpn.getText(), tfem.getText());
 			Login.main(null);
 			
 //			가입 실패시 창뜨게 해야하는데 아직 안해둠.. 나중에 하자 나중에 
-			
 			
 		}
 		if (e.getActionCommand().equals("탈퇴하기")) { // 우선 ID만 입력해서 탈퇴가능, 나중에 비밀번호도 같이 입력해서 하도록 바꾸기 
@@ -156,8 +156,10 @@ public class SignUp extends WindowAdapter implements ActionListener {
 		}
 
 		if (e.getActionCommand().equals("탈퇴")) { 
-			it.delete(tfid2.getText());
-			fout.setVisible(false);			
+			dao.delete(tfid2.getText());
+			fout.setVisible(false);	
+//			Login log  = new Login();
+			
 			Login.main(null);
 		}
 	}

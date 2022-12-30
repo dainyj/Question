@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class InDe {
+public class InDe { // 현재 사용X PMemberDAO로 옮겨둠.
 
 	public void insert(String ID, String PASSWORD, String PHNUM, String EMAIL) {
 		String driver = "oracle.jdbc.driver.OracleDriver";

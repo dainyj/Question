@@ -119,7 +119,7 @@ public class Login extends WindowAdapter implements ActionListener {
 				System.out.println(id + " : " + password);
 			}
 
-//				Dialog 적용하기 
+//				Dialog 적용하기  // 대신 아래 글 나오게 설정바꿔보기시도
 			if (tfid2.getText() == "" && tfpwd2.getText() == "") {// 로그인창 비었을때 왜 성공뜸?
 				info.add(lf);
 				info.setVisible(true);

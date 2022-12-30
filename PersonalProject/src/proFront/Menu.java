@@ -1,5 +1,7 @@
 package proFront;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Label;
 import java.awt.TextArea;
@@ -7,8 +9,14 @@ import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
+
 import db.Mfind;
 import muse.City;
 
@@ -18,8 +26,10 @@ public class Menu extends WindowAdapter implements ActionListener {
 	private JButton bm1, bm2, bm3, bs, bmp, bnt;
 	private Label lm;
 	private TextField tfs;
-	private TextArea ta;
-
+	private JTextArea ta;
+	private JPanel p;
+	private JScrollPane sp;
+	
 	String str;
 
 	Mypage mp = new Mypage();
@@ -36,31 +46,45 @@ public class Menu extends WindowAdapter implements ActionListener {
 		f4.setLocation(300, 300);
 		f4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		f4_1 = new JFrame("VIEW"); // 박물관 정보 출력프레임
+		f4_1 = new JFrame("VIEW"); // 박물관 정보 출력프레임 // 탭으로 화면 구현, DB 불러오는 방식 공부
 		f4_1.setLayout(null);
 		f4_1.setSize(400, 400);
 		f4_1.setLocation(300, 300);
 		f4_1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		ta = new TextArea(A, 10, 50, TextArea.SCROLLBARS_VERTICAL_ONLY); // 스크롤 세로만 가능
+		p = new JPanel(); // 스크롤 대신 탭으로 바꾸기 시도 해보자
+		p.setSize(300, 200);
+		p.setLocation(43, 30);
+		p.setLayout(new BorderLayout());
+		
+		ta = new JTextArea(); 
 		ta.setSize(300, 300);
 		ta.setLocation(40, 30);
+		ta.setLineWrap(true); // 자동 줄바꿈
 		ta.setEditable(false); // ta 수정 X
-
+		ta.setCaretPosition(ta.getDocument().getLength()); // 내용이 추가될 때마다 스크롤 내리지 않고 바로 보기
+		p.add(ta);
+		sp = new JScrollPane(ta); //스크롤 3. 스크롤에 TA를 추가한다.
+		sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		p.add(sp);  //3. 패널에 스크롤을 추가, 패널에 TA를 직접 추가하지 않는다.
+		
+		
+		
+		
 //		Button setting
-		bm1 = new JButton("박물관");
+		bm1 = new JButton("ALL");
 		bm1.setSize(100, 30);
 		bm1.setLocation(60, 130);
 		bm1.addActionListener(this);
 		bm1.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
-		bm2 = new JButton("ALL");
+		bm2 = new JButton("지역별");
 		bm2.setSize(100, 30);
 		bm2.setLocation(60, 200);
 		bm2.addActionListener(this);
 		bm2.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
-		bm3 = new JButton("지역별");
+		bm3 = new JButton("주제별");
 		bm3.setSize(100, 30);
 		bm3.setLocation(60, 270);
 		bm3.addActionListener(this);
@@ -111,7 +135,7 @@ public class Menu extends WindowAdapter implements ActionListener {
 
 	public void startmf(String a) {
 		ta.append(a);
-		f4_1.add(ta);
+		f4_1.add(p);
 		f4_1.setVisible(true);
 	}
 
@@ -125,11 +149,6 @@ public class Menu extends WindowAdapter implements ActionListener {
 //		Menu m = new Menu();
 //		City c = new City();
 
-		if (e.getActionCommand().equals("박물관")) {
-			f4.setVisible(false);
-//			su.startFrame();
-//			su.getF2().setVisible(true);
-		}
 		if (e.getActionCommand().equals("ALL")) { // Mfind에서 이름만 나오게 설정해둠.
 			f4.setVisible(false);
 			String all = "SELECT * FROM MUSEUM";
@@ -147,7 +166,12 @@ public class Menu extends WindowAdapter implements ActionListener {
 //			String city = null;
 //			String all = "SELECT BIZPLC_NM FROM MUSEUM WHERE SIGUN_NM = " + city;
 //			mf.query(all);
+		}
 
+		if (e.getActionCommand().equals("주제별")) {
+			f4.setVisible(false);
+//			su.startFrame();
+//			su.getF2().setVisible(true);
 		}
 		if (e.getActionCommand().equals("검색")) {
 			String st = tfs.getText();// 이거 쿼리에 넣을거
