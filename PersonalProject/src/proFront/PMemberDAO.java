@@ -68,10 +68,10 @@ public class PMemberDAO {
 				while (rs.next()) {
 					String strId = rs.getString("id");
 					String strPwd = rs.getString("password");
-					String strPhnum = rs.getString("phnum");
-					String strEm = rs.getString("email");
+//					String strPhnum = rs.getString("phnum");
+//					String strEm = rs.getString("email");
 
-					PMemberVo data = new PMemberVo(strId, strPwd, strPhnum, strEm);
+					PMemberVo data = new PMemberVo(strId, strPwd);//, strPhnum, strEm);
 					list.add(data);
 				}
 			}
@@ -82,12 +82,12 @@ public class PMemberDAO {
 		return list;
 	}
 
-	public void insert(String ID, String PASSWORD, String PHNUM, String EMAIL) { // 회원가입 추가
+	public void insert(String ID, String PASSWORD) {//, String PHNUM, String EMAIL) { // 회원가입 추가
 		try {
 			connDB();
-			System.out.println(ID + " " + PASSWORD + " " + PHNUM + " " + EMAIL);
+			System.out.println(ID + " " + PASSWORD);// + " " + PHNUM + " " + EMAIL);
 
-			String sql = "INSERT INTO PMEMBER VALUES ('" + ID + "','" + PASSWORD + "','" + PHNUM + "','" + EMAIL + "')";
+			String sql = "INSERT INTO PMEMBER VALUES ('" + ID + "','" + PASSWORD + "')";//,'" + PHNUM + "','" + EMAIL + "')";
 //			System.out.println(sql);
 			boolean b = stmt.execute(sql);
 			if (!b) {

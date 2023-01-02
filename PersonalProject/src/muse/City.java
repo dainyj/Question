@@ -1,6 +1,5 @@
 package muse;
 
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import db.Mfind;
+import proFront.Menu;
 
 /*//1가평군 //2과천시 //3광명시 //4광주시 //5고양시 //6구리시 //7김포시
 //8남양주시 //9동두천시 //10부천시 //11성남시 //12수원시 //13시흥시
@@ -15,195 +15,197 @@ import db.Mfind;
 //20오산시 //21용인시 //22이천시 //23의왕시 //24의정부시
 //25파주시 //26포천시 //27하남시 //28화성시
 */public class City implements ActionListener {
-	private JFrame fc, fc_1;
+	private JFrame fc;
 	private JButton b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17, b18, b19, b20, b21, b22,
-			b23, b24, b25, b26, b27, b28;
+			b23, b24, b25, b26, b27, b28, back;
 
 	String A = "";
 
 	public City() {
 		fc = new JFrame("CITY");
-//		fc.setLayout(null);
-		fc.setLayout(new FlowLayout());
-		fc.setSize(400, 400);
+		fc.setLayout(null);
+		fc.setSize(300, 550);
 		fc.setLocation(300, 300);
 		fc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		fc.setResizable(false);
 
-		fc_1 = new JFrame("VIEW");
-		fc_1.setLayout(null);
-		fc_1.setSize(400, 400);
-		fc_1.setLocation(300, 300);
-		fc_1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		
+//		도시 시작
 		b1 = new JButton("가평군");
-		b1.setSize(100, 30);
-		b1.setLocation(60, 130);
+		b1.setSize(87, 30);
+		b1.setLocation(10, 20);
 		b1.addActionListener(this);
 		b1.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 		b2 = new JButton("과천시");
-		b2.setSize(100, 30);
-		b2.setLocation(60, 130);
+		b2.setSize(87, 30);
+		b2.setLocation(100, 20);
 		b2.addActionListener(this);
 		b2.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 		b3 = new JButton("광명시");
-		b3.setSize(100, 30);
-		b3.setLocation(60, 130);
+		b3.setSize(87, 30);
+		b3.setLocation(190, 20);
 		b3.addActionListener(this);
 		b3.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 		b4 = new JButton("광주시");
-		b4.setSize(100, 30);
-		b4.setLocation(60, 130);
+		b4.setSize(87, 30);
+		b4.setLocation(10, 70);
 		b4.addActionListener(this);
 		b4.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 		b5 = new JButton("고양시");
-		b5.setSize(100, 30);
-		b5.setLocation(60, 130);
+		b5.setSize(87, 30);
+		b5.setLocation(100, 70);
 		b5.addActionListener(this);
 		b5.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 		b6 = new JButton("구리시");
-		b6.setSize(100, 30);
-		b6.setLocation(60, 130);
+		b6.setSize(87, 30);
+		b6.setLocation(190, 70);
 		b6.addActionListener(this);
 		b6.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 		b7 = new JButton("김포시");
-		b7.setSize(100, 30);
-		b7.setLocation(60, 130);
+		b7.setSize(87, 30);
+		b7.setLocation(10, 120);
 		b7.addActionListener(this);
 		b7.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 //8남양주시 //9동두천시 //10부천시 //11성남시 //12수원시 //13시흥시
 		b8 = new JButton("남양주시");
-		b8.setSize(100, 30);
-		b8.setLocation(60, 130);
+		b8.setSize(87, 30);
+		b8.setLocation(100, 120);
 		b8.addActionListener(this);
 		b8.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 		b9 = new JButton("동두천시");
-		b9.setSize(100, 30);
-		b9.setLocation(60, 130);
+		b9.setSize(87, 30);
+		b9.setLocation(190, 120);
 		b9.addActionListener(this);
 		b9.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 		b10 = new JButton("부천시");
-		b10.setSize(100, 30);
-		b10.setLocation(60, 130);
+		b10.setSize(87, 30);
+		b10.setLocation(10, 170);
 		b10.addActionListener(this);
 		b10.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 		b11 = new JButton("성남시");
-		b11.setSize(100, 30);
-		b11.setLocation(60, 130);
+		b11.setSize(87, 30);
+		b11.setLocation(100, 170);
 		b11.addActionListener(this);
 		b11.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 		b12 = new JButton("수원시");
-		b12.setSize(100, 30);
-		b12.setLocation(60, 130);
+		b12.setSize(87, 30);
+		b12.setLocation(190, 170);
 		b12.addActionListener(this);
 		b12.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 		b13 = new JButton("시흥시");
-		b13.setSize(100, 30);
-		b13.setLocation(60, 130);
+		b13.setSize(87, 30);
+		b13.setLocation(10, 220);
 		b13.addActionListener(this);
 		b13.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 //14안산시 //15안성시 //16안양시 //17양주시 //18양평군 //19여주시		
 		b14 = new JButton("안산시");
-		b14.setSize(100, 30);
-		b14.setLocation(60, 130);
+		b14.setSize(87, 30);
+		b14.setLocation(100, 220);
 		b14.addActionListener(this);
 		b14.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 		b15 = new JButton("안성시");
-		b15.setSize(100, 30);
-		b15.setLocation(60, 130);
+		b15.setSize(87, 30);
+		b15.setLocation(190, 220);
 		b15.addActionListener(this);
 		b15.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 		b16 = new JButton("안양시");
-		b16.setSize(100, 30);
-		b16.setLocation(60, 130);
+		b16.setSize(87, 30);
+		b16.setLocation(10, 270);
 		b16.addActionListener(this);
 		b16.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 		b17 = new JButton("양주시");
-		b17.setSize(100, 30);
-		b17.setLocation(60, 130);
+		b17.setSize(87, 30);
+		b17.setLocation(100, 270);
 		b17.addActionListener(this);
 		b17.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 		b18 = new JButton("양평군");
-		b18.setSize(100, 30);
-		b18.setLocation(60, 130);
+		b18.setSize(87, 30);
+		b18.setLocation(190, 270);
 		b18.addActionListener(this);
 		b18.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 		
 		b19 = new JButton("여주시");
-		b19.setSize(100, 30);
-		b19.setLocation(60, 130);
+		b19.setSize(87, 30);
+		b19.setLocation(10, 320);
 		b19.addActionListener(this);
 		b19.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 		
 //20오산시 //21용인시 //22이천시 //23의왕시 //24의정부시
 		b20 = new JButton("오산시");
-		b20.setSize(100, 30);
-		b20.setLocation(60, 130);
+		b20.setSize(87, 30);
+		b20.setLocation(100, 320);
 		b20.addActionListener(this);
 		b20.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 		b21 = new JButton("용인시");
-		b21.setSize(100, 30);
-		b21.setLocation(60, 130);
+		b21.setSize(87, 30);
+		b21.setLocation(190, 320);
 		b21.addActionListener(this);
 		b21.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 		b22 = new JButton("이천시");
-		b22.setSize(100, 30);
-		b22.setLocation(60, 130);
+		b22.setSize(87, 30);
+		b22.setLocation(10, 370);
 		b22.addActionListener(this);
 		b22.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 		b23 = new JButton("의왕시");
-		b23.setSize(100, 30);
-		b23.setLocation(60, 130);
+		b23.setSize(87, 30);
+		b23.setLocation(100, 370);
 		b23.addActionListener(this);
 		b23.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 		b24 = new JButton("의정부시");
-		b24.setSize(100, 30);
-		b24.setLocation(60, 130);
+		b24.setSize(87, 30);
+		b24.setLocation(190, 370);
 		b24.addActionListener(this);
 		b24.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 		
 //25파주시 //26포천시 //27하남시 //28화성시
 		b25 = new JButton("파주시");
-		b25.setSize(100, 30);
-		b25.setLocation(60, 130);
+		b25.setSize(87, 30);
+		b25.setLocation(10, 420);
 		b25.addActionListener(this);
 		b25.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 		b26 = new JButton("포천시");
-		b26.setSize(100, 30);
-		b26.setLocation(60, 130);
+		b26.setSize(87, 30);
+		b26.setLocation(100, 420);
 		b26.addActionListener(this);
 		b26.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 		b27 = new JButton("하남시");
-		b27.setSize(100, 30);
-		b27.setLocation(60, 130);
+		b27.setSize(87, 30);
+		b27.setLocation(190, 420);
 		b27.addActionListener(this);
 		b27.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 		b28 = new JButton("화성시");
-		b28.setSize(100, 30);
-		b28.setLocation(60, 130);
+		b28.setSize(87, 30);
+		b28.setLocation(10, 470);
 		b28.addActionListener(this);
 		b28.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
+		
+		back = new JButton("뒤로");
+		back.setSize(70, 20);
+		back.setLocation(200, 480);
+		back.addActionListener(this);
+		back.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 	}
 
@@ -236,6 +238,7 @@ import db.Mfind;
 		fc.add(b26);
 		fc.add(b27);
 		fc.add(b28);
+		fc.add(back);
 		fc.setVisible(true);
 	}
 
@@ -383,6 +386,11 @@ import db.Mfind;
 		if (e.getActionCommand().equals("화성시")) {
 //			System.out.println(b28.getText());
 			c.cquery(b28.getText());
+		}
+		
+		if (e.getActionCommand().equals("뒤로")) {
+			fc.setVisible(false);
+			Menu.main(null);
 		}
 
 	}

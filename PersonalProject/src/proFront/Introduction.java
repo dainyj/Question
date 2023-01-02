@@ -27,15 +27,16 @@ public class Introduction extends WindowAdapter implements ActionListener {
 		f1 = new JFrame("INTRODUCTION");
 //		f1.setLayout(new FlowLayout());
 		f1.setLayout(null);
-		f1.setSize(400, 400);
+		f1.setSize(300, 550);
 		f1.setLocation(300, 300);
 		f1.addWindowListener(this);
+		f1.setResizable(false);
 //	종료 
 		f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		p = new JPanel();
-		p.setSize(300, 200);
-		p.setLocation(43, 30);
+		p.setSize(210, 300);
+		p.setLocation(40, 30);
 		p.setLayout(new BorderLayout());
 //		p.setBackground(Color.green);
 		
@@ -43,13 +44,13 @@ public class Introduction extends WindowAdapter implements ActionListener {
 //		Button setting
 		blogf = new JButton("로그인");
 		blogf.setSize(100, 30);
-		blogf.setLocation(80, 300);
+		blogf.setLocation(30, 380);
 		blogf.addActionListener(this);
 		blogf.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 15));
 
 		bsignf = new JButton("회원가입");
 		bsignf.setSize(100, 30);
-		bsignf.setLocation(200, 300);
+		bsignf.setLocation(150, 380);
 		bsignf.addActionListener(this);
 		bsignf.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 15));
 		

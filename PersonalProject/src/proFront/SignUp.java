@@ -15,44 +15,39 @@ import javax.swing.JLabel;
 public class SignUp extends WindowAdapter implements ActionListener {
 	private JFrame f2, fout;
 	private JButton bsignUp, bout, bout2;
-	private JLabel lid, lpwd, lpn, lem, ltitle, lid2;
-	private TextField tfid, tfpwd, tfpn, tfem, tfid2;
+	private JLabel lid, lpwd, ltitle, lid2;//, lpn, lem;
+	private TextField tfid, tfpwd, tfid2;//, tfpn, tfem; 
 	
 	PMemberDAO dao = new PMemberDAO();
-
-//	다른 클래스에서 프레임 불러오기에 사용하려고 // 사용되는 부분 정리 후 삭제 예정.
-//	public JFrame getF2() {
-//		return f2;
-//	}
 
 	public SignUp() {
 
 //		Frame setting 1개
 		f2 = new JFrame("회원가입");
 		f2.setLayout(null);
-//		f2.setLayout(new FlowLayout());
-		f2.setSize(400, 400);
+		f2.setSize(300, 550);
 		f2.setLocation(300, 300);
 		f2.addWindowListener(this);
 		f2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f2.setResizable(false);
 
 		fout = new JFrame("탈퇴하기");
 		fout.setLayout(null);
-//		fout.setLayout(new FlowLayout());
 		fout.setSize(150, 150);
 		fout.setLocation(300, 300);
 		fout.addWindowListener(this);
+		fout.setResizable(false);
 
 //		Button setting 1개
 		bsignUp = new JButton("가입하기");  //O
-		bsignUp.setSize(85, 30);
-		bsignUp.setLocation(150, 280);
+		bsignUp.setSize(100, 40);
+		bsignUp.setLocation(100, 220);
 		bsignUp.addActionListener(this);
 		bsignUp.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 12));
 
 		bout = new JButton("탈퇴하기");  //O
-		bout.setSize(85, 30);
-		bout.setLocation(260, 280);
+		bout.setSize(83, 30);
+		bout.setLocation(180, 450);
 		bout.addActionListener(this);
 		bout.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 12));
 
@@ -65,28 +60,28 @@ public class SignUp extends WindowAdapter implements ActionListener {
 //		Label setting 5개
 		ltitle = new JLabel("가입 정보 입력", JLabel.CENTER);  //O
 		ltitle.setSize(150, 30);
-		ltitle.setLocation(80, 30);
+		ltitle.setLocation(70, 30);
 		ltitle.setFont(new Font("kopubworld", Font.BOLD, 20)); // 폰트
 		
 		lid = new JLabel("ID", JLabel.CENTER);
 		lid.setSize(100, 20);
-		lid.setLocation(60, 80);
+		lid.setLocation(30, 100);
 		lid.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 15));
 		
 		lpwd = new JLabel("PASSWORD", JLabel.CENTER);
 		lpwd.setSize(100, 20);
-		lpwd.setLocation(60, 130);
+		lpwd.setLocation(30, 150);
 		lpwd.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 15));
 		
-		lpn = new JLabel("Phone Number", JLabel.CENTER);
-		lpn.setSize(100, 20);
-		lpn.setLocation(60, 180);
-		lpn.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 15));
-		
-		lem = new JLabel("E-mail", JLabel.CENTER);
-		lem.setSize(100, 20);
-		lem.setLocation(60, 230);
-		lem.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 15));
+//		lpn = new JLabel("Phone Number", JLabel.CENTER);
+//		lpn.setSize(100, 20);
+//		lpn.setLocation(30, 200);
+//		lpn.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 15));
+//		
+//		lem = new JLabel("E-mail", JLabel.CENTER);
+//		lem.setSize(100, 20);
+//		lem.setLocation(30, 250);
+//		lem.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 15));
 
 		lid2 = new JLabel("ID", JLabel.RIGHT); // 탈퇴프레임
 		lid2.setSize(30, 20);
@@ -96,19 +91,19 @@ public class SignUp extends WindowAdapter implements ActionListener {
 //		TextField 4개
 		tfid = new TextField();
 		tfid.setSize(100, 20);
-		tfid.setLocation(180, 80);
+		tfid.setLocation(150, 100);
 	
 		tfpwd = new TextField();
 		tfpwd.setSize(100, 20);
-		tfpwd.setLocation(180, 130);
+		tfpwd.setLocation(150, 150);
 		
-		tfpn = new TextField();
-		tfpn.setSize(100, 20);
-		tfpn.setLocation(180, 180);
-		
-		tfem = new TextField();
-		tfem.setSize(100, 20);
-		tfem.setLocation(180, 230);
+//		tfpn = new TextField();
+//		tfpn.setSize(100, 20);
+//		tfpn.setLocation(150, 200);
+//		
+//		tfem = new TextField();
+//		tfem.setSize(100, 20);
+//		tfem.setLocation(150, 250);
 		
 		tfid2 = new TextField(); // 탈퇴프레임
 		tfid2.setSize(70, 20);
@@ -121,10 +116,10 @@ public class SignUp extends WindowAdapter implements ActionListener {
 		f2.add(tfid);
 		f2.add(lpwd);
 		f2.add(tfpwd);
-		f2.add(lpn);
-		f2.add(tfpn);
-		f2.add(lem);
-		f2.add(tfem);
+//		f2.add(lpn);
+//		f2.add(tfpn);
+//		f2.add(lem);
+//		f2.add(tfem);
 		f2.add(bsignUp);
 		f2.add(bout);
 
@@ -144,7 +139,7 @@ public class SignUp extends WindowAdapter implements ActionListener {
 
 		if (e.getActionCommand().equals("가입하기")) { // 버튼 클릭시 회원정보 DB테이블에 저장
 			f2.setVisible(false);
-			dao.insert(tfid.getText(), tfpwd.getText(), tfpn.getText(), tfem.getText());
+			dao.insert(tfid.getText(), tfpwd.getText());//, tfpn.getText(), tfem.getText());
 			Login.main(null);
 			
 //			가입 실패시 창뜨게 해야하는데 아직 안해둠.. 나중에 하자 나중에 
