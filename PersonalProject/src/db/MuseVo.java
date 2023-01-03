@@ -8,16 +8,22 @@ public class MuseVo {
 	private String BSN_STATE_NM;
 
 	public MuseVo() {
-		super(); //#검색 정의 기억 잘 안남 다시 한번 확인하기
+		super(); // #검색 정의 기억 잘 안남 다시 한번 확인하기
 	}
 
-	public MuseVo(String BIZPLC_NM, String MUSEUM_ARTGLRY_TYPE_NM, String SIGUN_NM, String REFINE_ROADNM_ADDR,String BSN_STATE_NM) {
+	public MuseVo(String BIZPLC_NM, String MUSEUM_ARTGLRY_TYPE_NM, String SIGUN_NM, String REFINE_ROADNM_ADDR,
+			String BSN_STATE_NM) {
 		super();
 		this.BIZPLC_NM = BIZPLC_NM;
 		this.MUSEUM_ARTGLRY_TYPE_NM = MUSEUM_ARTGLRY_TYPE_NM;
 		this.SIGUN_NM = SIGUN_NM;
 		this.REFINE_ROADNM_ADDR = REFINE_ROADNM_ADDR;
 		this.BSN_STATE_NM = BSN_STATE_NM;
+	}
+
+	public MuseVo(String BIZPLC_NM, String REFINE_ROADNM_ADDR) {
+		this.BIZPLC_NM = BIZPLC_NM;
+		this.REFINE_ROADNM_ADDR = REFINE_ROADNM_ADDR;
 	}
 
 	public String getBIZPLC_NM() {

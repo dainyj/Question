@@ -1,13 +1,12 @@
 package db;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.TextArea;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,13 +14,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 
-import muse.City;
 import proFront.Menu;
 
 // 쿼리 실행 클래스
 public class Mfind {
 	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:xe";
+	String url = "jdbc:oracle:thin:@localhost:1521:ORCL";
 	String user = "c##green";
 	String password = "green1234";
 
@@ -35,6 +33,8 @@ public class Mfind {
 
 	private Connection con;
 	private Statement stmt;
+
+	String sql = "";
 
 	public void connDB() { // 드라이버 연결, 계정 연결
 		try {
@@ -51,13 +51,14 @@ public class Mfind {
 	}
 
 	public void query(String A) { // 전체 박물관 이름 출력
-		try {
-			connDB();
-			String sql = A;
+		connDB();
 
-			stmt.executeQuery(sql);
-			System.out.println(sql);
-			ResultSet rs = stmt.executeQuery(sql);
+		try {
+			String sql1 = A;
+
+			stmt.executeQuery(sql1);
+			System.out.println(sql1);
+			ResultSet rs = stmt.executeQuery(sql1);
 			while (rs.next()) {
 //				System.out.println(rs.getString("BIZPLC_NM")); 
 				B = " - " + rs.getString("BIZPLC_NM") + "\n\t: " + rs.getString("SIGUN_NM") + "\n"; // 화면 출력 형식 결정
@@ -94,13 +95,14 @@ public class Mfind {
 		sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		p.add(sp); // 3. 패널에 스크롤을 추가, 패널에 TA를 직접 추가하지 않는다.
 
-		try {
-			connDB();
-			String sql = C;
+		connDB();
 
-			stmt.executeQuery(sql);
-			System.out.println(sql);
-			ResultSet rs = stmt.executeQuery(sql);
+		try {
+			String sql2 = C;
+
+			stmt.executeQuery(sql2);
+			System.out.println(sql2);
+			ResultSet rs = stmt.executeQuery(sql2);
 			while (rs.next()) {
 //				System.out.println(rs.getString("BIZPLC_NM"));
 //				System.out.println(rs.getString("REFINE_ROADNM_ADDR"));
@@ -117,8 +119,85 @@ public class Mfind {
 
 	}
 
-	public void serch() {
+	public String mq(String com, String sc) {
+		switch (com) {
+		case "기관명":
+			com = "BIZPLC_NM";
+		case "종류":
+			com = "MUSEUM_ARTGLRY_TYPE_NM";
+		case "도시":
+			com = "SIGUN_NM";
+		case "주소":
+			com = "REFINE_ROADNM_ADDR";
+		}
+		sql = "SELECT * FROM MUSEUM WHERE " + com + " LIKE '%" + sc + "%'";
+
+		return sql;
+	}
+
+//	museVo 사용해보기??
+	public ArrayList<MuseVo> list() {
+		connDB();
+
+		try {
+			System.out.println(sql);
+			stmt.executeQuery(sql);
+			ResultSet rs = stmt.executeQuery(sql);
+			rs.last();
+			System.out.println("rs.getRow() : " + rs.getRow());
+
+			if (rs.getRow() == 0) {
+				System.out.println("0 row selected...");
+			} else {
+				System.out.println(rs.getRow() + " rows selected...");
+				rs.previous();
+
+				while (rs.next()) { // 맞게 수정 해야함.
+					String strbn = rs.getString("BIZPLC_NM");
+					String stradd = rs.getString("REFINE_ROADNM_ADDR");
+					MuseVo data = new MuseVo(strbn, stradd);
+					list().add(data);
+					System.out.println(strbn + " " + stradd + " " + data);
+					System.out.println();
+				}
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+
+		return list();
 
 	}
+
+//	public String serch(String com, String sc) { // 검색어 입력
+//		String mn = "";
+//		connDB();
+//		try {
+//			switch (com) {
+//			case "기관명":
+//				com = "BIZPLC_NM";
+//			case "종류":
+//				com = "MUSEUM_ARTGLRY_TYPE_NM";
+//			case "도시":
+//				com = "SIGUN_NM";
+//			case "주소":
+//				com = "REFINE_ROADNM_ADDR";
+//			}
+//			String sql = "SELECT * FROM MUSEUM WHERE " + com + " LIKE '%" + sc + "%'";
+//			stmt.executeQuery(sql);
+////				System.out.println(sql);
+//			ResultSet rs = stmt.executeQuery(sql);
+//
+//			while (rs.next()) { // 맞게 수정 해야함.
+//				mn = " - " + rs.getString("BIZPLC_NM") + "\n" + "      주소 : " + rs.getString("REFINE_ROADNM_ADDR")
+//						+ "\n\n";
+//				System.out.println(mn);
+//			}
+//
+//		} catch (SQLException e) {
+//			System.out.println(e);
+//		}
+//		return mn;
+//	}
 
 }

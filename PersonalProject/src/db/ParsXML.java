@@ -70,22 +70,22 @@ public class ParsXML {
 					System.out.println(getTagValue("BSN_STATE_NM", eElement));
 
 //==================파싱한 정보를 DB에 insert시키는 메서드(MuseDAO에 있음) 호출  ======================================================
-//					ArrayList<MuseVo> list = md.mlist(getTagValue("BIZPLC_NM", eElement),
-//							getTagValue("MUSEUM_ARTGLRY_TYPE_NM", eElement), getTagValue("SIGUN_NM", eElement),
-//							getTagValue("REFINE_ROADNM_ADDR", eElement), getTagValue("BSN_STATE_NM", eElement));
-//					
-//					
-//					for (int i = 0; i < list.size(); i++) {
-//						MuseVo data = (MuseVo) list.get(i);
-//						String BIZPLC_NM = data.getBIZPLC_NM();
-//						String MUSEUM_ARTGLRY_TYPE_NM = data.getMUSEUM_ARTGLRY_TYPE_NM();
-//						String SIGUN_NM = data.getSIGUN_NM();
-//						String REFINE_ROADNM_ADDR = data.getREFINE_ROADNM_ADDR();
-//						String BSN_STATE_NM = data.getBSN_STATE_NM();
-//
-//						System.out.println(BIZPLC_NM + " " + MUSEUM_ARTGLRY_TYPE_NM + " " + SIGUN_NM + " "
-//								+ REFINE_ROADNM_ADDR + " " + BSN_STATE_NM);
-//					}
+					ArrayList<MuseVo> list = md.mlist(getTagValue("BIZPLC_NM", eElement),
+							getTagValue("MUSEUM_ARTGLRY_TYPE_NM", eElement), getTagValue("SIGUN_NM", eElement),
+							getTagValue("REFINE_ROADNM_ADDR", eElement), getTagValue("BSN_STATE_NM", eElement));
+					
+					
+					for (int i = 0; i < list.size(); i++) {
+						MuseVo data = (MuseVo) list.get(i);
+						String BIZPLC_NM = data.getBIZPLC_NM();
+						String MUSEUM_ARTGLRY_TYPE_NM = data.getMUSEUM_ARTGLRY_TYPE_NM();
+						String SIGUN_NM = data.getSIGUN_NM();
+						String REFINE_ROADNM_ADDR = data.getREFINE_ROADNM_ADDR();
+						String BSN_STATE_NM = data.getBSN_STATE_NM();
+
+						System.out.println(BIZPLC_NM + " " + MUSEUM_ARTGLRY_TYPE_NM + " " + SIGUN_NM + " "
+								+ REFINE_ROADNM_ADDR + " " + BSN_STATE_NM);
+					}
 //=================여기까지가 DB에 삽입 ==========================================================================================
 
 				}
