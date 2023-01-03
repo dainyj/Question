@@ -1,4 +1,4 @@
-package proFront;
+package proMiddle;
 
 import java.awt.FlowLayout;
 import java.awt.Label;

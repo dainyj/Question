@@ -18,6 +18,8 @@ import javax.swing.JTextArea;
 
 import db.Mfind;
 import muse.City;
+import proMiddle.Mypage;
+import proMiddle.Notice;
 
 // 프레임 1, 메뉴- 버튼3/라벨1, 검색- 라벨/텍스트필드/버튼 1, 마이페이지- 라벨/버튼1, 공지사항 - 라벨/버튼1
 public class Menu extends WindowAdapter implements ActionListener {
@@ -93,18 +95,18 @@ public class Menu extends WindowAdapter implements ActionListener {
 		bm3.addActionListener(this);
 		bm3.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
-		bs = new JButton("검색");
-		bs.setSize(60, 20);
-		bs.setLocation(165, 310);
-		bs.addActionListener(this);
-		bs.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 12));
-
 		bnt = new JButton("공지사항");
 		bnt.setSize(100, 30);
-		bnt.setLocation(95, 350);
+		bnt.setLocation(95, 300);
 		bnt.addActionListener(this);
 		bnt.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
+		bs = new JButton("검색");
+		bs.setSize(100, 30);
+		bs.setLocation(95, 350);
+		bs.addActionListener(this);
+		bs.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 12));
+		
 		bmp = new JButton("마이페이지");
 		bmp.setSize(100, 30);
 		bmp.setLocation(95, 400);
@@ -127,12 +129,7 @@ public class Menu extends WindowAdapter implements ActionListener {
 //		line = new JLabel("--------------------------------------------------");
 		line = new JLabel("- - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
 		line.setSize(200, 10);
-		line.setLocation(50, 250);
-
-//		TextField setting
-		tfs = new TextField();
-		tfs.setSize(150, 20);
-		tfs.setLocation(75, 280);
+		line.setLocation(50, 260);
 
 	}
 
@@ -142,7 +139,6 @@ public class Menu extends WindowAdapter implements ActionListener {
 		f4.add(bm1);
 		f4.add(bm2);
 		f4.add(bm3);
-		f4.add(tfs);
 		f4.add(bs);
 		f4.add(bmp);
 		f4.add(bnt);
@@ -152,7 +148,6 @@ public class Menu extends WindowAdapter implements ActionListener {
 	public void startmf(String a) {
 		ta.append(a);
 		f4_1.add(p);
-//		f4_1.add(ta);
 		f4_1.add(back);
 		f4_1.setVisible(true);
 	}
@@ -191,23 +186,16 @@ public class Menu extends WindowAdapter implements ActionListener {
 //			su.startFrame();
 //			su.getF2().setVisible(true);
 		}
-		if (e.getActionCommand().equals("검색")) { // 한글만 입력가능 // 도시 이름만 설정 해둠.. 예) ~시 // 
-			String st = tfs.getText();// 이거 쿼리에 넣을거
-//			ta.addpend()
-//			System.out.println(st);
-			tfs.setText(null);// 검색버튼 누르면 tf 초기화
-
-			bs.addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent e) { // 버튼 클릭시 쿼리 실행
-					c.cquery(st);
-				}
-			});
-
+		if (e.getActionCommand().equals("검색")) {
+			f4.setVisible(false);
+//			Serach. // 검색 프레임 뜨게
 		}
+		
 		if (e.getActionCommand().equals("마이페이지")) {
 			f4.setVisible(false);
 			mp.getF5().setVisible(true);
 		}
+		
 		if (e.getActionCommand().equals("공지사항")) {
 			f4.setVisible(false);
 			nt.getF6().setVisible(true);
