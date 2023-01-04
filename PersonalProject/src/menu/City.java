@@ -1,4 +1,4 @@
-package muse;
+package menu;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;

@@ -1,6 +1,7 @@
 package proFront;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
@@ -9,17 +10,21 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.border.Border;
 
 import db.Mfind;
-import muse.City;
+import menu.City;
+import menu.Theme;
 import proMiddle.Mypage;
 import proMiddle.Notice;
+import proMiddle.Search;
 
 // 프레임 1, 메뉴- 버튼3/라벨1, 검색- 라벨/텍스트필드/버튼 1, 마이페이지- 라벨/버튼1, 공지사항 - 라벨/버튼1
 public class Menu extends WindowAdapter implements ActionListener {
@@ -56,24 +61,30 @@ public class Menu extends WindowAdapter implements ActionListener {
 		f4_1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f4_1.setResizable(false);
 
-		p = new JPanel(); // 스크롤 대신 탭으로 바꾸기 시도 해보자
+		p = new JPanel(); 
 		p.setSize(250, 400);
 		p.setLocation(20, 30);
 		p.setLayout(new BorderLayout());
 
 		ta = new JTextArea();
 		ta.setLineWrap(true); // 자동 줄바꿈
-		ta.setEditable(false); // ta 수정 X
-//		ta.setBounds(12, 41, 489, 210);
+		ta.setEditable(false); // 수정 X
 		ta.setCaretPosition(ta.getDocument().getLength()); // 내용이 추가될 때마다 스크롤 내리지 않고 바로 보기
 
 		p.add(ta);
 		sp = new JScrollPane(); // 스크롤 3. 스크롤에 TA를 추가한다.
 		sp.setViewportView(ta);
-//		sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		p.add(sp); // 3. 패널에 스크롤을 추가, 패널에 TA를 직접 추가하지 않는다.
+//		sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		
+		// textArea 와 텍스트 경계 사이에 여백을 두기 위해 emptyBorder 생성
+		Border emptyBorder = BorderFactory.createEmptyBorder(20, 20, 20, 20);
 
-//		sp = new JScrollPane();
+		// textArea 의 테두리 선의 색과 두께 설정 가능.
+		Border lineBorder = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 3);
+		// textArea 에 lineBorder, emptyBorder 로 구성된 복함 경계선을 설정.
+				ta.setBorder(BorderFactory.createCompoundBorder(lineBorder,emptyBorder));
+
 //		=============================================================================================	
 
 //		Button setting
@@ -85,31 +96,25 @@ public class Menu extends WindowAdapter implements ActionListener {
 
 		bm2 = new JButton("지역별");
 		bm2.setSize(100, 30);
-		bm2.setLocation(95, 150);
+		bm2.setLocation(95, 160);
 		bm2.addActionListener(this);
 		bm2.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 		bm3 = new JButton("주제별");
 		bm3.setSize(100, 30);
-		bm3.setLocation(95, 200);
+		bm3.setLocation(95, 220);
 		bm3.addActionListener(this);
 		bm3.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
-		bnt = new JButton("공지사항");
-		bnt.setSize(100, 30);
-		bnt.setLocation(95, 300);
-		bnt.addActionListener(this);
-		bnt.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
-
 		bs = new JButton("검색");
 		bs.setSize(100, 30);
-		bs.setLocation(95, 350);
+		bs.setLocation(95, 320);
 		bs.addActionListener(this);
 		bs.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 12));
 		
 		bmp = new JButton("마이페이지");
 		bmp.setSize(100, 30);
-		bmp.setLocation(95, 400);
+		bmp.setLocation(95, 380);
 		bmp.addActionListener(this);
 		bmp.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
@@ -129,7 +134,7 @@ public class Menu extends WindowAdapter implements ActionListener {
 //		line = new JLabel("--------------------------------------------------");
 		line = new JLabel("- - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
 		line.setSize(200, 10);
-		line.setLocation(50, 260);
+		line.setLocation(50, 280);
 
 	}
 
@@ -141,7 +146,6 @@ public class Menu extends WindowAdapter implements ActionListener {
 		f4.add(bm3);
 		f4.add(bs);
 		f4.add(bmp);
-		f4.add(bnt);
 		f4.setVisible(true);
 	}
 
@@ -160,35 +164,27 @@ public class Menu extends WindowAdapter implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Mfind mf = new Mfind();
 //		Menu m = new Menu();
-		City c = new City();
+//		City c = new City();
 
 		if (e.getActionCommand().equals("ALL")) { // Mfind에서 이름만 나오게 설정해둠. //O
 			f4.setVisible(false);
 			String all = "SELECT * FROM MUSEUM";
 			mf.query(all); // Mfind.query메서드에 직접 넣어서 실행.
-
 //			System.out.println(str);
 //			m.startmf(str);// 아예 mfind에 넘겨줌.
 		}
 		if (e.getActionCommand().equals("지역별")) { // O
 			f4.setVisible(false);
-//			새로운 창에 지역별 버튼 만들기
-//			c.getFc().setVisible(true);
 			City.main(null);
-
-//			String city = null;
-//			String all = "SELECT BIZPLC_NM FROM MUSEUM WHERE SIGUN_NM = " + city;
-//			mf.query(all);
 		}
 
 		if (e.getActionCommand().equals("주제별")) {
 			f4.setVisible(false);
-//			su.startFrame();
-//			su.getF2().setVisible(true);
+			Theme.main(null);
 		}
 		if (e.getActionCommand().equals("검색")) {
 			f4.setVisible(false);
-//			Serach. // 검색 프레임 뜨게
+			Search.main(null); 
 		}
 		
 		if (e.getActionCommand().equals("마이페이지")) {
@@ -196,10 +192,7 @@ public class Menu extends WindowAdapter implements ActionListener {
 			mp.getF5().setVisible(true);
 		}
 		
-		if (e.getActionCommand().equals("공지사항")) {
-			f4.setVisible(false);
-			nt.getF6().setVisible(true);
-		}
+
 
 		if (e.getActionCommand().equals("뒤로")) {
 			f4_1.setVisible(false);

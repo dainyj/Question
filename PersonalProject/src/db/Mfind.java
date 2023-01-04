@@ -1,6 +1,7 @@
 package db;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -8,11 +9,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.border.Border;
 
 import proFront.Menu;
 
@@ -33,8 +36,7 @@ public class Mfind {
 
 	private Connection con;
 	private Statement stmt;
-
-	String sql = "";
+	private ResultSet rs;
 
 	public void connDB() { // 드라이버 연결, 계정 연결
 		try {
@@ -58,7 +60,7 @@ public class Mfind {
 
 			stmt.executeQuery(sql1);
 			System.out.println(sql1);
-			ResultSet rs = stmt.executeQuery(sql1);
+			rs = stmt.executeQuery(sql1);
 			while (rs.next()) {
 //				System.out.println(rs.getString("BIZPLC_NM")); 
 				B = " - " + rs.getString("BIZPLC_NM") + "\n\t: " + rs.getString("SIGUN_NM") + "\n"; // 화면 출력 형식 결정
@@ -94,6 +96,13 @@ public class Mfind {
 		sp.setViewportView(ta);
 		sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		p.add(sp); // 3. 패널에 스크롤을 추가, 패널에 TA를 직접 추가하지 않는다.
+		// textArea 와 텍스트 경계 사이에 여백을 두기 위해 emptyBorder 생성
+		Border emptyBorder = BorderFactory.createEmptyBorder(20, 20, 20, 20);
+
+		// textArea 의 테두리 선의 색과 두께 설정 가능.
+		Border lineBorder = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 3);
+		// textArea 에 lineBorder, emptyBorder 로 구성된 복함 경계선을 설정.
+		ta.setBorder(BorderFactory.createCompoundBorder(lineBorder, emptyBorder));
 
 		connDB();
 
@@ -102,7 +111,7 @@ public class Mfind {
 
 			stmt.executeQuery(sql2);
 			System.out.println(sql2);
-			ResultSet rs = stmt.executeQuery(sql2);
+			rs = stmt.executeQuery(sql2);
 			while (rs.next()) {
 //				System.out.println(rs.getString("BIZPLC_NM"));
 //				System.out.println(rs.getString("REFINE_ROADNM_ADDR"));
@@ -119,85 +128,50 @@ public class Mfind {
 
 	}
 
-	public String mq(String com, String sc) {
-		switch (com) {
-		case "기관명":
-			com = "BIZPLC_NM";
-		case "종류":
-			com = "MUSEUM_ARTGLRY_TYPE_NM";
-		case "도시":
-			com = "SIGUN_NM";
-		case "주소":
-			com = "REFINE_ROADNM_ADDR";
+	public void printTheme(String add) { // 주제별 정보 출력
+		String base = "SELECT * FROM MUSEUM WHERE MUSEUM_ARTGLRY_TYPE_NM LIKE '%" + add + "%'";
+		connDB();
+		try {
+			System.out.println(base);
+			stmt.executeQuery(base);
+			ResultSet rs = stmt.executeQuery(base);
+			while (rs.next()) {
+//				내용 채워야함. 이거 다음에 급한거 먼저 하자.
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
 		}
-		sql = "SELECT * FROM MUSEUM WHERE " + com + " LIKE '%" + sc + "%'";
-
-		return sql;
 	}
 
 //	museVo 사용해보기??
-	public ArrayList<MuseVo> list() {
+	public ArrayList<MuseVo> list(String sql) {
+		ArrayList<MuseVo> list = new ArrayList<MuseVo>();
 		connDB();
 
 		try {
 			System.out.println(sql);
 			stmt.executeQuery(sql);
-			ResultSet rs = stmt.executeQuery(sql);
-			rs.last();
-			System.out.println("rs.getRow() : " + rs.getRow());
+			rs = stmt.executeQuery(sql);
 
-			if (rs.getRow() == 0) {
-				System.out.println("0 row selected...");
-			} else {
-				System.out.println(rs.getRow() + " rows selected...");
-				rs.previous();
-
-				while (rs.next()) { // 맞게 수정 해야함.
-					String strbn = rs.getString("BIZPLC_NM");
-					String stradd = rs.getString("REFINE_ROADNM_ADDR");
-					MuseVo data = new MuseVo(strbn, stradd);
-					list().add(data);
-					System.out.println(strbn + " " + stradd + " " + data);
-					System.out.println();
-				}
+			while (rs.next()) { // 맞게 수정 해야함. 마지막만 출력하는걸 어떻게 바꿔야하나?
+				String strbn = rs.getString("BIZPLC_NM");
+				String stradd = rs.getString("REFINE_ROADNM_ADDR");
+				MuseVo data = new MuseVo(strbn, stradd);
+				list.add(data);
+//					System.out.println(strbn + " " + stradd + "\n" + list.add(data)));
+//					System.out.println();
 			}
+//			}
+			rs.close();
+			stmt.close();
+			con.close();
 		} catch (SQLException e) {
 			System.out.println(e);
+
 		}
 
-		return list();
+		return list;
 
 	}
-
-//	public String serch(String com, String sc) { // 검색어 입력
-//		String mn = "";
-//		connDB();
-//		try {
-//			switch (com) {
-//			case "기관명":
-//				com = "BIZPLC_NM";
-//			case "종류":
-//				com = "MUSEUM_ARTGLRY_TYPE_NM";
-//			case "도시":
-//				com = "SIGUN_NM";
-//			case "주소":
-//				com = "REFINE_ROADNM_ADDR";
-//			}
-//			String sql = "SELECT * FROM MUSEUM WHERE " + com + " LIKE '%" + sc + "%'";
-//			stmt.executeQuery(sql);
-////				System.out.println(sql);
-//			ResultSet rs = stmt.executeQuery(sql);
-//
-//			while (rs.next()) { // 맞게 수정 해야함.
-//				mn = " - " + rs.getString("BIZPLC_NM") + "\n" + "      주소 : " + rs.getString("REFINE_ROADNM_ADDR")
-//						+ "\n\n";
-//				System.out.println(mn);
-//			}
-//
-//		} catch (SQLException e) {
-//			System.out.println(e);
-//		}
-//		return mn;
-//	}
 
 }
