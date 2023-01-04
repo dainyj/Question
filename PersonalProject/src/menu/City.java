@@ -1,12 +1,23 @@
 package menu;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.border.Border;
 
+import db.Execute;
 import db.Mfind;
+import db.Query;
 import proFront.Menu;
 
 /*//1가평군 //2과천시 //3광명시 //4광주시 //5고양시 //6구리시 //7김포시
@@ -15,10 +26,15 @@ import proFront.Menu;
 //20오산시 //21용인시 //22이천시 //23의왕시 //24의정부시
 //25파주시 //26포천시 //27하남시 //28화성시
 */public class City implements ActionListener {
-	private JFrame fc;
+	private JFrame fc, fci;
 	private JButton b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17, b18, b19, b20, b21, b22,
 			b23, b24, b25, b26, b27, b28, back;
+	private JPanel p;
+	private JTextArea ta;
+	private JScrollPane sp;
 
+	Query qu = new Query();
+	Execute ec = new Execute();
 	String A = "";
 
 	public City() {
@@ -29,7 +45,6 @@ import proFront.Menu;
 		fc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		fc.setResizable(false);
 
-		
 //		도시 시작
 		b1 = new JButton("가평군");
 		b1.setSize(87, 30);
@@ -138,13 +153,13 @@ import proFront.Menu;
 		b18.setLocation(190, 270);
 		b18.addActionListener(this);
 		b18.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
-		
+
 		b19 = new JButton("여주시");
 		b19.setSize(87, 30);
 		b19.setLocation(10, 320);
 		b19.addActionListener(this);
 		b19.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
-		
+
 //20오산시 //21용인시 //22이천시 //23의왕시 //24의정부시
 		b20 = new JButton("오산시");
 		b20.setSize(87, 30);
@@ -175,7 +190,7 @@ import proFront.Menu;
 		b24.setLocation(190, 370);
 		b24.addActionListener(this);
 		b24.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
-		
+
 //25파주시 //26포천시 //27하남시 //28화성시
 		b25 = new JButton("파주시");
 		b25.setSize(87, 30);
@@ -200,12 +215,41 @@ import proFront.Menu;
 		b28.setLocation(10, 470);
 		b28.addActionListener(this);
 		b28.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
-		
+
 		back = new JButton("뒤로");
 		back.setSize(70, 20);
 		back.setLocation(200, 480);
 		back.addActionListener(this);
 		back.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
+
+		fci = new JFrame("목록");
+		fci.setLayout(null);
+		fci.setSize(300, 550);
+		fci.setLocation(300, 300);
+		fci.setResizable(false);
+
+		p = new JPanel();
+		p.setSize(250, 400);
+		p.setLocation(20, 30);
+		p.setLayout(new BorderLayout());
+
+		ta = new JTextArea();
+		ta.setLineWrap(true); // 자동 줄바꿈
+		ta.setEditable(false); // ta 수정 X
+		ta.setCaretPosition(ta.getDocument().getLength()); // 내용이 추가될 때마다 스크롤 내리지 않고 바로 보기
+
+		p.add(ta);
+		sp = new JScrollPane(ta); // 스크롤 3. 스크롤에 TA를 추가한다.
+		sp.setViewportView(ta);
+		sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		p.add(sp); // 3. 패널에 스크롤을 추가, 패널에 TA를 직접 추가하지 않는다.
+		// textArea 와 텍스트 경계 사이에 여백을 두기 위해 emptyBorder 생성
+		Border emptyBorder = BorderFactory.createEmptyBorder(20, 20, 20, 20);
+
+		// textArea 의 테두리 선의 색과 두께 설정 가능.
+		Border lineBorder = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 3);
+		// textArea 에 lineBorder, emptyBorder 로 구성된 복함 경계선을 설정.
+		ta.setBorder(BorderFactory.createCompoundBorder(lineBorder, emptyBorder));
 
 	}
 
@@ -240,154 +284,273 @@ import proFront.Menu;
 		fc.add(b28);
 		fc.add(back);
 		fc.setVisible(true);
+		fci.add(p);
 	}
 
-	public void cquery(String city) { // (정보 호출 쿼리), 이름과 주소만 출력되도록 설정.
-		Mfind mf = new Mfind();
-		String common = "SELECT BIZPLC_NM, REFINE_ROADNM_ADDR FROM MUSEUM WHERE SIGUN_NM = '" + city + "'";
-		mf.fcity(common);
-	}
+//	public void cquery(String city) { // (정보 호출 쿼리), 이름과 주소만 출력되도록 설정.
+//		Mfind mf = new Mfind();
+//		String common = "SELECT BIZPLC_NM, REFINE_ROADNM_ADDR FROM MUSEUM WHERE SIGUN_NM LIKE '" + city + "%'";
+//		mf.fcity(common);
+//	}
 
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) { // 다시 해야함
 		City c = new City();
 		if (e.getActionCommand().equals("가평군")) {
-//			System.out.println(b1.getText());
-			c.cquery(b1.getText()); // 버튼 텍스트 가져오기 JButton이 가능
+//			String A1 = qu.cityQuery(b1.getText());
+			A = qu.cityQuery(b1.getText());
+			fci.setVisible(true);
+			ec.printRes(A);
+//			String[] list = ec.printResult(A1);
+//			for (int i = 0; i < list.length; i++) {
+//				ta.append(list[i]);
+//			}
+
 		}
+
 		if (e.getActionCommand().equals("과천시")) {
-//			System.out.println(b2.getText());
-			c.cquery(b2.getText());
+//			String A2 = qu.cityQuery(b2.getText());
+			A = qu.cityQuery(b2.getText());
+//			String[] list = ec.printResult(A2);
+			fci.setVisible(true);
+			ec.printRes(A);
+//			for (int i = 0; i < list.length; i++) {
+//				ta.append(list[i]);
+//			}
 		}
 
 		if (e.getActionCommand().equals("광명시")) {
-//			System.out.println(b3.getText());
-			c.cquery(b3.getText());
+			A = qu.cityQuery(b3.getText());
+			String[] list = ec.printResult(A);
+			fci.setVisible(true);
+			for (int i = 0; i < list.length; i++) {
+				ta.append(list[i]);
+			}
 		}
 
 		if (e.getActionCommand().equals("광주시")) {
-//			System.out.println(b4.getText());
-			c.cquery(b4.getText());
+			A = qu.cityQuery(b4.getText());
+			String[] list = ec.printResult(A);
+			fci.setVisible(true);
+			for (int i = 0; i < list.length; i++) {
+				ta.append(list[i]);
+			}
 		}
 
 		if (e.getActionCommand().equals("고양시")) {
-//			System.out.println(b5.getText());
-			c.cquery(b5.getText());
+			A = qu.cityQuery(b5.getText());
+			String[] list = ec.printResult(A);
+			fci.setVisible(true);
+			for (int i = 0; i < list.length; i++) {
+				ta.append(list[i]);
+			}
 		}
 
 		if (e.getActionCommand().equals("구리시")) {
-//			System.out.println(b6.getText());
-			c.cquery(b6.getText());
+			A = qu.cityQuery(b6.getText());
+			String[] list = ec.printResult(A);
+			fci.setVisible(true);
+			for (int i = 0; i < list.length; i++) {
+				ta.append(list[i]);
+			}
 		}
 
 		if (e.getActionCommand().equals("김포시")) {
-//			System.out.println(b7.getText());
-			c.cquery(b7.getText());
+			A = qu.cityQuery(b7.getText());
+			String[] list = ec.printResult(A);
+			fci.setVisible(true);
+			for (int i = 0; i < list.length; i++) {
+				ta.append(list[i]);
+			}
 		}
 
 		if (e.getActionCommand().equals("남양주시")) {
-//			System.out.println(b8.getText());
-			c.cquery(b8.getText());
+			A = qu.cityQuery(b8.getText());
+			String[] list = ec.printResult(A);
+			fci.setVisible(true);
+			for (int i = 0; i < list.length; i++) {
+				ta.append(list[i]);
+			}
 		}
 
 		if (e.getActionCommand().equals("동두천시")) {
-//			System.out.println(b9.getText());
-			c.cquery(b9.getText());
+			A = qu.cityQuery(b9.getText());
+			String[] list = ec.printResult(A);
+			fci.setVisible(true);
+			for (int i = 0; i < list.length; i++) {
+				ta.append(list[i]);
+			}
 		}
 
 		if (e.getActionCommand().equals("부천시")) {
-//			System.out.println(b10.getText());
-			c.cquery(b10.getText());
+			A = qu.cityQuery(b10.getText());
+			String[] list = ec.printResult(A);
+			fci.setVisible(true);
+			for (int i = 0; i < list.length; i++) {
+				ta.append(list[i]);
+			}
 		}
 
 		if (e.getActionCommand().equals("성남시")) {
-//			System.out.println(b11.getText());
-			c.cquery(b11.getText());
+			A = qu.cityQuery(b11.getText());
+			String[] list = ec.printResult(A);
+			fci.setVisible(true);
+			for (int i = 0; i < list.length; i++) {
+				ta.append(list[i]);
+			}
 		}
 		if (e.getActionCommand().equals("수원시")) {
-//			System.out.println(b12.getText());
-			c.cquery(b12.getText());
+			A = qu.cityQuery(b12.getText());
+			String[] list = ec.printResult(A);
+			fci.setVisible(true);
+			for (int i = 0; i < list.length; i++) {
+				ta.append(list[i]);
+			}
 		}
 
 		if (e.getActionCommand().equals("시흥시")) {
-//			System.out.println(b13.getText());
-			c.cquery(b13.getText());
+			A = qu.cityQuery(b13.getText());
+			String[] list = ec.printResult(A);
+			fci.setVisible(true);
+			for (int i = 0; i < list.length; i++) {
+				ta.append(list[i]);
+			}
 		}
 
 		if (e.getActionCommand().equals("안산시")) {
-//			System.out.println(b14.getText());
-			c.cquery(b14.getText());
+			A = qu.cityQuery(b14.getText());
+			String[] list = ec.printResult(A);
+			fci.setVisible(true);
+			for (int i = 0; i < list.length; i++) {
+				ta.append(list[i]);
+			}
 		}
 
 		if (e.getActionCommand().equals("안성시")) {
-//			System.out.println(b15.getText());
-			c.cquery(b15.getText());
+			A = qu.cityQuery(b15.getText());
+			String[] list = ec.printResult(A);
+			fci.setVisible(true);
+			for (int i = 0; i < list.length; i++) {
+				ta.append(list[i]);
+			}
 		}
 
 		if (e.getActionCommand().equals("안양시")) {
-//			System.out.println(b16.getText());
-			c.cquery(b16.getText());
+			A = qu.cityQuery(b16.getText());
+			String[] list = ec.printResult(A);
+			fci.setVisible(true);
+			for (int i = 0; i < list.length; i++) {
+				ta.append(list[i]);
+			}
 		}
 
 		if (e.getActionCommand().equals("양주시")) {
-//			System.out.println(b17.getText());
-			c.cquery(b17.getText());
+			A = qu.cityQuery(b17.getText());
+			String[] list = ec.printResult(A);
+			fci.setVisible(true);
+			for (int i = 0; i < list.length; i++) {
+				ta.append(list[i]);
+			}
 		}
 
 		if (e.getActionCommand().equals("양평군")) {
-//			System.out.println(b18.getText());
-			c.cquery(b18.getText());
+			A = qu.cityQuery(b18.getText());
+			String[] list = ec.printResult(A);
+			fci.setVisible(true);
+			for (int i = 0; i < list.length; i++) {
+				ta.append(list[i]);
+			}
 		}
 
 		if (e.getActionCommand().equals("여주시")) {
-//			System.out.println(b19.getText());
-			c.cquery(b19.getText());
+			A = qu.cityQuery(b19.getText());
+			String[] list = ec.printResult(A);
+			fci.setVisible(true);
+			for (int i = 0; i < list.length; i++) {
+				ta.append(list[i]);
+			}
 		}
 
 		if (e.getActionCommand().equals("오산시")) {
-//			System.out.println(b20.getText());
-			c.cquery(b20.getText());
+			A = qu.cityQuery(b20.getText());
+			String[] list = ec.printResult(A);
+			fci.setVisible(true);
+			for (int i = 0; i < list.length; i++) {
+				ta.append(list[i]);
+			}
 		}
 
 		if (e.getActionCommand().equals("용인시")) {
-//			System.out.println(b21.getText());
-			c.cquery(b21.getText());
+			A = qu.cityQuery(b21.getText());
+			String[] list = ec.printResult(A);
+			fci.setVisible(true);
+			for (int i = 0; i < list.length; i++) {
+				ta.append(list[i]);
+			}
 		}
 
 		if (e.getActionCommand().equals("이천시")) {
-//			System.out.println(b22.getText());
-			c.cquery(b22.getText());
+			A = qu.cityQuery(b22.getText());
+			String[] list = ec.printResult(A);
+			fci.setVisible(true);
+			for (int i = 0; i < list.length; i++) {
+				ta.append(list[i]);
+			}
 		}
 
 		if (e.getActionCommand().equals("의왕시")) {
-//			System.out.println(b23.getText());
-			c.cquery(b23.getText());
+			A = qu.cityQuery(b23.getText());
+			String[] list = ec.printResult(A);
+			fci.setVisible(true);
+			for (int i = 0; i < list.length; i++) {
+				ta.append(list[i]);
+			}
 		}
 
 		if (e.getActionCommand().equals("의정부시")) {
-//			System.out.println(b24.getText());
-			c.cquery(b24.getText());
+			A = qu.cityQuery(b24.getText());
+			String[] list = ec.printResult(A);
+			fci.setVisible(true);
+			for (int i = 0; i < list.length; i++) {
+				ta.append(list[i]);
+			}
 		}
 
 		if (e.getActionCommand().equals("파주시")) {
-//			System.out.println(b25.getText());
-			c.cquery(b25.getText());
+			A = qu.cityQuery(b25.getText());
+			String[] list = ec.printResult(A);
+			fci.setVisible(true);
+			for (int i = 0; i < list.length; i++) {
+				ta.append(list[i]);
+			}
 		}
 
 		if (e.getActionCommand().equals("포천시")) {
-//			System.out.println(b26.getText());
-			c.cquery(b26.getText());
+			A = qu.cityQuery(b26.getText());
+			String[] list = ec.printResult(A);
+			fci.setVisible(true);
+			for (int i = 0; i < list.length; i++) {
+				ta.append(list[i]);
+			}
 		}
 
 		if (e.getActionCommand().equals("하남시")) {
-//			System.out.println(b27.getText());
-			c.cquery(b27.getText());
+			A = qu.cityQuery(b27.getText());
+			String[] list = ec.printResult(A);
+			fci.setVisible(true);
+			for (int i = 0; i < list.length; i++) {
+				ta.append(list[i]);
+			}
 		}
 
 		if (e.getActionCommand().equals("화성시")) {
-//			System.out.println(b28.getText());
-			c.cquery(b28.getText());
+			A = qu.cityQuery(b28.getText());
+			String[] list = ec.printResult(A);
+			fci.setVisible(true);
+			for (int i = 0; i < list.length; i++) {
+				ta.append(list[i]);
+			}
 		}
-		
+
 		if (e.getActionCommand().equals("뒤로")) {
 			fc.setVisible(false);
 			Menu.main(null);

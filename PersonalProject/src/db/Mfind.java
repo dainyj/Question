@@ -52,27 +52,6 @@ public class Mfind {
 		}
 	}
 
-	public void query(String A) { // 전체 박물관 이름 출력
-		connDB();
-
-		try {
-			String sql1 = A;
-
-			stmt.executeQuery(sql1);
-			System.out.println(sql1);
-			rs = stmt.executeQuery(sql1);
-			while (rs.next()) {
-//				System.out.println(rs.getString("BIZPLC_NM")); 
-				B = " - " + rs.getString("BIZPLC_NM") + "\n\t: " + rs.getString("SIGUN_NM") + "\n"; // 화면 출력 형식 결정
-//				박물관명 + 시군명 
-				m.startmf(B); // 여기서 호출해서 실행
-			}
-
-		} catch (SQLException e) {
-			System.out.println(e);
-		}
-
-	}
 
 	public void fcity(String C) { // 지역별 정보 출력
 		fci = new JFrame("목록");

@@ -23,7 +23,6 @@ public class Execute { // 쿼리받아서 실행 클래스
 			System.out.println("jdbc driver loading success.");
 			con = DriverManager.getConnection(url, user, password); // 계정 연결
 			System.out.println("oracle connection success.");
-//			stmt = con.createStatement();
 			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			System.out.println("statement create success.");
 		} catch (Exception e) {
@@ -54,25 +53,41 @@ public class Execute { // 쿼리받아서 실행 클래스
 		}
 		return muselist;
 	}
-	
-	
+
 //	출력 프로그램
-	public void printResult(String sql) {
-		Test t = new Test();
-		ArrayList<MuseVo> muselist = list(sql);
+	public String[] printResult(String sql) {
 		String strbn = "", stradd = "";
+
+		ArrayList<MuseVo> muselist = list(sql);
+		String[] mulist = new String[muselist.size()];
 		for (int i = 0; i < muselist.size(); i++) {
 			MuseVo data = (MuseVo) muselist.get(i);
-//			System.out.println(muselist.get(i));
+			System.out.println(muselist.get(i));
 //			System.out.println();
 			strbn = data.getBIZPLC_NM();
 			stradd = data.getREFINE_ROADNM_ADDR();
 			String mlist = " - " + strbn + "\n" + "      주소 : " + stradd + "\n\n";
-			t.taappear(mlist);
 			System.out.println(mlist);
-			
+			mulist[i] = mlist;
 		}
-		
+		return mulist;
 	}
 
-}// class end
+	public String printRes(String sql) {
+		connDB();
+		String mlist ="";
+		try {
+			stmt.executeQuery(sql);
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				String strbn = rs.getString("BIZPLC_NM");
+				String stradd = rs.getString("REFINE_ROADNM_ADDR");
+				mlist = " - " + strbn + "\n" + "      주소 : " + stradd + "\n\n";
+				System.out.println(mlist);
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+		return mlist;
+	}
+} // class end

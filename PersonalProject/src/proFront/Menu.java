@@ -6,8 +6,6 @@ import java.awt.Font;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 
 import javax.swing.BorderFactory;
@@ -19,7 +17,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.Border;
 
+import db.Execute;
 import db.Mfind;
+import db.Query;
 import menu.City;
 import menu.Theme;
 import proMiddle.Mypage;
@@ -40,6 +40,8 @@ public class Menu extends WindowAdapter implements ActionListener {
 
 	Mypage mp = new Mypage();
 	Notice nt = new Notice();
+	Query qu = new Query();
+	Execute ec = new Execute();
 
 	String A = "";
 
@@ -61,7 +63,7 @@ public class Menu extends WindowAdapter implements ActionListener {
 		f4_1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f4_1.setResizable(false);
 
-		p = new JPanel(); 
+		p = new JPanel();
 		p.setSize(250, 400);
 		p.setLocation(20, 30);
 		p.setLayout(new BorderLayout());
@@ -72,18 +74,16 @@ public class Menu extends WindowAdapter implements ActionListener {
 		ta.setCaretPosition(ta.getDocument().getLength()); // 내용이 추가될 때마다 스크롤 내리지 않고 바로 보기
 
 		p.add(ta);
-		sp = new JScrollPane(); // 스크롤 3. 스크롤에 TA를 추가한다.
-		sp.setViewportView(ta);
-		p.add(sp); // 3. 패널에 스크롤을 추가, 패널에 TA를 직접 추가하지 않는다.
-//		sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		
+		sp = new JScrollPane(); 
+		sp.setViewportView(ta); // 스크롤에 ta를 추가
+		p.add(sp); // 패널에 스크롤을 추가, 패널에 ta를 직접 추가하지 않는다.
+
 		// textArea 와 텍스트 경계 사이에 여백을 두기 위해 emptyBorder 생성
 		Border emptyBorder = BorderFactory.createEmptyBorder(20, 20, 20, 20);
-
 		// textArea 의 테두리 선의 색과 두께 설정 가능.
 		Border lineBorder = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 3);
 		// textArea 에 lineBorder, emptyBorder 로 구성된 복함 경계선을 설정.
-				ta.setBorder(BorderFactory.createCompoundBorder(lineBorder,emptyBorder));
+		ta.setBorder(BorderFactory.createCompoundBorder(lineBorder, emptyBorder));
 
 //		=============================================================================================	
 
@@ -111,7 +111,7 @@ public class Menu extends WindowAdapter implements ActionListener {
 		bs.setLocation(95, 320);
 		bs.addActionListener(this);
 		bs.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 12));
-		
+
 		bmp = new JButton("마이페이지");
 		bmp.setSize(100, 30);
 		bmp.setLocation(95, 380);
@@ -136,9 +136,13 @@ public class Menu extends WindowAdapter implements ActionListener {
 		line.setSize(200, 10);
 		line.setLocation(50, 280);
 
+		
+	
 	}
 
 	public void startFrame() {
+		f4_1.add(p);
+		f4_1.add(back);
 		f4.add(lm);
 		f4.add(line);
 		f4.add(bm1);
@@ -149,30 +153,18 @@ public class Menu extends WindowAdapter implements ActionListener {
 		f4.setVisible(true);
 	}
 
-	public void startmf(String a) {
-		ta.append(a);
-		f4_1.add(p);
-		f4_1.add(back);
-		f4_1.setVisible(true);
-	}
-
-	public String getStr(String str) {
-		this.str = str;
-		return str;
-	}
 
 	public void actionPerformed(ActionEvent e) {
-		Mfind mf = new Mfind();
-//		Menu m = new Menu();
-//		City c = new City();
 
-		if (e.getActionCommand().equals("ALL")) { // Mfind에서 이름만 나오게 설정해둠. //O
+		if (e.getActionCommand().equals("ALL")) {
 			f4.setVisible(false);
-			String all = "SELECT * FROM MUSEUM";
-			mf.query(all); // Mfind.query메서드에 직접 넣어서 실행.
-//			System.out.println(str);
-//			m.startmf(str);// 아예 mfind에 넘겨줌.
+			f4_1.setVisible(true);
+			String[] list = ec.printResult(qu.allQuery());
+			for (int i = 0; i < list.length; i++) {
+				ta.append(list[i]);
+			}
 		}
+
 		if (e.getActionCommand().equals("지역별")) { // O
 			f4.setVisible(false);
 			City.main(null);
@@ -182,17 +174,16 @@ public class Menu extends WindowAdapter implements ActionListener {
 			f4.setVisible(false);
 			Theme.main(null);
 		}
+
 		if (e.getActionCommand().equals("검색")) {
 			f4.setVisible(false);
-			Search.main(null); 
+			Search.main(null);
 		}
-		
+
 		if (e.getActionCommand().equals("마이페이지")) {
 			f4.setVisible(false);
 			mp.getF5().setVisible(true);
 		}
-		
-
 
 		if (e.getActionCommand().equals("뒤로")) {
 			f4_1.setVisible(false);

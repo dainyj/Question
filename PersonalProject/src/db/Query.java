@@ -9,14 +9,16 @@ public class Query {
 	}
 
 //	메뉴f > 지역별 버튼 > City클래스 도시별로
-	public void cityQuery(String city) {
-		String citySql = "SELECT BIZPLC_NM, REFINE_ROADNM_ADDR FROM MUSEUM WHERE SIGUN_NM = '" + city + "'";
+	public String cityQuery(String city) {
+		String citySql = "SELECT BIZPLC_NM, REFINE_ROADNM_ADDR FROM MUSEUM WHERE SIGUN_NM LIKE '%" + city + "%'";
+		return citySql;
 	}
 	
 //	메뉴f > 주제별 버튼 > Theme클래스 1.박물관 2.미술관 3.전시관 버튼 클릭시 각각
-	public void themeQuery(String add) {
+	public String themeQuery(String add) {
 //		버튼 클릭시 해당 add가 여기로
 		String baseSql = "SELECT * FROM MUSEUM WHERE MUSEUM_ARTGLRY_TYPE_NM LIKE '%" + add + "%'";
+		return baseSql;
 	}
 	
 	
