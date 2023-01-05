@@ -15,7 +15,7 @@ public class Execute { // 쿼리받아서 실행 클래스
 
 	private Connection con;
 	private Statement stmt;
-	private ResultSet rs;
+//	private ResultSet rs;
 
 	public void connDB() { // 드라이버 연결, 계정 연결
 		try {
@@ -28,6 +28,7 @@ public class Execute { // 쿼리받아서 실행 클래스
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 	public ArrayList<MuseVo> list(String sql) { // 쿼리 실행해서 MuseVo에 저장하는 메서드
@@ -62,32 +63,34 @@ public class Execute { // 쿼리받아서 실행 클래스
 		String[] mulist = new String[muselist.size()];
 		for (int i = 0; i < muselist.size(); i++) {
 			MuseVo data = (MuseVo) muselist.get(i);
-			System.out.println(muselist.get(i));
-//			System.out.println();
+//			System.out.println(muselist.get(i));
 			strbn = data.getBIZPLC_NM();
 			stradd = data.getREFINE_ROADNM_ADDR();
 			String mlist = " - " + strbn + "\n" + "      주소 : " + stradd + "\n\n";
-			System.out.println(mlist);
+//			System.out.println(mlist);
 			mulist[i] = mlist;
 		}
 		return mulist;
 	}
 
-	public String printRes(String sql) {
-		connDB();
-		String mlist ="";
-		try {
-			stmt.executeQuery(sql);
-			ResultSet rs = stmt.executeQuery(sql);
-			while (rs.next()) {
-				String strbn = rs.getString("BIZPLC_NM");
-				String stradd = rs.getString("REFINE_ROADNM_ADDR");
-				mlist = " - " + strbn + "\n" + "      주소 : " + stradd + "\n\n";
-				System.out.println(mlist);
-			}
-		} catch (SQLException e) {
-			System.out.println(e);
-		}
-		return mlist;
-	}
+	
+//	public String printRes(String sql) { // 하나만 전송됨. 여러개 전송하려면 배열로 넘겨야할듯
+//		connDB();
+//		String mlist ="";
+//		try {
+//			stmt.executeQuery(sql);
+//			ResultSet rs = stmt.executeQuery(sql);
+//			while (rs.next()) {
+//				String strbn = rs.getString("BIZPLC_NM");
+//				String stradd = rs.getString("REFINE_ROADNM_ADDR");
+//				mlist = " - " + strbn + "\n" + "      주소 : " + stradd + "\n\n";
+//				System.out.println(mlist);
+//			}
+//		} catch (SQLException e) {
+//			System.out.println(e);
+//		}
+//		return mlist;
+//	}
+	
+
 } // class end

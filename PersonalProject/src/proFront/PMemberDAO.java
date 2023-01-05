@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
+
+import LOGIN_T.MemberVo;
 
 public class PMemberDAO {
 	String driver = "oracle.jdbc.driver.OracleDriver";
@@ -37,7 +40,6 @@ public class PMemberDAO {
 			System.out.println("jdbc driver loading success.");
 			con = DriverManager.getConnection(url, user, password);
 			System.out.println("oracle connection success.");
-//			stmt = con.createStatement();
 			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			System.out.println("statement create success.");
 		} catch (Exception e) {
@@ -45,11 +47,10 @@ public class PMemberDAO {
 		}
 	}
 
-
 	public ArrayList<PMemberVo> list(String id) { // 로그인 시 id 매치
+		connDB();
 		ArrayList<PMemberVo> list = new ArrayList<PMemberVo>();
 		try {
-			connDB();
 			String query = "SELECT * FROM PMEMBER";
 			if (id != null) {
 				query += " where id='" + id + "'";
@@ -68,10 +69,8 @@ public class PMemberDAO {
 				while (rs.next()) {
 					String strId = rs.getString("id");
 					String strPwd = rs.getString("password");
-//					String strPhnum = rs.getString("phnum");
-//					String strEm = rs.getString("email");
 
-					PMemberVo data = new PMemberVo(strId, strPwd);//, strPhnum, strEm);
+					PMemberVo data = new PMemberVo(strId, strPwd);
 					list.add(data);
 				}
 			}
@@ -82,12 +81,40 @@ public class PMemberDAO {
 		return list;
 	}
 
-	public void insert(String ID, String PASSWORD) {//, String PHNUM, String EMAIL) { // 회원가입 추가
+	public String idmatch(String id) { // ID 중복 확인
+		connDB();
+		String answer = "";
+		try {
+			String query = "SELECT * FROM PMEMBER";
+			if (id != null) {
+				query += " where id='" + id + "'";
+
+				System.out.println("SQL : " + query);
+				rs = stmt.executeQuery(query);
+				rs.last();
+				int count = rs.getRow();
+				System.out.println(count);
+				rs.previous();
+
+				if (count != 0) {
+					answer = "이미 존재하는 ID입니다.";
+				} else {
+					answer = "사용 가능한 ID입니다.";
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return answer;
+	}
+
+	public void insert(String ID, String PASSWORD) { // 회원가입 추가
 		try {
 			connDB();
-			System.out.println(ID + " " + PASSWORD);// + " " + PHNUM + " " + EMAIL);
+			System.out.println(ID + " " + PASSWORD);
 
-			String sql = "INSERT INTO PMEMBER VALUES ('" + ID + "','" + PASSWORD + "')";//,'" + PHNUM + "','" + EMAIL + "')";
+			String sql = "INSERT INTO PMEMBER VALUES ('" + ID + "','" + PASSWORD + "')";
 //			System.out.println(sql);
 			boolean b = stmt.execute(sql);
 			if (!b) {
@@ -109,10 +136,13 @@ public class PMemberDAO {
 
 	}
 
-	public void delete(String ID) { // 탈퇴
+	public void delete(String ID, String PWD) { // 탈퇴
+//		SELECT ID FROM PMEMBER WHERE ID = 'ID' AND PASSWORD = 'PWD'
+		
 		try {
 			connDB();
-			String sql = "delete FROM PMEMBER Where ID = " + "'" + ID + "'"; // 아이디 적용시키기
+
+			String sql = "delete FROM PMEMBER Where ID = '" + ID + "' AND PASSWORD = '" + PWD + "'"; // 아이디 적용시키기
 //			System.out.println(sql);
 			stmt.executeQuery(sql);
 

@@ -12,7 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import db.Mfind;
+import db.Execute;
+import db.Query;
 import proFront.Menu;
 
 public class Theme extends WindowAdapter implements ActionListener {
@@ -22,7 +23,8 @@ public class Theme extends WindowAdapter implements ActionListener {
 	private JTextArea tam, taa, tag;
 	private JScrollPane sm, sa, sg;
 
-	String add;
+	Query qu = new Query();
+	Execute ec = new Execute();
 
 	public Theme() {
 //		Frame setting
@@ -51,7 +53,7 @@ public class Theme extends WindowAdapter implements ActionListener {
 		bg.setLocation(30, 340);
 		bg.addActionListener(this);
 		bg.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
-		
+
 		back = new JButton("뒤로");
 		back.setSize(60, 18);
 		back.setLocation(210, 10);
@@ -118,33 +120,50 @@ public class Theme extends WindowAdapter implements ActionListener {
 		ft.setVisible(true);
 	}
 
-	public void actionPerformed(ActionEvent e) { // 버튼 클릭시 쿼리 완성되는데 까지만 함.
-//		String base = "SELECT * FROM MUSEUM WHERE MUSEUM_ARTGLRY_TYPE_NM LIKE '%";
-		Mfind mf = new Mfind();
+	public void actionPerformed(ActionEvent e) {
+
 		if (e.getActionCommand().equals("박물관")) {
-//			버튼 클릭시 리스트 tam에 출력
-			add = "박물관";
-			mf.printTheme(add);
-			tam.append(null);
+			String add = bm.getText();
+			String sql = qu.themeQuery(add);
+			System.out.println(add + " " + sql);
+			tam.setText(null);
+			String[] list = ec.printResult(sql);
+			for (int i = 0; i < list.length; i++) {
+				tam.append(list[i]);
+			}
+
 		}
 
 		if (e.getActionCommand().equals("미술관")) {
-			add = "미술관";
-			mf.printTheme(add);
-			taa.append(null);
+			String add = ba.getText();
+			String sql = qu.themeQuery(add);
+			System.out.println(add + " " + sql);
+			taa.setText(null);
+			String[] list = ec.printResult(sql);
+			for (int i = 0; i < list.length; i++) {
+				taa.append(list[i]);
+			}
+
 		}
 
 		if (e.getActionCommand().equals("전시관")) {
-			add = "전시관";
-			mf.printTheme(add);
-			tag.append(null);
+			String add = bg.getText();
+			String sql = qu.themeQuery(add);
+			System.out.println(add + " " + sql);
+			tag.setText(null);
+			String[] list = ec.printResult(sql);
+			for (int i = 0; i < list.length; i++) {
+				tag.append(list[i]);
+
+			}
 		}
-		
+
 		if (e.getActionCommand().equals("뒤로")) {
 			ft.setVisible(false);
 			Menu.main(null);
 		}
 	}
+
 	public static void main(String[] args) {
 		Theme tm = new Theme();
 		tm.startFrame();
