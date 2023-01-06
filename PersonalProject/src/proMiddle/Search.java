@@ -29,7 +29,7 @@ public class Search extends WindowAdapter implements ActionListener {
 	private JPanel p;
 	private JButton bsc, back;
 	private JTextField tfs;
-	private JTextArea ta;
+	private JTextArea ta, ta2;
 	private JScrollPane sp;
 	private Choice group;
 

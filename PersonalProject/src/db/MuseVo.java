@@ -26,6 +26,13 @@ public class MuseVo {
 		this.REFINE_ROADNM_ADDR = REFINE_ROADNM_ADDR;
 	}
 
+//						zero							one				  two	
+	public MuseVo(String MUSEUM_ARTGLRY_TYPE_NM, String BIZPLC_NM, String SIGUN_NM) {
+		this.MUSEUM_ARTGLRY_TYPE_NM = MUSEUM_ARTGLRY_TYPE_NM;
+		this.BIZPLC_NM = BIZPLC_NM;
+		this.SIGUN_NM = SIGUN_NM;
+	}
+
 	public String getBIZPLC_NM() {
 		return BIZPLC_NM;
 	}

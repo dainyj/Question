@@ -164,7 +164,7 @@ public class SignUp extends WindowAdapter implements ActionListener {
 				label.setText(answer);
 			}
 		}
-
+//		방법1
 		if (e.getActionCommand().equals("가입하기")) {
 			// ID확인 버튼을 클릭하는걸 전제조건으로 삼으려면 어떻게 해야하지? 이 방법은 버튼 누른 상태여야하나봄 다시 검색시작
 			if (label.getText().equals("사용 가능한 ID입니다.")) {
@@ -181,6 +181,10 @@ public class SignUp extends WindowAdapter implements ActionListener {
 				label.setText("중복 ID 확인을 해주세요.");
 			}
 		}
+		
+//		방법2
+//		boolean b = false;
+		
 
 		if (e.getActionCommand().equals("탈퇴하기")) {
 			f2.setVisible(false);

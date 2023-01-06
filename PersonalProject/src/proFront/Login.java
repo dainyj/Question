@@ -105,13 +105,24 @@ public class Login extends WindowAdapter implements ActionListener {
 
 		if (e.getActionCommand().equals("확인")) {
 			info.dispose(); // info창만 종료
+			tfid2.setText(null);
+			tfpwd2.setText(null);
+			f3.setVisible(true);
 		}
 
 		if (e.getActionCommand().equals("로그인")) {
-			f3.setVisible(false);
+			
+//				Dialog 적용하기  // 대신 아래 글 나오게 설정바꿔보기시도
+			if (tfid2.getText() == "" && tfpwd2.getText() == "") {
+				
+				info.add(lf);
+				info.setVisible(true);
+				
+			}
+
 			ArrayList<PMemberVo> list = dao.list(tfid2.getText());
 
-			String id = "     ", password = "     "; // 다이얼로그 오류 원인 - 기본값이 ""니 당연히 성공이지
+			String id = "     ", password = "     "; 
 			for (int i = 0; i < list.size(); i++) {
 				PMemberVo data = (PMemberVo) list.get(i);
 				id = data.getId();
@@ -119,12 +130,8 @@ public class Login extends WindowAdapter implements ActionListener {
 
 				System.out.println(id + " : " + password);
 			}
+			f3.setVisible(false);
 
-//				Dialog 적용하기  // 대신 아래 글 나오게 설정바꿔보기시도
-			if (tfid2.getText() == "" && tfpwd2.getText() == "") {// 로그인창 비었을때 왜 성공뜸?
-				info.add(lf);
-				info.setVisible(true);
-			}
 
 			if (tfid2.getText().equals(id) && tfpwd2.getText().equals(password)) {
 				Menu.main(null);
