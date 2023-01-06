@@ -55,9 +55,9 @@ public class JTabel extends JFrame implements MouseListener {
 		fsave.setSize(400, 300);
 		fsave.addMouseListener(this);
 		
-		model2 = new DefaultTableModel(); 
+		model2 = new DefaultTableModel(0,3); 
 		tb2 = new JTable(model2);
-		tb2.addMouseListener(this);
+//		tb2.addMouseListener(this);
 		sp2 = new JScrollPane(tb2);
 		sp2.addMouseListener(this);
 				
