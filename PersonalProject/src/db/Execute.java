@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Execute { // 쿼리받아서 실행 클래스
 	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:ORCL";
+	String url = "jdbc:oracle:thin:@localhost:1521:XE";
 	String user = "c##green";
 	String password = "green1234";
 

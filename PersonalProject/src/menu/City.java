@@ -294,7 +294,7 @@ import proFront.Menu;
 //			MuseVo에 저장한 list 불러오기
 			String[] list = ec.printResult(A);//
 			for (int i = 0; i < list.length; i++) {
-				ta.append("1"+list[i]);
+				ta.append(list[i]);
 			}
 		}
 
@@ -304,7 +304,7 @@ import proFront.Menu;
 			A = qu.cityQuery(b2.getText());
 			String[] list = ec.printResult(A);
 			for (int i = 0; i < list.length; i++) {
-				ta.append("2"+list[i]);
+				ta.append(list[i]);
 			}
 		}
 
@@ -314,7 +314,7 @@ import proFront.Menu;
 			A = qu.cityQuery(b3.getText());
 			String[] list = ec.printResult(A);
 			for (int i = 0; i < list.length; i++) {
-				ta.append("3"+list[i]);
+				ta.append(list[i]);
 			}
 		}
 
