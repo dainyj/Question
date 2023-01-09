@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Execute { // 쿼리받아서 실행 클래스
 	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:XE";
+	String url = "jdbc:oracle:thin:@localhost:1521:ORCL";
 	String user = "c##green";
 	String password = "green1234";
 
@@ -28,7 +28,7 @@ public class Execute { // 쿼리받아서 실행 클래스
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	public ArrayList<MuseVo> list(String sql) { // 쿼리 실행해서 MuseVo에 저장하는 메서드
@@ -45,6 +45,29 @@ public class Execute { // 쿼리받아서 실행 클래스
 				muselist.add(data);
 //					System.out.println(strbn + " " + stradd + "\n" + list.add(data)));
 //					System.out.println();
+			}
+			rs.close();
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+		return muselist;
+	}
+
+	public ArrayList<MuseVo> list2(String sql) { // 쿼리 실행해서 MuseVo에 저장하는 메서드
+		ArrayList<MuseVo> muselist = new ArrayList<MuseVo>();
+		connDB();
+		try {
+			System.out.println(sql);
+			stmt.executeQuery(sql);
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				String strtn = rs.getString("MUSEUM_ARTGLRY_TYPE_NM");
+				String strbn = rs.getString("BIZPLC_NM");
+				String strcn = rs.getString("SIGUN_NM");
+				MuseVo data = new MuseVo(strtn, strbn, strcn);
+				muselist.add(data);
 			}
 			rs.close();
 			stmt.close();
@@ -73,24 +96,37 @@ public class Execute { // 쿼리받아서 실행 클래스
 		return mulist;
 	}
 
-	
-//	public String printRes(String sql) { // 하나만 전송됨. 여러개 전송하려면 배열로 넘겨야할듯
-//		connDB();
-//		String mlist ="";
-//		try {
-//			stmt.executeQuery(sql);
-//			ResultSet rs = stmt.executeQuery(sql);
-//			while (rs.next()) {
-//				String strbn = rs.getString("BIZPLC_NM");
-//				String stradd = rs.getString("REFINE_ROADNM_ADDR");
-//				mlist = " - " + strbn + "\n" + "      주소 : " + stradd + "\n\n";
-//				System.out.println(mlist);
-//			}
-//		} catch (SQLException e) {
-//			System.out.println(e);
-//		}
-//		return mlist;
-//	}
-	
+	public String printRes(String sql) { // 하나만 전송됨. 여러개 전송하려면 배열로 넘겨야할듯
+		connDB();
+		String mlist = "";
+		try {
+			stmt.executeQuery(sql);
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				String strbn = rs.getString("BIZPLC_NM");
+				String strcn = rs.getString("SIGUN_NM");
+				String stradd = rs.getString("REFINE_ROADNM_ADDR");
+				mlist = " - " + strbn + "	" + strcn + "\n" + "      주소 : " + stradd + "\n\n";
+				System.out.println(mlist);
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+		return mlist;
+	}
+
+	public void insertMypage(String sql) {
+		connDB();
+		try {
+			boolean b = stmt.execute(sql);
+			if (!b) {
+				System.out.println("Insert success.\n");
+			} else {
+				System.out.println("Insert fail.\n");
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+	}
 
 } // class end

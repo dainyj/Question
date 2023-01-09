@@ -13,17 +13,16 @@ public class Query {
 		String citySql = "SELECT BIZPLC_NM, REFINE_ROADNM_ADDR FROM MUSEUM WHERE SIGUN_NM LIKE '%" + city + "%'";
 		return citySql;
 	}
-	
+
 //	메뉴f > 주제별 버튼 > Theme클래스 1.박물관 2.미술관 3.전시관 버튼 클릭시 각각 //연결O
 	public String themeQuery(String add) {
 //		버튼 클릭시 해당 add가 여기로
 		String baseSql = "SELECT * FROM MUSEUM WHERE MUSEUM_ARTGLRY_TYPE_NM LIKE '%" + add + "%'";
 		return baseSql;
 	}
-	
-	
+
 //	 Search클래스 
-	public String serchQuery(String combo, String search) { //쿼리 완성 메서드  
+	public String serchQuery(String combo, String search) { // 쿼리 완성 메서드
 		switch (combo) {
 		case "기관명":
 			combo = "BIZPLC_NM";
@@ -39,9 +38,27 @@ public class Query {
 			break;
 		}
 		String SearchSql = "SELECT * FROM MUSEUM WHERE " + combo + " LIKE '%" + search + "%'";
-		
+
 		return SearchSql;
 	}
 
+//	검색f > 저장
+	public String insertQuery(String A, String B) {
+		String insertSql = "INSERT INTO MYPAGE VALUES('" + A + "','" + B + "')";
+		return insertSql;
+	}
+
+//	마이f > 조회
+	public String detail(String get) {
+		String detailSql = "SELECT * FROM MUSEUM WHERE BIZPLC_NM LIKE '" + get + "'";
+		return detailSql;
+	}
+	
+//	마이f > 기본 화면
+	public String main() {
+		String sql = "SELECT * FROM MYPAGE";
+		return sql;
+	}
+	
 
 }// class end

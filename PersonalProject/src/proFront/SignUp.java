@@ -157,7 +157,6 @@ public class SignUp extends WindowAdapter implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		SignUp su = new SignUp();
-//		============================================= 다시 작성해야함.============
 		if (e.getActionCommand().equals("ID 확인")) { // id 중복체크
 			if (!(tfid.getText() == null)) {
 				String answer = dao.idmatch(tfid.getText());

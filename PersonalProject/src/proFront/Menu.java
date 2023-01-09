@@ -18,12 +18,10 @@ import javax.swing.JTextArea;
 import javax.swing.border.Border;
 
 import db.Execute;
-import db.Mfind;
 import db.Query;
 import menu.City;
 import menu.Theme;
 import proMiddle.Mypage;
-import proMiddle.Notice;
 import proMiddle.Search;
 
 // 프레임 1, 메뉴- 버튼3/라벨1, 검색- 라벨/텍스트필드/버튼 1, 마이페이지- 라벨/버튼1, 공지사항 - 라벨/버튼1
@@ -31,7 +29,6 @@ public class Menu extends WindowAdapter implements ActionListener {
 	private JFrame f4, f4_1;
 	private JButton bm1, bm2, bm3, bs, bmp, bnt, back;
 	private JLabel lm, line;
-	private TextField tfs;
 	private JTextArea ta;
 	private JPanel p;
 	private JScrollPane sp;
@@ -39,7 +36,6 @@ public class Menu extends WindowAdapter implements ActionListener {
 	String str;
 
 	Mypage mp = new Mypage();
-	Notice nt = new Notice();
 	Query qu = new Query();
 	Execute ec = new Execute();
 
@@ -73,7 +69,6 @@ public class Menu extends WindowAdapter implements ActionListener {
 		ta.setEditable(false); // 수정 X
 		ta.setCaretPosition(ta.getDocument().getLength()); // 내용이 추가될 때마다 스크롤 내리지 않고 바로 보기
 
-		p.add(ta);
 		sp = new JScrollPane(); 
 		sp.setViewportView(ta); // 스크롤에 ta를 추가
 		p.add(sp); // 패널에 스크롤을 추가, 패널에 ta를 직접 추가하지 않는다.
@@ -157,7 +152,7 @@ public class Menu extends WindowAdapter implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getActionCommand().equals("ALL")) {
-			f4.setVisible(false);
+//			f4.setVisible(false);
 			f4_1.setVisible(true);
 			String[] list = ec.printResult(qu.allQuery());
 			for (int i = 0; i < list.length; i++) {
@@ -166,23 +161,23 @@ public class Menu extends WindowAdapter implements ActionListener {
 		}
 
 		if (e.getActionCommand().equals("지역별")) { // O
-			f4.setVisible(false);
+//			f4.setVisible(false);
 			City.main(null);
 		}
 
 		if (e.getActionCommand().equals("주제별")) {
-			f4.setVisible(false);
+//			f4.setVisible(false);
 			Theme.main(null);
 		}
 
 		if (e.getActionCommand().equals("검색")) {
-			f4.setVisible(false);
+//			f4.setVisible(false);
 			Search.main(null);
 		}
 
 		if (e.getActionCommand().equals("마이페이지")) {
-			f4.setVisible(false);
-			mp.getF5().setVisible(true);
+//			f4.setVisible(false);
+			Mypage.main(null);
 		}
 
 		if (e.getActionCommand().equals("뒤로")) {

@@ -64,25 +64,25 @@ public class MouseEvent extends JFrame implements MouseListener {
 	}
 
 	@Override
-	public void mousePressed(java.awt.event.MouseEvent e) {
+	public void mousePressed(java.awt.event.MouseEvent e) {//마우스가 눌린 상태
 		// TODO Auto-generated method stub
 		System.out.println("1111111");
 	}
 
 	@Override
-	public void mouseReleased(java.awt.event.MouseEvent e) {
+	public void mouseReleased(java.awt.event.MouseEvent e) { // 버튼 클릭 상태의 마우스에서 손 땠을 때 
 		// TODO Auto-generated method stub
 		System.out.println("2222222");
 	}
 
 	@Override
-	public void mouseEntered(java.awt.event.MouseEvent e) {
+	public void mouseEntered(java.awt.event.MouseEvent e) { // 마우스가 지정범위 안에 있을 때, 지정범위 = 프레임 안, 버튼 /tf 제외
 		// TODO Auto-generated method stub
 		System.out.println("33333333");
 	}
 
 	@Override
-	public void mouseExited(java.awt.event.MouseEvent e) {
+	public void mouseExited(java.awt.event.MouseEvent e) { // 마우스가 지정범위 밖에 있을때
 		// TODO Auto-generated method stub
 		System.out.println("44444444444");
 	}
