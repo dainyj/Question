@@ -122,14 +122,10 @@ public class PMemberDAO {
 			} else {
 				System.out.println("Insert fail.\n");
 			}
-//			String sql2 = "SELECT * FROM PMEMBER";
-//			ResultSet rs = stmt.executeQuery(sql2);
-//			while (rs.next()) {
-//				System.out.print(rs.getString("ID") + "\t");
-//				System.out.print(rs.getString("PASSWORD") + "\t");
-//				System.out.print(rs.getString("PHNUM") + "\t");
-//				System.out.println(rs.getString("EMAIL") + " ");
-//			}
+
+			String createSql = "CREATE TABLE " + ID + " (NAME varchar2(60), CITY varchar2(20))"; // 가입과 동시에 테이블 생성
+			stmt.executeQuery(createSql);
+			
 		} catch (SQLException e) {
 			System.out.println(e);
 		}
@@ -138,14 +134,16 @@ public class PMemberDAO {
 
 	public void delete(String ID, String PWD) { // 탈퇴
 //		SELECT ID FROM PMEMBER WHERE ID = 'ID' AND PASSWORD = 'PWD'
-		
+
 		try {
 			connDB();
 
 			String sql = "delete FROM PMEMBER Where ID = '" + ID + "' AND PASSWORD = '" + PWD + "'"; // 아이디 적용시키기
 //			System.out.println(sql);
 			stmt.executeQuery(sql);
-
+			String sql2 = "DROP TABLE " + ID; // 테이블 삭제
+			stmt.executeQuery(sql2);
+			System.out.println(sql2);
 		} catch (SQLException e) {
 			System.out.println(e);
 		}

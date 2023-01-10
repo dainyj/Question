@@ -31,7 +31,8 @@ import proFront.Menu;
 	private JPanel p;
 	private JTextArea ta;
 	private JScrollPane sp;
-
+	
+	Menu mn = new Menu();
 	Query qu = new Query();
 	Execute ec = new Execute();
 	String A = "";
@@ -569,7 +570,7 @@ import proFront.Menu;
 
 		if (e.getActionCommand().equals("뒤로")) {
 			fc.setVisible(false);
-			Menu.main(null);
+			mn.startFrame();
 		}
 
 	}

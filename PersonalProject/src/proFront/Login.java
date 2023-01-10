@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import proMiddle.Mypage;
+import proMiddle.Search;
+
 // ID 라벨, 텍스트필드/ PWD 라벨, 텍스트필드/ 로그인 버튼
 
 public class Login extends WindowAdapter implements ActionListener {
@@ -85,7 +88,6 @@ public class Login extends WindowAdapter implements ActionListener {
 		info.setLayout(null);
 //		info.setLayout(new FlowLayout());
 		info.addWindowListener(this);
-		
 
 	}
 
@@ -114,27 +116,30 @@ public class Login extends WindowAdapter implements ActionListener {
 			
 //				Dialog 적용하기  // 대신 아래 글 나오게 설정바꿔보기시도
 			if (tfid2.getText() == "" && tfpwd2.getText() == "") {
-				
+
 				info.add(lf);
 				info.setVisible(true);
-				
 			}
 
 			ArrayList<PMemberVo> list = dao.list(tfid2.getText());
 
-			String id = "     ", password = "     "; 
+			String id = "     ", password = "     ";
 			for (int i = 0; i < list.size(); i++) {
 				PMemberVo data = (PMemberVo) list.get(i);
 				id = data.getId();
 				password = data.getPwd();
 
-				System.out.println(id + " : " + password);
+//				System.out.println(id + " : " + password);
 			}
 			f3.setVisible(false);
 
-
 			if (tfid2.getText().equals(id) && tfpwd2.getText().equals(password)) {
-				Menu.main(null);
+				Menu mn = new Menu();
+				mn.setID(tfid2.getText());
+				mn.startFrame();
+				
+//				Menu.main(null);
+
 			} else {
 				info.add(lf);
 				info.setVisible(true);

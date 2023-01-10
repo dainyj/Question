@@ -25,6 +25,7 @@ public class Theme extends WindowAdapter implements ActionListener {
 
 	Query qu = new Query();
 	Execute ec = new Execute();
+	Menu mn = new Menu();
 
 	public Theme() {
 //		Frame setting
@@ -160,7 +161,7 @@ public class Theme extends WindowAdapter implements ActionListener {
 
 		if (e.getActionCommand().equals("뒤로")) {
 			ft.setVisible(false);
-			Menu.main(null);
+			mn.startFrame();
 		}
 	}
 

@@ -42,23 +42,25 @@ public class Query {
 		return SearchSql;
 	}
 
-//	검색f > 저장
-	public String insertQuery(String A, String B) {
-		String insertSql = "INSERT INTO MYPAGE VALUES('" + A + "','" + B + "')";
+//	검색f > 저장 > ID 필요
+	public String insertQuery(String A, String B, String ID) {
+		String insertSql = "INSERT INTO " + ID + " VALUES('" + A + "','" + B + "')";
+//		System.out.println(insertSql);
 		return insertSql;
 	}
 
 //	마이f > 조회
 	public String detail(String get) {
 		String detailSql = "SELECT * FROM MUSEUM WHERE BIZPLC_NM LIKE '" + get + "'";
+//		System.out.println(detailSql);
 		return detailSql;
 	}
-	
-//	마이f > 기본 화면
-	public String main() {
-		String sql = "SELECT * FROM MYPAGE";
+
+//	마이f > 기본 화면 > ID 필요
+	public String basics(String ID) {
+		String sql = "SELECT DISTINCT * FROM " + ID;
+//		System.out.println(sql);
 		return sql;
 	}
-	
 
 }// class end

@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,6 +19,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import db.Execute;
+import db.MyMuseVo;
 import db.Query;
 
 public class Mypage extends WindowAdapter implements ActionListener, MouseListener {
@@ -27,6 +29,7 @@ public class Mypage extends WindowAdapter implements ActionListener, MouseListen
 	private JTable tb;
 	private DefaultTableModel model;
 	private JButton b;
+	private String ID;
 
 	TextArea comments;
 
@@ -47,6 +50,8 @@ public class Mypage extends WindowAdapter implements ActionListener, MouseListen
 		fclick.setSize(500, 200);
 
 		comments = new TextArea();
+		comments.setSize(450, 120);
+		comments.setLocation(20, 20);
 
 		p = new JPanel();
 		p.setSize(250, 450);
@@ -70,7 +75,7 @@ public class Mypage extends WindowAdapter implements ActionListener, MouseListen
 		sp.addMouseListener(this);
 		tb.getTableHeader().setReorderingAllowed(false); // 테이블 컬럼 이동금지
 //		tb.getTableHeader().setResizingAllowed(false); // 테이블 사이즈 고정
-		tb.setEnabled(false); // 테이블 수정 금지// 적용하면 자료 이동이 안됨.
+//		tb.setEnabled(false); // 테이블 수정 금지// 적용하면 자료 이동이 안됨.
 		p.add(sp);
 
 		b = new JButton("확인");
@@ -81,60 +86,65 @@ public class Mypage extends WindowAdapter implements ActionListener, MouseListen
 
 	}
 
-	public void list() {// 여기서 부터 다시 작성 시작
-		String A = qu.main();
-		String list[] = ec.printResult(A);
-		for(int i=0;i<list.length;i++) {
-		model.addRow(list);	
-		
-		}
+	public void setID(String ID) {
+		this.ID = ID;
+	}
 
+	public void list() {// 마이페이지 실행과 동시에 실행될 부분
+//		System.out.println("프레임 실행과 동시에 >" + ID);
+		String sql = qu.basics(ID); // 먼저 조회쿼리 작성
+		System.out.println(sql);
+		ArrayList<MyMuseVo> mylist = ec.printBasics(sql);// 쿼리 실행 메서드 호츨 // 배열로 넘겨받음
+	
+		String list[] = new String[mylist.size()];
+		for (int i = 0; i < mylist.size(); i++) {
+			MyMuseVo data = (MyMuseVo) mylist.get(i);
+			list[0] = data.getNAME();
+			list[1] = data.getCITY();
+		System.out.println(list);
+			model.addRow(list);
+		}
 	}
 
 	public void startFrame() {
 		f5.add(p);
 		f5.add(b);
 		f5.setVisible(true);
+		list();
+//		System.out.println("마이>" + ID);
 	}
 
-	public void startClick() {
+	public void startClick(String result) {
+		comments.append(result);
 		fclick.add(comments);
 		fclick.setVisible(true);
 
 	}
 
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) { // DB 출력까지는 됨. 화면에 출력이 안되는 중. 레이아웃 문제였음.
 		if (e.getActionCommand().equals("확인")) {
 			Mypage mp = new Mypage();
 			int row = tb.getSelectedRow();
-			String get = (String) tb.getValueAt(row, 1);
+			String get = (String) tb.getValueAt(row, 0);
 //			쿼리 작성하고 실행시켜서 출력 하나만 출력하면 됨. 
-			String sql = qu.detail(get);
-			String result = ec.printRes(sql);
-			comments.append(result);
-			mp.startClick();
+			String sql = qu.detail(get); // 쿼리 작성
+//			System.out.println(sql);
+			String result = ec.printRes(sql); // 데이터 출력 성공.
+//			System.out.println(result);
+			mp.startClick(result);
 		}
 
 	}
 
 	public static void main(String[] args) {
 		Mypage mp = new Mypage();
+//		mp.list();
 		mp.startFrame();
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent e) { // 이거 안씀 정리 해야함.
-		String[] inputStr = new String[3];
-//		tb에서 선택하여 프레임 더블클릭하면 tb2에 추가됨.
-		if (e.getClickCount() == 2 && e.getSource().equals(sp)) {
-//		if(e.getClickCount()==3) {
-			int row = tb.getSelectedRow();
-			inputStr[0] = (String) tb.getValueAt(row, 0);
-			inputStr[1] = (String) tb.getValueAt(row, 1);
-			inputStr[2] = (String) tb.getValueAt(row, 2);
-//			model2.addRow(inputStr);
-			fclick.setVisible(true);
-		}
+	public void mouseClicked(MouseEvent e) {
+
 	}
 
 	@Override

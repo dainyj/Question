@@ -32,12 +32,13 @@ public class Menu extends WindowAdapter implements ActionListener {
 	private JTextArea ta;
 	private JPanel p;
 	private JScrollPane sp;
-
+	private String ID;
 	String str;
 
 	Mypage mp = new Mypage();
 	Query qu = new Query();
 	Execute ec = new Execute();
+//	Menu mn = new Menu();
 
 	String A = "";
 
@@ -69,7 +70,7 @@ public class Menu extends WindowAdapter implements ActionListener {
 		ta.setEditable(false); // 수정 X
 		ta.setCaretPosition(ta.getDocument().getLength()); // 내용이 추가될 때마다 스크롤 내리지 않고 바로 보기
 
-		sp = new JScrollPane(); 
+		sp = new JScrollPane();
 		sp.setViewportView(ta); // 스크롤에 ta를 추가
 		p.add(sp); // 패널에 스크롤을 추가, 패널에 ta를 직접 추가하지 않는다.
 
@@ -131,8 +132,6 @@ public class Menu extends WindowAdapter implements ActionListener {
 		line.setSize(200, 10);
 		line.setLocation(50, 280);
 
-		
-	
 	}
 
 	public void startFrame() {
@@ -146,8 +145,8 @@ public class Menu extends WindowAdapter implements ActionListener {
 		f4.add(bs);
 		f4.add(bmp);
 		f4.setVisible(true);
+		System.out.println("3 " + ID);
 	}
-
 
 	public void actionPerformed(ActionEvent e) {
 
@@ -172,18 +171,26 @@ public class Menu extends WindowAdapter implements ActionListener {
 
 		if (e.getActionCommand().equals("검색")) {
 //			f4.setVisible(false);
-			Search.main(null);
+			Search s = new Search();
+			s.setID(ID);
+			s.startFrame();
 		}
 
 		if (e.getActionCommand().equals("마이페이지")) {
 //			f4.setVisible(false);
-			Mypage.main(null);
+			mp.setID(ID);
+			mp.startFrame();			
 		}
 
 		if (e.getActionCommand().equals("뒤로")) {
+			Menu mn = new Menu();
 			f4_1.setVisible(false);
-			Menu.main(null);
+			mn.startFrame();
 		}
+	}
+
+	public void setID(String ID) {
+		this.ID = ID;
 	}
 
 	public static void main(String[] args) {
