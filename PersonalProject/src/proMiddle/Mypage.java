@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -30,8 +31,7 @@ public class Mypage extends WindowAdapter implements ActionListener, MouseListen
 	private DefaultTableModel model;
 	private JButton b;
 	private String ID;
-
-	TextArea comments;
+	private TextArea comments;
 
 	Query qu = new Query();
 	Execute ec = new Execute();
@@ -42,7 +42,7 @@ public class Mypage extends WindowAdapter implements ActionListener, MouseListen
 		f5.setLayout(null);
 		f5.setSize(300, 550);
 		f5.setLocation(300, 300);
-		f5.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		f5.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f5.setResizable(false);
 
 		fclick = new JFrame("자세히");
@@ -86,6 +86,10 @@ public class Mypage extends WindowAdapter implements ActionListener, MouseListen
 
 	}
 
+//	public void windowClosing(WindowEvent e) {
+//		System.exit(0);
+//	}
+	
 	public void setID(String ID) {
 		this.ID = ID;
 	}
@@ -110,6 +114,7 @@ public class Mypage extends WindowAdapter implements ActionListener, MouseListen
 		f5.add(p);
 		f5.add(b);
 		f5.setVisible(true);
+		model.setNumRows(0); // 초기화 시켜주지 않으면 Table에 계속 쌓인다.
 		list();
 //		System.out.println("마이>" + ID);
 	}

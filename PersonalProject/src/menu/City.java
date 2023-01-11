@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -42,7 +43,7 @@ import proFront.Menu;
 		fc.setLayout(null);
 		fc.setSize(300, 550);
 		fc.setLocation(300, 300);
-		fc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		fc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		fc.setResizable(false);
 
 //		도시 시작
@@ -252,6 +253,10 @@ import proFront.Menu;
 		ta.setBorder(BorderFactory.createCompoundBorder(lineBorder, emptyBorder));
 
 	}
+	
+//	public void windowClosing(WindowEvent e) {
+//		System.exit(0);
+//	}
 
 	public void startFrame() {
 		fc.add(b1);
@@ -282,7 +287,7 @@ import proFront.Menu;
 		fc.add(b26);
 		fc.add(b27);
 		fc.add(b28);
-		fc.add(back);
+//		fc.add(back);
 		fc.setVisible(true);
 		fci.add(p);
 	}

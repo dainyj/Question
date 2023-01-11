@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Vector;
 
 public class Execute { // 쿼리받아서 실행 클래스
 	String driver = "oracle.jdbc.driver.OracleDriver";
@@ -32,13 +31,28 @@ public class Execute { // 쿼리받아서 실행 클래스
 
 	}
 
+	public int runQuery(String sql) {
+		int num = 0;
+		try {
+			rs = stmt.executeQuery(sql);
+//			while (rs.next()) {
+
+//				num = rs.getInt("COUNT(*)"); 
+//				System.out.println("num = " + num);
+//			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return num;
+	}
+
 //  쿼리 실행해서 MuseVo에 저장하는 메서드
 	public ArrayList<MuseVo> list(String sql) { // 쿼리 실행해서 MuseVo에 저장하는 메서드
 		ArrayList<MuseVo> muselist = new ArrayList<MuseVo>();
 		connDB();
 		try {
-			System.out.println(sql);
-			stmt.executeQuery(sql);
+//			System.out.println(sql);
+//			stmt.executeQuery(sql);
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				String strbn = rs.getString("BIZPLC_NM");
@@ -63,7 +77,7 @@ public class Execute { // 쿼리받아서 실행 클래스
 		connDB();
 		try {
 			System.out.println(sql);
-			stmt.executeQuery(sql);
+//			stmt.executeQuery(sql);
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				String strtn = rs.getString("MUSEUM_ARTGLRY_TYPE_NM");
@@ -105,7 +119,7 @@ public class Execute { // 쿼리받아서 실행 클래스
 		connDB();
 		String mlist = "";
 		try {
-			stmt.executeQuery(sql);
+//			stmt.executeQuery(sql);
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				String strbn = rs.getString("BIZPLC_NM");
@@ -120,7 +134,7 @@ public class Execute { // 쿼리받아서 실행 클래스
 		return mlist;
 	}
 
-//	마이f > 저장버튼으로 삽입실행
+//	검색f > 저장버튼으로 삽입실행
 	public void insertMypage(String sql) {
 		connDB();
 		try {
@@ -136,15 +150,15 @@ public class Execute { // 쿼리받아서 실행 클래스
 	}
 
 //	마이f > 기본 화면에 띄울 데이터 Vo에 저장 후 리턴
-	public ArrayList<MyMuseVo> printBasics(String sql) { 
+	public ArrayList<MyMuseVo> printBasics(String sql) {
 		connDB();
 		ArrayList<MyMuseVo> mylist = new ArrayList<MyMuseVo>();// DB 불러와서 저장할 ArrayList 생성
 		try {
-			stmt.executeQuery(sql);
+//			stmt.executeQuery(sql);
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) {
-				String strName = rs.getString("NAME");
-				String strCity = rs.getString("CITY");
+				String strName = rs.getString("BIZPLC_NM");
+				String strCity = rs.getString("SIGUN_NM");
 				MyMuseVo data = new MyMuseVo(strName, strCity);
 				mylist.add(data);
 			}
@@ -156,6 +170,5 @@ public class Execute { // 쿼리받아서 실행 클래스
 		}
 		return mylist;
 	}
-
 
 } // class end

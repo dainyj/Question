@@ -12,11 +12,6 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-import proMiddle.Mypage;
-import proMiddle.Search;
-
-// ID 라벨, 텍스트필드/ PWD 라벨, 텍스트필드/ 로그인 버튼
-
 public class Login extends WindowAdapter implements ActionListener {
 	private JFrame f3;
 	private JButton blogin, ok, sign;
@@ -25,14 +20,12 @@ public class Login extends WindowAdapter implements ActionListener {
 	private Dialog info;
 	private PMemberDAO dao;
 
-	public Login() { // setting
-
+	public Login() {
 		dao = new PMemberDAO();
 
 //		Frame setting
 		f3 = new JFrame("로그인");
 		f3.setLayout(null);
-//		f3.setLayout(new FlowLayout());
 		f3.setSize(300, 550);
 		f3.setLocation(300, 300);
 		f3.addWindowListener(this);
@@ -42,7 +35,7 @@ public class Login extends WindowAdapter implements ActionListener {
 //		Button setting O
 		blogin = new JButton("로그인");
 		blogin.setSize(130, 40);
-		blogin.setLocation(70, 230);
+		blogin.setLocation(85, 230);
 		blogin.addActionListener(this);
 		blogin.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 15));
 
@@ -86,9 +79,7 @@ public class Login extends WindowAdapter implements ActionListener {
 		info.setSize(150, 100);
 		info.setLocation(300, 300);
 		info.setLayout(null);
-//		info.setLayout(new FlowLayout());
 		info.addWindowListener(this);
-
 	}
 
 	public void startFrame() {
@@ -98,9 +89,9 @@ public class Login extends WindowAdapter implements ActionListener {
 		f3.add(tfpwd2);
 		f3.add(blogin);
 		f3.add(sign);
+		f3.setVisible(true);
 
 		info.add(ok);
-		f3.setVisible(true);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -113,32 +104,26 @@ public class Login extends WindowAdapter implements ActionListener {
 		}
 
 		if (e.getActionCommand().equals("로그인")) {
-			
-//				Dialog 적용하기  // 대신 아래 글 나오게 설정바꿔보기시도
+//			Dialog 적용하기 
 			if (tfid2.getText() == "" && tfpwd2.getText() == "") {
-
 				info.add(lf);
 				info.setVisible(true);
 			}
 
-			ArrayList<PMemberVo> list = dao.list(tfid2.getText());
+			ArrayList<PMemberVo> list = dao.list(tfid2.getText()); // ID가 DB에 있는지 확인하는 메서드 호출
 
-			String id = "     ", password = "     ";
+			String id = "     ", password = "     "; // 기본 "";로 하면 null을 하나의 값으로 인식해서 자동으로 로그인이 되어버림.
 			for (int i = 0; i < list.size(); i++) {
 				PMemberVo data = (PMemberVo) list.get(i);
 				id = data.getId();
 				password = data.getPwd();
-
-//				System.out.println(id + " : " + password);
 			}
 			f3.setVisible(false);
 
-			if (tfid2.getText().equals(id) && tfpwd2.getText().equals(password)) {
-				Menu mn = new Menu();
-				mn.setID(tfid2.getText());
-				mn.startFrame();
-				
-//				Menu.main(null);
+			if (tfid2.getText().equals(id) && tfpwd2.getText().equals(password)) { // 로그인 성공할 때
+				Menu mn = new Menu(); // ID가 필요한 프레임에 넘겨주기 위해 객체 생성 
+				mn.setID(tfid2.getText()); // ID 저장할 메서드 호출
+				mn.startFrame(); // 로그인 성공 시 열리는 프레임
 
 			} else {
 				info.add(lf);

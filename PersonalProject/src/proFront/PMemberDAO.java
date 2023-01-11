@@ -123,7 +123,15 @@ public class PMemberDAO {
 				System.out.println("Insert fail.\n");
 			}
 
-			String createSql = "CREATE TABLE " + ID + " (NAME varchar2(60), CITY varchar2(20))"; // 가입과 동시에 테이블 생성
+			String createSql = "CREATE TABLE " + ID + " ("
+//					+ "NUM INT,"
+					+ "BIZPLC_NM varchar2(60),"
+					+ "SIGUN_NM varchar2(20),"
+					+ "ID VARCHAR2(30),"
+//					+ "CONSTRAINT PK_"+ ID +" PRIMARY KEY(NUM),"
+					+ "CONSTRAINT FK_"+ ID +" FOREIGN KEY(BIZPLC_NM) REFERENCES MUSEUM(BIZPLC_NM),"
+					+ "fOREIGN KEY(ID) REFERENCES PMEMBER(ID))"; // 가입과 동시에 테이블 생성
+//			System.out.println(createSql);
 			stmt.executeQuery(createSql);
 			
 		} catch (SQLException e) {

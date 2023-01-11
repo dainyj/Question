@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -33,7 +34,7 @@ public class Theme extends WindowAdapter implements ActionListener {
 		ft.setLayout(null);
 		ft.setSize(300, 550);
 		ft.setLocation(300, 300);
-		ft.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		ft.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ft.setResizable(false);
 
 //		Button setting
@@ -117,9 +118,13 @@ public class Theme extends WindowAdapter implements ActionListener {
 		ft.add(pa);
 		ft.add(bg);
 		ft.add(pg);
-		ft.add(back);
+//		ft.add(back);
 		ft.setVisible(true);
 	}
+	
+//	public void windowClosing(WindowEvent e) {
+//		System.exit(0);
+//	}
 
 	public void actionPerformed(ActionEvent e) {
 

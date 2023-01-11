@@ -2,7 +2,6 @@ package proMiddle;
 
 import java.awt.BorderLayout;
 import java.awt.Choice;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -10,13 +9,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -26,15 +28,19 @@ import db.Query;
 import proFront.Menu;
 
 public class Search extends WindowAdapter implements ActionListener, MouseListener {
-	private JFrame fsc;
-	private JPanel p, p2;
+	private JFrame fsc, fex;
+	private JPanel p, p2, pex;
 	private JButton bsc, back, bdown, bsave;
 	private JTextField tfs;
 	private JTable tb, tb2;
-	private JScrollPane sp, sp2;
+	private JScrollPane sp, sp2, spex;
 	private Choice group;
 	private DefaultTableModel model, model2;
 	private String ID;
+	private JLabel lex1, lex2, lex3;
+	private JTextArea taex;
+
+	private String explain1 = "", explain2 = "", explain3 = "";
 
 	Execute ec = new Execute();
 	Query qu = new Query();
@@ -46,14 +52,36 @@ public class Search extends WindowAdapter implements ActionListener, MouseListen
 		fsc.setLayout(null);
 		fsc.setSize(300, 550);
 		fsc.setLocation(300, 300);
-		fsc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		fsc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		fsc.setResizable(false);
+		fsc.addMouseListener(this);
 
+		fex = new JFrame();
+		fex.setLayout(null);
+		fex.setSize(190, 175);
+
+		fex.addMouseListener(this);
+
+//		JTextArea setting
+		taex = new JTextArea();
+		taex.setSize(100, 100);
+		taex.setLocation(20, 20);
+		spex = new JScrollPane(taex);
+
+		taex.append(explain1); // 어떤 Label인지에 따라서 들어가는 String도 다름, 한 Frame에 실행 시 다르게 넣을 예정
+
+//		JPanel setting
 		p = new JPanel();
 		p.setSize(250, 150);
 		p.setLocation(20, 70);
 		p.setLayout(new BorderLayout());
 		p.addMouseListener(this);
+
+		pex = new JPanel();
+		pex.setSize(135, 100);
+		pex.setLocation(20, 20);
+		pex.setLayout(new BorderLayout());
+		pex.add(spex);
 
 //		JTable setting
 		String header[] = { "종류", "기관명", "도시명" };
@@ -69,7 +97,6 @@ public class Search extends WindowAdapter implements ActionListener, MouseListen
 
 		sp = new JScrollPane(); // 테이블을 스크롤패널에 추가
 		sp.setViewportView(tb);
-		sp.setBackground(Color.cyan);
 		sp.addMouseListener(this);
 		tb.getTableHeader().setReorderingAllowed(false); // 테이블 컬럼 이동금지
 //		tb.getTableHeader().setResizingAllowed(false); // 테이블 사이즈 고정
@@ -93,7 +120,6 @@ public class Search extends WindowAdapter implements ActionListener, MouseListen
 
 		sp2 = new JScrollPane(tb2);
 		sp2.addMouseListener(this);
-		sp2.setBackground(Color.YELLOW);
 		tb2.getTableHeader().setReorderingAllowed(false); // 테이블 컬럼 이동금지
 //		tb2.getTableHeader().setResizingAllowed(false); // 테이블 사이즈 고정
 		p2.add(sp2);
@@ -137,7 +163,34 @@ public class Search extends WindowAdapter implements ActionListener, MouseListen
 		group.setSize(60, 20);
 		group.setLocation(20, 18);
 
+//		JLabel setting
+		lex1 = new JLabel("?"); // 검색버튼 옆
+		lex1.setSize(30, 30);
+		lex1.setLocation(255, 15);
+		lex1.setHorizontalAlignment(JLabel.CENTER);
+		lex1.addMouseListener(this);
+
+		lex2 = new JLabel("?"); // 아래로버튼 옆
+		lex2.setSize(30, 30);
+		lex2.setLocation(200, 230);
+		lex2.setHorizontalAlignment(JLabel.CENTER);
+		lex2.addMouseListener(this);
+
+		lex3 = new JLabel("?"); // 저장버튼 옆
+		lex3.setSize(30, 30);
+		lex3.setLocation(200, 445);
+		lex3.setHorizontalAlignment(JLabel.CENTER);
+		lex3.addMouseListener(this);
+
+		explain1 = "설명1";
+		explain2 = "설명2";
+		explain3 = "설명3";
+
 	}
+
+//	public void windowClosing(WindowEvent e) {
+//		System.exit(0);
+//	}
 
 	public void startFrame() {
 		fsc.add(tfs);
@@ -147,8 +200,16 @@ public class Search extends WindowAdapter implements ActionListener, MouseListen
 		fsc.add(group);
 		fsc.add(bdown);
 		fsc.add(bsave);
-		fsc.add(back);
+//		fsc.add(back);
 		fsc.setVisible(true);
+
+//		설명부분
+		fsc.add(lex1);
+		fsc.add(lex2);
+		fsc.add(lex3);
+		fex.add(pex);
+
+		ec.connDB();
 	}
 
 	public void setID(String ID) {
@@ -156,9 +217,10 @@ public class Search extends WindowAdapter implements ActionListener, MouseListen
 	}
 
 	public void actionPerformed(ActionEvent e) {
+
 		String[] inputStr = new String[3];
-		if (e.getActionCommand().equals("검색")) { // 한글만 입력가능
-			if (tfs.getText().equals(null)) { // 이것도 다시 확인 필요
+		if (e.getActionCommand().equals("검색")) {
+			if (tfs.getText().equals(null)) {
 				model.setNumRows(0);
 				inputStr = null;
 			} else {
@@ -199,15 +261,19 @@ public class Search extends WindowAdapter implements ActionListener, MouseListen
 //					row 카운트  
 //					검색어만 저장 후 불러올때 검색어를 이용한 DB 호출?
 //					검색어는 기관명 시군명 이 두가지로
+
 			int count = tb2.getRowCount(); // 저장해야할 행 수
-//			System.out.println(count);
 			for (int i = 0; i < count; i++) {
+//				int num = cnt + i + 1;
+//				System.out.println("cntnum = " + num);
 				String A = (String) tb2.getValueAt(i, 1);// 기관명
 				String B = (String) tb2.getValueAt(i, 2); // 도시명
 				String sql = qu.insertQuery(A, B, ID);
 //				System.out.println(A + " " + B + " " + ID + "\n");
 //				System.out.println(sql + "\n\n");
 				ec.insertMypage(sql);
+				String dsSql = qu.deleteSame(ID);
+				ec.runQuery(dsSql);
 			}
 
 		}
@@ -228,19 +294,7 @@ public class Search extends WindowAdapter implements ActionListener, MouseListen
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-//		String[] inputStr = new String[3];
-////		tb에서 선택하여 프레임 더블클릭하면 tb2에 추가됨.
-//		if (e.getClickCount() == 2 && e.getSource().equals(sp)) {
-////		if(e.getClickCount()==3) {
-//			int row = tb.getSelectedRow();
-//			inputStr[0] = (String) tb.getValueAt(row, 0);
-//			inputStr[1] = (String) tb.getValueAt(row, 1);
-//			inputStr[2] = (String) tb.getValueAt(row, 2);
-//			model2.addRow(inputStr);
-//		}
-
-//		삭제
-//		tb2에서 선택하여 더블클릭하면 삭제됨.
+//		삭제 : tb2에서 선택하여 더블클릭하면 삭제됨.
 		if (e.getClickCount() == 2 && e.getSource().equals(tb2)) {
 			model2.removeRow(tb2.getSelectedRow());
 		}
@@ -260,14 +314,39 @@ public class Search extends WindowAdapter implements ActionListener, MouseListen
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if (e.getSource().equals(lex1)) {
+			fex.setLocation(600, 300);
+			System.out.println("?1");
+			taex.setText(null);// 초기화 안해주면 내용이 중복되어 쌓임.
+			taex.append(explain1);
+			fex.setVisible(true);
 
+		}
+		if (e.getSource().equals(lex2)) {
+
+			fex.setLocation(600, 400);
+
+			System.out.println("?2");
+			taex.setText(null);// 초기화 안해주면 내용이 중복되어 쌓임.
+			taex.append(explain2);
+			fex.setVisible(true);
+
+		}
+		if (e.getSource().equals(lex3)) {
+			fex.setLocation(600, 600);
+			System.out.println("?3");
+			taex.setText(null);// 초기화 안해주면 내용이 중복되어 쌓임.
+			taex.append(explain3);
+			fex.setVisible(true);
+
+		}
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+		if (e.getSource().equals(fsc)) {
+			fex.setVisible(false);
+		}
 	}
 
 }

@@ -7,6 +7,7 @@ import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -57,7 +58,7 @@ public class Menu extends WindowAdapter implements ActionListener {
 		f4_1.setLayout(null);
 		f4_1.setSize(300, 550);
 		f4_1.setLocation(300, 300);
-		f4_1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		f4_1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f4_1.setResizable(false);
 
 		p = new JPanel();
@@ -136,7 +137,7 @@ public class Menu extends WindowAdapter implements ActionListener {
 
 	public void startFrame() {
 		f4_1.add(p);
-		f4_1.add(back);
+//		f4_1.add(back);
 		f4.add(lm);
 		f4.add(line);
 		f4.add(bm1);
@@ -189,6 +190,10 @@ public class Menu extends WindowAdapter implements ActionListener {
 		}
 	}
 
+//	public void windowClosing(WindowEvent e) {
+//		System.exit(0);
+//	}
+	
 	public void setID(String ID) {
 		this.ID = ID;
 	}

@@ -9,7 +9,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-// 프레임 1개, 버튼1개, 라벨 5개, 텍스트필드 4개
 // 정보 입력하고 bsignUp 버튼 클릭 시 DB에 저장되도록 연동, DB에 MEMBER TABLE 필요
 
 public class SignUp extends WindowAdapter implements ActionListener {
@@ -22,7 +21,7 @@ public class SignUp extends WindowAdapter implements ActionListener {
 
 	public SignUp() {
 
-//		Frame setting 1개
+//		Frame setting
 		f2 = new JFrame("회원가입");
 		f2.setLayout(null);
 		f2.setSize(300, 550);
@@ -38,21 +37,20 @@ public class SignUp extends WindowAdapter implements ActionListener {
 		fout.addWindowListener(this);
 		fout.setResizable(false);
 
-//		Button setting 1개
-
-		bidcheck = new JButton("ID 확인"); // O
+//		Button setting
+		bidcheck = new JButton("ID 확인"); 
 		bidcheck.setSize(83, 20);
 		bidcheck.setLocation(160, 125);
 		bidcheck.addActionListener(this);
 		bidcheck.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 12));
 
-		bsignUp = new JButton("가입하기"); // O
+		bsignUp = new JButton("가입하기");
 		bsignUp.setSize(100, 40);
 		bsignUp.setLocation(90, 260);
 		bsignUp.addActionListener(this);
 		bsignUp.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 12));
 
-		bout = new JButton("탈퇴하기"); // O
+		bout = new JButton("탈퇴하기");
 		bout.setSize(83, 30);
 		bout.setLocation(180, 450);
 		bout.addActionListener(this);
@@ -64,11 +62,11 @@ public class SignUp extends WindowAdapter implements ActionListener {
 		bout2.addActionListener(this);
 		bout2.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 12));
 
-//		Label setting 5개
-		ltitle = new JLabel("가입 정보 입력", JLabel.CENTER); // O
+//		Label setting 
+		ltitle = new JLabel("가입 정보 입력", JLabel.CENTER); 
 		ltitle.setSize(150, 30);
 		ltitle.setLocation(70, 30);
-		ltitle.setFont(new Font("kopubworld", Font.BOLD, 20)); // 폰트
+		ltitle.setFont(new Font("kopubworld", Font.BOLD, 20));
 
 		lid = new JLabel("ID", JLabel.CENTER);
 		lid.setSize(100, 20);
@@ -90,22 +88,23 @@ public class SignUp extends WindowAdapter implements ActionListener {
 		label.setLocation(50, 230);
 		label.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 15));
 
-		lid2 = new JLabel("ID", JLabel.RIGHT); // 탈퇴프레임
+//		탈퇴 부분
+		lid2 = new JLabel("ID", JLabel.RIGHT);
 		lid2.setSize(30, 20);
 		lid2.setLocation(3, 15);
 		lid2.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 15));
 
-		lpwd2 = new JLabel("PWD", JLabel.RIGHT); // 탈퇴프레임
+		lpwd2 = new JLabel("PWD", JLabel.RIGHT); 
 		lpwd2.setSize(40, 20);
 		lpwd2.setLocation(3, 40);
 		lpwd2.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 15));
 
-		lout = new JLabel("", JLabel.RIGHT); // 탈퇴프레임
+		lout = new JLabel("", JLabel.RIGHT); 
 		lout.setSize(120, 20);
 		lout.setLocation(10, 65);
 		lout.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
-//		TextField 4개
+//		TextField
 		tfid = new TextField();
 		tfid.setSize(100, 20);
 		tfid.setLocation(150, 100);
@@ -118,11 +117,12 @@ public class SignUp extends WindowAdapter implements ActionListener {
 		tfpwd3.setSize(100, 20);
 		tfpwd3.setLocation(150, 200);
 
-		tfid2 = new TextField(); // 탈퇴프레임
+//		탈퇴 부분
+		tfid2 = new TextField(); 
 		tfid2.setSize(70, 20);
 		tfid2.setLocation(55, 15);
 
-		tfpwd2 = new TextField(); // 탈퇴프레임
+		tfpwd2 = new TextField();
 		tfpwd2.setSize(70, 20);
 		tfpwd2.setLocation(55, 40);
 
@@ -145,7 +145,7 @@ public class SignUp extends WindowAdapter implements ActionListener {
 
 	}
 
-	public void outFrame() {
+	public void outFrame() { // 탈퇴프레임
 		fout.add(lid2);
 		fout.add(tfid2);
 		fout.add(lpwd2);
@@ -163,10 +163,8 @@ public class SignUp extends WindowAdapter implements ActionListener {
 				label.setText(answer);
 			}
 		}
-//		방법1
 		if (e.getActionCommand().equals("가입하기")) {
-			// ID확인 버튼을 클릭하는걸 전제조건으로 삼으려면 어떻게 해야하지? 이 방법은 버튼 누른 상태여야하나봄 다시 검색시작
-			if (label.getText().equals("사용 가능한 ID입니다.")) {
+			if (label.getText().equals("사용 가능한 ID입니다.")) { 
 
 				if (tfpwd.getText().equals(tfpwd3.getText())) {
 					f2.setVisible(false);
@@ -180,10 +178,6 @@ public class SignUp extends WindowAdapter implements ActionListener {
 				label.setText("중복 ID 확인을 해주세요.");
 			}
 		}
-		
-//		방법2
-//		boolean b = false;
-		
 
 		if (e.getActionCommand().equals("탈퇴하기")) {
 			f2.setVisible(false);
@@ -195,7 +189,6 @@ public class SignUp extends WindowAdapter implements ActionListener {
 			String pwd = tfpwd2.getText();
 			lout.setText("탈퇴되었습니다.");
 			dao.delete(id, pwd);
-//			fout.setVisible(false);
 		}
 	}
 

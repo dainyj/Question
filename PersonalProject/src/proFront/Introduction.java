@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -33,7 +35,7 @@ public class Introduction extends WindowAdapter implements ActionListener {
 		f1.setResizable(false);
 //	종료 
 		f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+	
 		p = new JPanel();
 		p.setSize(210, 300);
 		p.setLocation(40, 30);
@@ -59,17 +61,15 @@ public class Introduction extends WindowAdapter implements ActionListener {
 		ta = new JTextArea(); // 1. TA 생성
 		ta.setSize(200, 150);
 		ta.setLocation(50, 40);
-		
-		
 		ta.setLineWrap(true); // 자동 줄바꿈
 		ta.setEditable(false); // 편집X
 		ta.setCaretPosition(ta.getDocument().getLength()); // 내용이 추가될 때마다 스크롤 내리지 않고 바로 보기
 		p.add(ta);
-		sp = new JScrollPane(ta); //스크롤 3. 스크롤에 TA를 추가한다.
+		sp = new JScrollPane(ta); //스크롤 2. 스크롤에 TA를 추가한다.
 		sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		p.add(sp);  //3. 패널에 스크롤을 추가, 패널에 TA를 직접 추가하지 않는다.
 
-		String intro = "안녕하세요.";
+		String intro = "안녕하세요."; // 소개 글 적는 부분
 		ta.append(intro);
 	}
 

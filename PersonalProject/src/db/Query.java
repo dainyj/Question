@@ -43,10 +43,27 @@ public class Query {
 	}
 
 //	검색f > 저장 > ID 필요
-	public String insertQuery(String A, String B, String ID) {
-		String insertSql = "INSERT INTO " + ID + " VALUES('" + A + "','" + B + "')";
+//	public String insertQuery(int cnt, String A, String B, String ID) { // 필드 > NUM / BIZPLC_NM / SIGUN_NM / ID //
+//		String insertSql = "INSERT INTO " + ID + " VALUES('" + cnt + "','" + A + "','" + B + "','" + ID + "')";
+////		System.out.println(insertSql);
+//		return insertSql;
+//	}
+	public String insertQuery(String A, String B, String ID) { // 필드 > / BIZPLC_NM / SIGUN_NM / ID //
+		String insertSql = "INSERT INTO " + ID + " VALUES('" + A + "','" + B + "','" + ID + "')";
 //		System.out.println(insertSql);
 		return insertSql;
+	}
+
+//	중복제거
+	public String deleteSame(String ID) {
+		String sql = "DELETE FROM " + ID + " a WHERE ROWID>(SELECT MIN(rowid)FROM " + ID
+				+ " a2 WHERE a2.BIZPLC_NM = a.BIZPLC_NM) ";
+		return sql;
+	}
+
+	public String countnum(String ID) {
+		String cntsql = "SELECT COUNT(*) FROM " + ID;
+		return cntsql;
 	}
 
 //	마이f > 조회
@@ -58,7 +75,8 @@ public class Query {
 
 //	마이f > 기본 화면 > ID 필요
 	public String basics(String ID) {
-		String sql = "SELECT DISTINCT * FROM " + ID;
+//		String sql = "SELECT DISTINCT BIZPLC_NM FROM " + ID;
+		String sql = "SELECT * FROM "+ ID;
 //		System.out.println(sql);
 		return sql;
 	}
