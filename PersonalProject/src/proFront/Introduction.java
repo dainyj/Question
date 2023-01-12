@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,9 +13,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 
-// 로그인, 회원가입 프레임으로 넘어가는 버튼 필요
-// 버튼 눌렀을때 다른 프레임이 뜨도록 하기
-// 종료버튼 작동하게 하기
 public class Introduction extends WindowAdapter implements ActionListener {
 	private JFrame f1;
 	private JButton blogf, bsignf;
@@ -27,7 +23,6 @@ public class Introduction extends WindowAdapter implements ActionListener {
 	public Introduction() { // setting
 //		Frame setting
 		f1 = new JFrame("INTRODUCTION");
-//		f1.setLayout(new FlowLayout());
 		f1.setLayout(null);
 		f1.setSize(300, 550);
 		f1.setLocation(300, 300);
@@ -40,8 +35,6 @@ public class Introduction extends WindowAdapter implements ActionListener {
 		p.setSize(210, 300);
 		p.setLocation(40, 30);
 		p.setLayout(new BorderLayout());
-//		p.setBackground(Color.green);
-		
 
 //		Button setting
 		blogf = new JButton("로그인");

@@ -43,11 +43,6 @@ public class Query {
 	}
 
 //	검색f > 저장 > ID 필요
-//	public String insertQuery(int cnt, String A, String B, String ID) { // 필드 > NUM / BIZPLC_NM / SIGUN_NM / ID //
-//		String insertSql = "INSERT INTO " + ID + " VALUES('" + cnt + "','" + A + "','" + B + "','" + ID + "')";
-////		System.out.println(insertSql);
-//		return insertSql;
-//	}
 	public String insertQuery(String A, String B, String ID) { // 필드 > / BIZPLC_NM / SIGUN_NM / ID //
 		String insertSql = "INSERT INTO " + ID + " VALUES('" + A + "','" + B + "','" + ID + "')";
 //		System.out.println(insertSql);
@@ -61,6 +56,13 @@ public class Query {
 		return sql;
 	}
 
+	public String deleteDB(String ID, String muse) {
+		String sql = "DELETE FROM " + ID + " WHERE BIZPLC_NM LIKE '" + muse + "'";
+//		System.out.println(sql);
+		return sql;
+	}
+
+//	count
 	public String countnum(String ID) {
 		String cntsql = "SELECT COUNT(*) FROM " + ID;
 		return cntsql;
@@ -76,7 +78,7 @@ public class Query {
 //	마이f > 기본 화면 > ID 필요
 	public String basics(String ID) {
 //		String sql = "SELECT DISTINCT BIZPLC_NM FROM " + ID;
-		String sql = "SELECT * FROM "+ ID;
+		String sql = "SELECT * FROM " + ID;
 //		System.out.println(sql);
 		return sql;
 	}

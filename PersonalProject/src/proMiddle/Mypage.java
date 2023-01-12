@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -34,15 +33,16 @@ public class Mypage extends WindowAdapter implements ActionListener, MouseListen
 	private TextArea comments;
 
 	Query qu = new Query();
+
 	Execute ec = new Execute();
 
 	public Mypage() {
+
 //		Frame setting
 		f5 = new JFrame("Mypage");
 		f5.setLayout(null);
 		f5.setSize(300, 550);
 		f5.setLocation(300, 300);
-//		f5.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f5.setResizable(false);
 
 		fclick = new JFrame("자세히");
@@ -57,7 +57,7 @@ public class Mypage extends WindowAdapter implements ActionListener, MouseListen
 		p.setSize(250, 450);
 		p.setLocation(20, 30);
 		p.setLayout(new BorderLayout());
-		p.addMouseListener(this);
+//		p.addMouseListener(this);
 
 //		JTable setting
 		String header[] = { "기관명", "도시명" };
@@ -65,14 +65,12 @@ public class Mypage extends WindowAdapter implements ActionListener, MouseListen
 		model = new DefaultTableModel(contents, header); // 모델 생성
 
 		tb = new JTable(model); // 모델을 사용한 테이블 생성
-//		tb.setSize(230, 160);
-//		tb.setLocation(30, 70);
 		tb.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		tb.setPreferredSize(new Dimension(250, 450));
+		tb.addMouseListener(this);
 
 		sp = new JScrollPane(); // 테이블을 스크롤패널에 추가
 		sp.setViewportView(tb);
-		sp.addMouseListener(this);
 		tb.getTableHeader().setReorderingAllowed(false); // 테이블 컬럼 이동금지
 //		tb.getTableHeader().setResizingAllowed(false); // 테이블 사이즈 고정
 //		tb.setEnabled(false); // 테이블 수정 금지// 적용하면 자료 이동이 안됨.
@@ -86,26 +84,18 @@ public class Mypage extends WindowAdapter implements ActionListener, MouseListen
 
 	}
 
-//	public void windowClosing(WindowEvent e) {
-//		System.exit(0);
-//	}
-	
-	public void setID(String ID) {
-		this.ID = ID;
-	}
-
 	public void list() {// 마이페이지 실행과 동시에 실행될 부분
-//		System.out.println("프레임 실행과 동시에 >" + ID);
+		ec.connDB();
 		String sql = qu.basics(ID); // 먼저 조회쿼리 작성
 		System.out.println(sql);
 		ArrayList<MyMuseVo> mylist = ec.printBasics(sql);// 쿼리 실행 메서드 호츨 // 배열로 넘겨받음
-	
+
 		String list[] = new String[mylist.size()];
 		for (int i = 0; i < mylist.size(); i++) {
 			MyMuseVo data = (MyMuseVo) mylist.get(i);
 			list[0] = data.getNAME();
 			list[1] = data.getCITY();
-		System.out.println(list);
+			System.out.println(list);
 			model.addRow(list);
 		}
 	}
@@ -116,17 +106,22 @@ public class Mypage extends WindowAdapter implements ActionListener, MouseListen
 		f5.setVisible(true);
 		model.setNumRows(0); // 초기화 시켜주지 않으면 Table에 계속 쌓인다.
 		list();
-//		System.out.println("마이>" + ID);
+	}
+
+	public void setID(String ID) {
+		this.ID = ID;
 	}
 
 	public void startClick(String result) {
 		comments.append(result);
 		fclick.add(comments);
 		fclick.setVisible(true);
-
+		ec.connDB();
 	}
 
 	public void actionPerformed(ActionEvent e) { // DB 출력까지는 됨. 화면에 출력이 안되는 중. 레이아웃 문제였음.
+//		Execute ec = new Execute();
+		ec.connDB();
 		if (e.getActionCommand().equals("확인")) {
 			Mypage mp = new Mypage();
 			int row = tb.getSelectedRow();
@@ -143,13 +138,22 @@ public class Mypage extends WindowAdapter implements ActionListener, MouseListen
 
 	public static void main(String[] args) {
 		Mypage mp = new Mypage();
-//		mp.list();
 		mp.startFrame();
+
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		if (e.getClickCount() == 2 && e.getSource().equals(tb)) {
+//			System.out.println(tb.getSelectedRow());
+			String muse = (String) tb.getValueAt(tb.getSelectedRow(), 0);
+//			System.out.println(muse);
+			String sql = qu.deleteDB(ID, muse);
+			ec.runQuery(sql);
 
+			model.removeRow(tb.getSelectedRow());
+
+		}
 	}
 
 	@Override

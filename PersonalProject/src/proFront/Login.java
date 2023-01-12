@@ -18,10 +18,8 @@ public class Login extends WindowAdapter implements ActionListener {
 	private Label lid2, lpwd2, lf;
 	private TextField tfid2, tfpwd2;
 	private Dialog info;
-	private PMemberDAO dao;
 
 	public Login() {
-		dao = new PMemberDAO();
 
 //		Frame setting
 		f3 = new JFrame("로그인");
@@ -90,12 +88,12 @@ public class Login extends WindowAdapter implements ActionListener {
 		f3.add(blogin);
 		f3.add(sign);
 		f3.setVisible(true);
-
 		info.add(ok);
 	}
 
 	public void actionPerformed(ActionEvent e) {
-
+		PMemberDAO dao = new PMemberDAO();
+		dao.connDB();
 		if (e.getActionCommand().equals("확인")) {
 			info.dispose(); // info창만 종료
 			tfid2.setText(null);
@@ -139,6 +137,7 @@ public class Login extends WindowAdapter implements ActionListener {
 	public static void main(String[] args) {
 		Login login = new Login();
 		login.startFrame();
+
 	}
 
 }

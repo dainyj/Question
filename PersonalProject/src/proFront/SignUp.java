@@ -9,15 +9,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-// 정보 입력하고 bsignUp 버튼 클릭 시 DB에 저장되도록 연동, DB에 MEMBER TABLE 필요
-
 public class SignUp extends WindowAdapter implements ActionListener {
 	private JFrame f2, fout;
 	private JButton bsignUp, bout, bout2, bidcheck;
 	private JLabel lid, lpwd, ltitle, lid2, lpwd2, lpwd3, label, lout;
 	private TextField tfid, tfpwd, tfid2, tfpwd2, tfpwd3;
-
-	PMemberDAO dao = new PMemberDAO();
 
 	public SignUp() {
 
@@ -38,7 +34,7 @@ public class SignUp extends WindowAdapter implements ActionListener {
 		fout.setResizable(false);
 
 //		Button setting
-		bidcheck = new JButton("ID 확인"); 
+		bidcheck = new JButton("ID 확인");
 		bidcheck.setSize(83, 20);
 		bidcheck.setLocation(160, 125);
 		bidcheck.addActionListener(this);
@@ -63,7 +59,7 @@ public class SignUp extends WindowAdapter implements ActionListener {
 		bout2.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 12));
 
 //		Label setting 
-		ltitle = new JLabel("가입 정보 입력", JLabel.CENTER); 
+		ltitle = new JLabel("가입 정보 입력", JLabel.CENTER);
 		ltitle.setSize(150, 30);
 		ltitle.setLocation(70, 30);
 		ltitle.setFont(new Font("kopubworld", Font.BOLD, 20));
@@ -94,12 +90,12 @@ public class SignUp extends WindowAdapter implements ActionListener {
 		lid2.setLocation(3, 15);
 		lid2.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 15));
 
-		lpwd2 = new JLabel("PWD", JLabel.RIGHT); 
+		lpwd2 = new JLabel("PWD", JLabel.RIGHT);
 		lpwd2.setSize(40, 20);
 		lpwd2.setLocation(3, 40);
 		lpwd2.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 15));
 
-		lout = new JLabel("", JLabel.RIGHT); 
+		lout = new JLabel("", JLabel.RIGHT);
 		lout.setSize(120, 20);
 		lout.setLocation(10, 65);
 		lout.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
@@ -118,14 +114,13 @@ public class SignUp extends WindowAdapter implements ActionListener {
 		tfpwd3.setLocation(150, 200);
 
 //		탈퇴 부분
-		tfid2 = new TextField(); 
+		tfid2 = new TextField();
 		tfid2.setSize(70, 20);
 		tfid2.setLocation(55, 15);
 
 		tfpwd2 = new TextField();
 		tfpwd2.setSize(70, 20);
 		tfpwd2.setLocation(55, 40);
-
 	}
 
 	public void startFrame() {
@@ -140,9 +135,7 @@ public class SignUp extends WindowAdapter implements ActionListener {
 		f2.add(label);
 		f2.add(bsignUp);
 		f2.add(bout);
-
 		f2.setVisible(true);
-
 	}
 
 	public void outFrame() { // 탈퇴프레임
@@ -157,6 +150,8 @@ public class SignUp extends WindowAdapter implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		SignUp su = new SignUp();
+		PMemberDAO dao = new PMemberDAO();
+		dao.connDB();
 		if (e.getActionCommand().equals("ID 확인")) { // id 중복체크
 			if (!(tfid.getText() == null)) {
 				String answer = dao.idmatch(tfid.getText());
@@ -164,21 +159,20 @@ public class SignUp extends WindowAdapter implements ActionListener {
 			}
 		}
 		if (e.getActionCommand().equals("가입하기")) {
-			if (label.getText().equals("사용 가능한 ID입니다.")) { 
+			if (label.getText().equals("사용 가능한 ID입니다.")) {
 
-				if (tfpwd.getText().equals(tfpwd3.getText())) {
-					f2.setVisible(false);
-					dao.insert(tfid.getText(), tfpwd.getText());
-					Login.main(null);
-				} else {
-					label.setText("비밀번호가 일치하지 않습니다.");
-
-				}
 			} else {
 				label.setText("중복 ID 확인을 해주세요.");
 			}
-		}
+			if (tfpwd.getText().equals(tfpwd3.getText())) {
+				f2.setVisible(false);
+				dao.insert(tfid.getText(), tfpwd.getText());
+				Login.main(null);
+			} else {
+				label.setText("비밀번호가 일치하지 않습니다.");
+			}
 
+		}
 		if (e.getActionCommand().equals("탈퇴하기")) {
 			f2.setVisible(false);
 			su.outFrame();

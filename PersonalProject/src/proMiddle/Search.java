@@ -30,7 +30,7 @@ import proFront.Menu;
 public class Search extends WindowAdapter implements ActionListener, MouseListener {
 	private JFrame fsc, fex;
 	private JPanel p, p2, pex;
-	private JButton bsc, back, bdown, bsave;
+	private JButton bsc, bdown, bsave;
 	private JTextField tfs;
 	private JTable tb, tb2;
 	private JScrollPane sp, sp2, spex;
@@ -148,11 +148,11 @@ public class Search extends WindowAdapter implements ActionListener, MouseListen
 		bsave.addActionListener(this);
 		bsave.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
-		back = new JButton("뒤로");
-		back.setSize(60, 18);
-		back.setLocation(210, 485);
-		back.addActionListener(this);
-		back.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
+//		back = new JButton("뒤로");
+//		back.setSize(60, 18);
+//		back.setLocation(210, 485);
+//		back.addActionListener(this);
+//		back.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 //		초이스? 콤보박스? setting
 		group = new Choice();
@@ -290,6 +290,8 @@ public class Search extends WindowAdapter implements ActionListener, MouseListen
 	public static void main(String[] args) {
 		Search s = new Search();
 		s.startFrame();
+		Execute ec = new Execute();
+		ec.connDB();
 	}
 
 	@Override

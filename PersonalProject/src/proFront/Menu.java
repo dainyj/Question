@@ -3,11 +3,9 @@ package proFront;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -25,10 +23,9 @@ import menu.Theme;
 import proMiddle.Mypage;
 import proMiddle.Search;
 
-// 프레임 1, 메뉴- 버튼3/라벨1, 검색- 라벨/텍스트필드/버튼 1, 마이페이지- 라벨/버튼1, 공지사항 - 라벨/버튼1
 public class Menu extends WindowAdapter implements ActionListener {
 	private JFrame f4, f4_1;
-	private JButton bm1, bm2, bm3, bs, bmp, bnt, back;
+	private JButton bm1, bm2, bm3, bs, bmp, back;
 	private JLabel lm, line;
 	private JTextArea ta;
 	private JPanel p;
@@ -36,18 +33,13 @@ public class Menu extends WindowAdapter implements ActionListener {
 	private String ID;
 	String str;
 
-	Mypage mp = new Mypage();
-	Query qu = new Query();
-	Execute ec = new Execute();
-//	Menu mn = new Menu();
-
 	String A = "";
+
 
 	public Menu() {
 //		Frame setting
 		f4 = new JFrame("MENU");
 		f4.setLayout(null);
-//		f4.setLayout(new FlowLayout());
 		f4.setSize(300, 550);
 		f4.setLocation(300, 300);
 		f4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,7 +50,6 @@ public class Menu extends WindowAdapter implements ActionListener {
 		f4_1.setLayout(null);
 		f4_1.setSize(300, 550);
 		f4_1.setLocation(300, 300);
-//		f4_1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f4_1.setResizable(false);
 
 		p = new JPanel();
@@ -81,7 +72,6 @@ public class Menu extends WindowAdapter implements ActionListener {
 		Border lineBorder = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 3);
 		// textArea 에 lineBorder, emptyBorder 로 구성된 복함 경계선을 설정.
 		ta.setBorder(BorderFactory.createCompoundBorder(lineBorder, emptyBorder));
-
 //		=============================================================================================	
 
 //		Button setting
@@ -137,7 +127,6 @@ public class Menu extends WindowAdapter implements ActionListener {
 
 	public void startFrame() {
 		f4_1.add(p);
-//		f4_1.add(back);
 		f4.add(lm);
 		f4.add(line);
 		f4.add(bm1);
@@ -146,13 +135,14 @@ public class Menu extends WindowAdapter implements ActionListener {
 		f4.add(bs);
 		f4.add(bmp);
 		f4.setVisible(true);
-		System.out.println("3 " + ID);
 	}
 
 	public void actionPerformed(ActionEvent e) {
-
+		Mypage mp = new Mypage();
+		Query qu = new Query();
+		Execute ec = new Execute();
+		ec.connDB();
 		if (e.getActionCommand().equals("ALL")) {
-//			f4.setVisible(false);
 			f4_1.setVisible(true);
 			String[] list = ec.printResult(qu.allQuery());
 			for (int i = 0; i < list.length; i++) {
@@ -161,24 +151,20 @@ public class Menu extends WindowAdapter implements ActionListener {
 		}
 
 		if (e.getActionCommand().equals("지역별")) { // O
-//			f4.setVisible(false);
 			City.main(null);
 		}
 
 		if (e.getActionCommand().equals("주제별")) {
-//			f4.setVisible(false);
 			Theme.main(null);
 		}
 
 		if (e.getActionCommand().equals("검색")) {
-//			f4.setVisible(false);
 			Search s = new Search();
 			s.setID(ID);
 			s.startFrame();
 		}
 
 		if (e.getActionCommand().equals("마이페이지")) {
-//			f4.setVisible(false);
 			mp.setID(ID);
 			mp.startFrame();			
 		}
@@ -189,10 +175,6 @@ public class Menu extends WindowAdapter implements ActionListener {
 			mn.startFrame();
 		}
 	}
-
-//	public void windowClosing(WindowEvent e) {
-//		System.exit(0);
-//	}
 	
 	public void setID(String ID) {
 		this.ID = ID;
@@ -201,6 +183,7 @@ public class Menu extends WindowAdapter implements ActionListener {
 	public static void main(String[] args) {
 		Menu mn = new Menu();
 		mn.startFrame();
+
 	}
 
 }

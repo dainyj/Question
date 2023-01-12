@@ -34,6 +34,7 @@ public class Execute { // 쿼리받아서 실행 클래스
 	public int runQuery(String sql) {
 		int num = 0;
 		try {
+			System.out.println("쿼리 실행");
 			rs = stmt.executeQuery(sql);
 //			while (rs.next()) {
 
@@ -49,10 +50,10 @@ public class Execute { // 쿼리받아서 실행 클래스
 //  쿼리 실행해서 MuseVo에 저장하는 메서드
 	public ArrayList<MuseVo> list(String sql) { // 쿼리 실행해서 MuseVo에 저장하는 메서드
 		ArrayList<MuseVo> muselist = new ArrayList<MuseVo>();
-		connDB();
+//		connDB();
 		try {
+			System.out.println("MuseVo에 저장-이름,주소");
 //			System.out.println(sql);
-//			stmt.executeQuery(sql);
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				String strbn = rs.getString("BIZPLC_NM");
@@ -62,9 +63,9 @@ public class Execute { // 쿼리받아서 실행 클래스
 //					System.out.println(strbn + " " + stradd + "\n" + list.add(data)));
 //					System.out.println();
 			}
-			rs.close();
-			stmt.close();
-			con.close();
+//			rs.close();
+//			stmt.close();
+//			con.close();
 		} catch (SQLException e) {
 			System.out.println(e);
 		}
@@ -74,10 +75,10 @@ public class Execute { // 쿼리받아서 실행 클래스
 //	쿼리 실행하여 Vo로 저장
 	public ArrayList<MuseVo> list2(String sql) { // 쿼리 실행해서 MuseVo에 저장하는 메서드
 		ArrayList<MuseVo> muselist = new ArrayList<MuseVo>();
-		connDB();
+//		connDB();
 		try {
-			System.out.println(sql);
-//			stmt.executeQuery(sql);
+			System.out.println("MuseVo에 저장 - 종류,이름,도시");
+//			System.out.println(sql);
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				String strtn = rs.getString("MUSEUM_ARTGLRY_TYPE_NM");
@@ -86,9 +87,9 @@ public class Execute { // 쿼리받아서 실행 클래스
 				MuseVo data = new MuseVo(strtn, strbn, strcn);
 				muselist.add(data);
 			}
-			rs.close();
-			stmt.close();
-			con.close();
+//			rs.close();
+//			stmt.close();
+//			con.close();
 		} catch (SQLException e) {
 			System.out.println(e);
 		}
@@ -98,7 +99,7 @@ public class Execute { // 쿼리받아서 실행 클래스
 //	여러개 출력 프로그램
 	public String[] printResult(String sql) {
 		String strbn = "", stradd = "";
-
+		System.out.println("list 출력");
 		ArrayList<MuseVo> muselist = list(sql);
 		// list(sql)의 list는 이 클래스 안에 있는 메서드 호출한 것
 		String[] mulist = new String[muselist.size()];
@@ -114,11 +115,12 @@ public class Execute { // 쿼리받아서 실행 클래스
 		return mulist;
 	}
 
-//	하나만 전송
+//	마이f > 선택 후 자세히 보기
 	public String printRes(String sql) { // 하나만 전송됨. 여러개 전송하려면 배열로 넘겨야할듯
-		connDB();
+//		connDB();
 		String mlist = "";
 		try {
+			System.out.println("마이f 선택 후 자세히 보기");
 //			stmt.executeQuery(sql);
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
@@ -136,8 +138,9 @@ public class Execute { // 쿼리받아서 실행 클래스
 
 //	검색f > 저장버튼으로 삽입실행
 	public void insertMypage(String sql) {
-		connDB();
+//		connDB();
 		try {
+			System.out.println("개인DB에 삽입");
 			boolean b = stmt.execute(sql);
 			if (!b) {
 				System.out.println("Insert success.\n");
@@ -151,10 +154,10 @@ public class Execute { // 쿼리받아서 실행 클래스
 
 //	마이f > 기본 화면에 띄울 데이터 Vo에 저장 후 리턴
 	public ArrayList<MyMuseVo> printBasics(String sql) {
-		connDB();
+//		connDB();
 		ArrayList<MyMuseVo> mylist = new ArrayList<MyMuseVo>();// DB 불러와서 저장할 ArrayList 생성
 		try {
-//			stmt.executeQuery(sql);
+			System.out.println("마이f 기본 화면에 띄울 데이터 Vo에 저장");
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				String strName = rs.getString("BIZPLC_NM");
@@ -162,9 +165,9 @@ public class Execute { // 쿼리받아서 실행 클래스
 				MyMuseVo data = new MyMuseVo(strName, strCity);
 				mylist.add(data);
 			}
-			rs.close();
-			stmt.close();
-			con.close();
+//			rs.close();
+//			stmt.close();
+//			con.close();
 		} catch (SQLException e) {
 			System.out.println(e);
 		}
