@@ -19,6 +19,7 @@ import javax.swing.border.Border;
 import db.Execute;
 import db.Query;
 import menu.City;
+import menu.Tab;
 import menu.Theme;
 import proMiddle.Mypage;
 import proMiddle.Search;
@@ -41,7 +42,7 @@ public class Menu extends WindowAdapter implements ActionListener {
 		f4 = new JFrame("MENU");
 		f4.setLayout(null);
 		f4.setSize(300, 550);
-		f4.setLocation(300, 300);
+		f4.setLocation(900, 300);
 		f4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f4.setResizable(false);
 
@@ -81,7 +82,7 @@ public class Menu extends WindowAdapter implements ActionListener {
 		bm1.addActionListener(this);
 		bm1.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
-		bm2 = new JButton("지역별");
+		bm2 = new JButton("List");
 		bm2.setSize(100, 30);
 		bm2.setLocation(95, 160);
 		bm2.addActionListener(this);
@@ -117,8 +118,6 @@ public class Menu extends WindowAdapter implements ActionListener {
 		lm.setLocation(50, 40);
 		lm.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 40));
 
-//		line = new JLabel("============================");
-//		line = new JLabel("--------------------------------------------------");
 		line = new JLabel("- - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
 		line.setSize(200, 10);
 		line.setLocation(50, 280);
@@ -150,8 +149,8 @@ public class Menu extends WindowAdapter implements ActionListener {
 			}
 		}
 
-		if (e.getActionCommand().equals("지역별")) { // O
-			City.main(null);
+		if (e.getActionCommand().equals("List")) {
+			Tab.main(null);
 		}
 
 		if (e.getActionCommand().equals("주제별")) {

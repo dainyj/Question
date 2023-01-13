@@ -15,7 +15,7 @@ import javax.swing.JFrame;
 public class Login extends WindowAdapter implements ActionListener {
 	private JFrame f3;
 	private JButton blogin, ok, sign;
-	private Label lid2, lpwd2, lf;
+	private Label lid2, lpwd2, lf, linfo;
 	private TextField tfid2, tfpwd2;
 	private Dialog info;
 
@@ -25,7 +25,7 @@ public class Login extends WindowAdapter implements ActionListener {
 		f3 = new JFrame("로그인");
 		f3.setLayout(null);
 		f3.setSize(300, 550);
-		f3.setLocation(300, 300);
+		f3.setLocation(900, 300);
 		f3.addWindowListener(this);
 		f3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f3.setResizable(false);
@@ -58,6 +58,12 @@ public class Login extends WindowAdapter implements ActionListener {
 		lpwd2.setSize(80, 20);
 		lpwd2.setLocation(30, 150);
 		lpwd2.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
+		
+		
+		linfo = new Label("a", Label.CENTER); // Dialog
+		linfo.setSize(80, 20);
+		linfo.setLocation(45, 190);
+		linfo.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 		lf = new Label("로그인 실패", Label.CENTER); // Dialog
 		lf.setSize(60, 30);
@@ -87,6 +93,7 @@ public class Login extends WindowAdapter implements ActionListener {
 		f3.add(tfpwd2);
 		f3.add(blogin);
 		f3.add(sign);
+//		f3.add(linfo);
 		f3.setVisible(true);
 		info.add(ok);
 	}

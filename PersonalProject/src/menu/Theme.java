@@ -17,7 +17,8 @@ import db.Execute;
 import db.Query;
 import proFront.Menu;
 
-public class Theme extends WindowAdapter implements ActionListener {
+public class Theme extends WindowAdapter 
+implements ActionListener {
 	private JFrame ft;
 	private JButton bm, ba, bg, back;
 	private JPanel pm, pa, pg;
@@ -127,7 +128,7 @@ public class Theme extends WindowAdapter implements ActionListener {
 //	}
 
 	public void actionPerformed(ActionEvent e) {
-
+		ec.connDB();
 		if (e.getActionCommand().equals("박물관")) {
 			String add = bm.getText();
 			String sql = qu.themeQuery(add);

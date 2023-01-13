@@ -6,8 +6,6 @@ import java.awt.Font;
 import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.util.ArrayList;
 
@@ -22,13 +20,13 @@ import db.Execute;
 import db.MyMuseVo;
 import db.Query;
 
-public class Mypage extends WindowAdapter implements ActionListener, MouseListener {
+public class Mypage extends WindowAdapter implements ActionListener {
 	private JFrame f5, fclick;
 	private JPanel p;
 	private JScrollPane sp;
 	private JTable tb;
 	private DefaultTableModel model;
-	private JButton b;
+	private JButton b, bdel;
 	private String ID;
 	private TextArea comments;
 
@@ -42,7 +40,7 @@ public class Mypage extends WindowAdapter implements ActionListener, MouseListen
 		f5 = new JFrame("Mypage");
 		f5.setLayout(null);
 		f5.setSize(300, 550);
-		f5.setLocation(300, 300);
+		f5.setLocation(1200, 300);
 		f5.setResizable(false);
 
 		fclick = new JFrame("자세히");
@@ -57,7 +55,6 @@ public class Mypage extends WindowAdapter implements ActionListener, MouseListen
 		p.setSize(250, 450);
 		p.setLocation(20, 30);
 		p.setLayout(new BorderLayout());
-//		p.addMouseListener(this);
 
 //		JTable setting
 		String header[] = { "기관명", "도시명" };
@@ -67,7 +64,6 @@ public class Mypage extends WindowAdapter implements ActionListener, MouseListen
 		tb = new JTable(model); // 모델을 사용한 테이블 생성
 		tb.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		tb.setPreferredSize(new Dimension(250, 450));
-		tb.addMouseListener(this);
 
 		sp = new JScrollPane(); // 테이블을 스크롤패널에 추가
 		sp.setViewportView(tb);
@@ -75,6 +71,12 @@ public class Mypage extends WindowAdapter implements ActionListener, MouseListen
 //		tb.getTableHeader().setResizingAllowed(false); // 테이블 사이즈 고정
 //		tb.setEnabled(false); // 테이블 수정 금지// 적용하면 자료 이동이 안됨.
 		p.add(sp);
+
+		bdel = new JButton("삭제");
+		bdel.setSize(60, 20);
+		bdel.setLocation(210, 8);
+		bdel.addActionListener(this);
+		bdel.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 		b = new JButton("확인");
 		b.setSize(80, 25);
@@ -103,6 +105,7 @@ public class Mypage extends WindowAdapter implements ActionListener, MouseListen
 	public void startFrame() {
 		f5.add(p);
 		f5.add(b);
+		f5.add(bdel);
 		f5.setVisible(true);
 		model.setNumRows(0); // 초기화 시켜주지 않으면 Table에 계속 쌓인다.
 		list();
@@ -134,49 +137,20 @@ public class Mypage extends WindowAdapter implements ActionListener, MouseListen
 			mp.startClick(result);
 		}
 
-	}
-
-	public static void main(String[] args) {
-		Mypage mp = new Mypage();
-		mp.startFrame();
-
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		if (e.getClickCount() == 2 && e.getSource().equals(tb)) {
-//			System.out.println(tb.getSelectedRow());
+		if (e.getActionCommand().equals("삭제")) {
 			String muse = (String) tb.getValueAt(tb.getSelectedRow(), 0);
-//			System.out.println(muse);
 			String sql = qu.deleteDB(ID, muse);
 			ec.runQuery(sql);
 
 			model.removeRow(tb.getSelectedRow());
 
 		}
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
+	public static void main(String[] args) {
+		Mypage mp = new Mypage();
+		mp.startFrame();
 
 	}
 

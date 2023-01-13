@@ -21,7 +21,7 @@ public class SignUp extends WindowAdapter implements ActionListener {
 		f2 = new JFrame("회원가입");
 		f2.setLayout(null);
 		f2.setSize(300, 550);
-		f2.setLocation(300, 300);
+		f2.setLocation(900, 300);
 		f2.addWindowListener(this);
 		f2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f2.setResizable(false);

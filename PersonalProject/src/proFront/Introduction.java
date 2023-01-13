@@ -25,7 +25,7 @@ public class Introduction extends WindowAdapter implements ActionListener {
 		f1 = new JFrame("INTRODUCTION");
 		f1.setLayout(null);
 		f1.setSize(300, 550);
-		f1.setLocation(300, 300);
+		f1.setLocation(900, 300);
 		f1.addWindowListener(this);
 		f1.setResizable(false);
 //	종료 
