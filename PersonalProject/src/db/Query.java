@@ -83,4 +83,29 @@ public class Query {
 		return sql;
 	}
 
+//	게시판 등록
+	public String noticeInsert(String ID, String title, String content) {
+		String sql = "Insert INTO NOTICE VALUES('" + ID + "','" + title + "','" + content + "')";
+		System.out.println(sql);
+		return sql;
+	}
+
+//	게시판 삭제
+	public String noticeDelete(String title, String ID) {
+		String sql = "DELETE FROM NOTICE WHERE TITLE '" + title + "' AND ID '" + ID + "'";
+		return null;
+
+	}
+
+	public String noticeEdit(String title, String ID) {
+		String sql = "SELECT * FROM NOTICE WHERE TITLE LIKE '" + title + "' AND ID LIKE '" + ID + "'";
+		return sql;
+	}
+
+	public String notice() {
+		String sql = "SELECT ROWNUM, n.* FROM NOTICE n";
+		return sql;
+	}
+	
+	
 }// class end

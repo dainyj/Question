@@ -1,36 +1,25 @@
 package proFront;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.border.Border;
 
 import db.Execute;
-import db.Query;
-import menu.City_0;
 import menu.Tab;
 import menu.Theme_0;
 import proMiddle.Mypage;
+import proMiddle.Notice;
 import proMiddle.Search;
 
 public class Menu extends WindowAdapter implements ActionListener {
-	private JFrame f4, f4_1;
+	private JFrame f4;
 	private JButton bm1, bm2, bs, bmp, back;
 	private JLabel lm, line;
-	private JTextArea ta;
-	private JPanel p;
-	private JScrollPane sp;
 	private String ID;
 	String str;
 
@@ -46,34 +35,7 @@ public class Menu extends WindowAdapter implements ActionListener {
 //		f4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f4.setResizable(false);
 
-//		=======DB출력 화면=========================================================================
-		f4_1 = new JFrame("게시판"); // 박물관 정보 출력프레임 // 탭으로 화면 구현, DB 불러오는 방식 공부
-		f4_1.setLayout(null);
-		f4_1.setSize(300, 550);
-		f4_1.setLocation(300, 300);
-		f4_1.setResizable(false);
 
-		p = new JPanel();
-		p.setSize(250, 400);
-		p.setLocation(20, 30);
-		p.setLayout(new BorderLayout());
-
-		ta = new JTextArea();
-		ta.setLineWrap(true); // 자동 줄바꿈
-		ta.setEditable(false); // 수정 X
-		ta.setCaretPosition(ta.getDocument().getLength()); // 내용이 추가될 때마다 스크롤 내리지 않고 바로 보기
-
-		sp = new JScrollPane();
-		sp.setViewportView(ta); // 스크롤에 ta를 추가
-		p.add(sp); // 패널에 스크롤을 추가, 패널에 ta를 직접 추가하지 않는다.
-
-		// textArea 와 텍스트 경계 사이에 여백을 두기 위해 emptyBorder 생성
-		Border emptyBorder = BorderFactory.createEmptyBorder(20, 20, 20, 20);
-		// textArea 의 테두리 선의 색과 두께 설정 가능.
-		Border lineBorder = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 3);
-		// textArea 에 lineBorder, emptyBorder 로 구성된 복함 경계선을 설정.
-		ta.setBorder(BorderFactory.createCompoundBorder(lineBorder, emptyBorder));
-//		=============================================================================================	
 
 //		Button setting
 		bm1 = new JButton("게시판");
@@ -119,7 +81,6 @@ public class Menu extends WindowAdapter implements ActionListener {
 	}
 
 	public void startFrame() {
-		f4_1.add(p);
 		f4.add(lm);
 		f4.add(line);
 		f4.add(bm1);
@@ -132,17 +93,15 @@ public class Menu extends WindowAdapter implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Mypage mp = new Mypage();
 		Execute ec = new Execute();
+		Notice note = new Notice();
 		ec.connDB();
 		if (e.getActionCommand().equals("게시판")) {
-			f4_1.setVisible(true);
+			note.setID(ID);
+			note.startFrame();
 		}
 
 		if (e.getActionCommand().equals("List")) {
 			Tab.main(null);
-		}
-
-		if (e.getActionCommand().equals("주제별")) {
-			Theme_0.main(null);
 		}
 
 		if (e.getActionCommand().equals("검색")) {
@@ -158,7 +117,6 @@ public class Menu extends WindowAdapter implements ActionListener {
 
 		if (e.getActionCommand().equals("뒤로")) {
 			Menu mn = new Menu();
-			f4_1.setVisible(false);
 			mn.startFrame();
 		}
 	}

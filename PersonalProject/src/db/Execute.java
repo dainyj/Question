@@ -36,11 +36,7 @@ public class Execute { // 쿼리받아서 실행 클래스
 		try {
 			System.out.println("쿼리 실행");
 			rs = stmt.executeQuery(sql);
-//			while (rs.next()) {
 
-//				num = rs.getInt("COUNT(*)"); 
-//				System.out.println("num = " + num);
-//			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -173,5 +169,23 @@ public class Execute { // 쿼리받아서 실행 클래스
 		}
 		return mylist;
 	}
+	
+	public void notice(String sql) {
+		try {
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				String strNum = rs.getString("ROWNUM");
+				String strTitle = rs.getString("TITLE");
+				String strId = rs.getString("ID");
+				
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 
 } // class end

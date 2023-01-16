@@ -37,7 +37,7 @@ public class Tab extends JFrame {
 		setTitle("List");
 //		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(300, 550);
-		setLocation(900, 300);
+		setLocation(600, 300);
 		setVisible(true);
 	}
 

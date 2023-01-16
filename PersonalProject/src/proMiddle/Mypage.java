@@ -40,7 +40,7 @@ public class Mypage extends WindowAdapter implements ActionListener {
 		f5 = new JFrame("Mypage");
 		f5.setLayout(null);
 		f5.setSize(300, 550);
-		f5.setLocation(1200, 300);
+		f5.setLocation(1500, 300);
 		f5.setResizable(false);
 
 		fclick = new JFrame("자세히");
