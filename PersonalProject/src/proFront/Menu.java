@@ -18,15 +18,15 @@ import javax.swing.border.Border;
 
 import db.Execute;
 import db.Query;
-import menu.City;
+import menu.City_0;
 import menu.Tab;
-import menu.Theme;
+import menu.Theme_0;
 import proMiddle.Mypage;
 import proMiddle.Search;
 
 public class Menu extends WindowAdapter implements ActionListener {
 	private JFrame f4, f4_1;
-	private JButton bm1, bm2, bm3, bs, bmp, back;
+	private JButton bm1, bm2, bs, bmp, back;
 	private JLabel lm, line;
 	private JTextArea ta;
 	private JPanel p;
@@ -43,11 +43,11 @@ public class Menu extends WindowAdapter implements ActionListener {
 		f4.setLayout(null);
 		f4.setSize(300, 550);
 		f4.setLocation(900, 300);
-		f4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		f4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f4.setResizable(false);
 
 //		=======DB출력 화면=========================================================================
-		f4_1 = new JFrame("VIEW"); // 박물관 정보 출력프레임 // 탭으로 화면 구현, DB 불러오는 방식 공부
+		f4_1 = new JFrame("게시판"); // 박물관 정보 출력프레임 // 탭으로 화면 구현, DB 불러오는 방식 공부
 		f4_1.setLayout(null);
 		f4_1.setSize(300, 550);
 		f4_1.setLocation(300, 300);
@@ -76,23 +76,17 @@ public class Menu extends WindowAdapter implements ActionListener {
 //		=============================================================================================	
 
 //		Button setting
-		bm1 = new JButton("ALL");
+		bm1 = new JButton("게시판");
 		bm1.setSize(100, 30);
-		bm1.setLocation(95, 100);
+		bm1.setLocation(95, 140);
 		bm1.addActionListener(this);
 		bm1.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 		bm2 = new JButton("List");
 		bm2.setSize(100, 30);
-		bm2.setLocation(95, 160);
+		bm2.setLocation(95, 200);
 		bm2.addActionListener(this);
 		bm2.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
-
-		bm3 = new JButton("주제별");
-		bm3.setSize(100, 30);
-		bm3.setLocation(95, 220);
-		bm3.addActionListener(this);
-		bm3.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 		bs = new JButton("검색");
 		bs.setSize(100, 30);
@@ -120,7 +114,7 @@ public class Menu extends WindowAdapter implements ActionListener {
 
 		line = new JLabel("- - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
 		line.setSize(200, 10);
-		line.setLocation(50, 280);
+		line.setLocation(50, 270);
 
 	}
 
@@ -130,7 +124,6 @@ public class Menu extends WindowAdapter implements ActionListener {
 		f4.add(line);
 		f4.add(bm1);
 		f4.add(bm2);
-		f4.add(bm3);
 		f4.add(bs);
 		f4.add(bmp);
 		f4.setVisible(true);
@@ -138,15 +131,10 @@ public class Menu extends WindowAdapter implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		Mypage mp = new Mypage();
-		Query qu = new Query();
 		Execute ec = new Execute();
 		ec.connDB();
-		if (e.getActionCommand().equals("ALL")) {
+		if (e.getActionCommand().equals("게시판")) {
 			f4_1.setVisible(true);
-			String[] list = ec.printResult(qu.allQuery());
-			for (int i = 0; i < list.length; i++) {
-				ta.append(list[i]);
-			}
 		}
 
 		if (e.getActionCommand().equals("List")) {
@@ -154,7 +142,7 @@ public class Menu extends WindowAdapter implements ActionListener {
 		}
 
 		if (e.getActionCommand().equals("주제별")) {
-			Theme.main(null);
+			Theme_0.main(null);
 		}
 
 		if (e.getActionCommand().equals("검색")) {
