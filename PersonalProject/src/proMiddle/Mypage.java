@@ -92,7 +92,7 @@ public class Mypage extends WindowAdapter implements ActionListener {
 		System.out.println(sql);
 		ArrayList<MyMuseVo> mylist = ec.printBasics(sql);// 쿼리 실행 메서드 호츨 // 배열로 넘겨받음
 
-		String list[] = new String[mylist.size()];
+		String list[] = new String[mylist.size()*2]; //  *2 나중에 확인하기
 		for (int i = 0; i < mylist.size(); i++) {
 			MyMuseVo data = (MyMuseVo) mylist.get(i);
 			list[0] = data.getNAME();

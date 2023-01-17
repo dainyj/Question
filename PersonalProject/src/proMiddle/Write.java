@@ -16,12 +16,12 @@ import db.Query;
 
 public class Write implements ActionListener {
 	private JFrame f;
-	private JButton b;
+	private JButton bsave, bedit;
 	private JLabel l;
 	private JTextField tf;
 	private JTextArea ta;
 	private JScrollPane sp;
-	private String ID;
+	private String ID, num;
 
 	public Write() {
 		f = new JFrame("Write");
@@ -30,11 +30,17 @@ public class Write implements ActionListener {
 		f.setLocation(1200, 300);
 		f.setResizable(false);
 
-		b = new JButton("등록");
-		b.setSize(60, 30);
-		b.setLocation(115, 450);
-		b.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
-		b.addActionListener(this);
+		bsave = new JButton("등록");
+		bsave.setSize(60, 30);
+		bsave.setLocation(115, 450);
+		bsave.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
+		bsave.addActionListener(this);
+
+		bedit = new JButton("수정");
+		bedit.setSize(60, 30);
+		bedit.setLocation(115, 450);
+		bedit.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
+		bedit.addActionListener(this);
 
 		l = new JLabel("제목");
 		l.setSize(30, 30);
@@ -58,19 +64,40 @@ public class Write implements ActionListener {
 	public void edit(String writingtitle) {
 		Query qu = new Query();
 		Execute ec = new Execute();
-		
+		Write wt = new Write();
+		Notice notice = new Notice();
+		ec.connDB();
 		String sql = qu.noticeEdit(writingtitle, ID);
-		ec.runQuery(sql);
-		
-		tf.setText(null);
-		ta.setText(null);
+		System.out.println(sql);
+		String[] strsum = ec.eidtQuery(sql);
+		String title = strsum[0];
+		String content = strsum[1];
+		String num = strsum[2];
+		notice.setID(ID);
+		System.out.println(strsum[0] + " " + strsum[1] + " " + strsum[2]);
+		wt.editStartFrame(title, content);
+		wt.setNum(num);
+	}
+
+	public void setNum(String num) {
+		this.num = num;
+	}
+
+	public void editStartFrame(String title, String content) {
+		tf.setText(title);
+		ta.setText(content);
+		f.add(l);
+		f.add(tf);
+		f.add(sp);
+		f.add(bedit);
+		f.setVisible(true);
 	}
 
 	public void startFrame() {
 		f.add(l);
 		f.add(tf);
 		f.add(sp);
-		f.add(b);
+		f.add(bsave);
 		f.setVisible(true);
 	}
 
@@ -80,19 +107,43 @@ public class Write implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		Notice notice = new Notice();
 		Query qu = new Query();
 		Execute ec = new Execute();
 		ec.connDB();
 		if (e.getActionCommand().equals("등록")) {
 //		DB에 저장 
+			String cntnum = qu.noticenum(); // count 쿼리문
+			System.out.println("실행 쿼리문 :" + cntnum);
+
+			int cntnumber = ec.cntrunQuery(cntnum);
+			int intnumber = 1 + cntnumber;
+			System.out.println("DB 수 : " + cntnumber + " 다음 게시글 순서 :" + intnumber);
+			String number = String.valueOf(intnumber);
+			System.out.println(number);
+
 			String title = tf.getText();
 			String content = ta.getText();
-			String sql = qu.noticeInsert(ID, title, content);
+			String sql = qu.noticeInsert(number, ID, title, content);
 			ec.runQuery(sql);
 //			System.out.println(title);
 //			System.out.println(content);
+			notice.setID(ID);
+			notice.model.setNumRows(0);// 게시판 초기화 후
+			notice.startFrame(); // 다시 실행
 			f.setVisible(false);
 		}
+		if (e.getActionCommand().equals("수정")) {
+			String title = tf.getText();
+			String content = ta.getText();
+
+			String sql = qu.editsave(title, content, num);
+			ec.runQuery(sql);
+			f.setVisible(false);
+			notice.setID(ID);
+			notice.startFrame();
+		}
+
 	}
 
 	public static void main(String[] args) {

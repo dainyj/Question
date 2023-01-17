@@ -63,8 +63,9 @@ public class Query {
 	}
 
 //	count
-	public String countnum(String ID) {
-		String cntsql = "SELECT COUNT(*) FROM " + ID;
+	public String countnum() {
+		String cntsql = "SELECT COUNT(*) FROM NOTICE";
+		System.out.println(cntsql);
 		return cntsql;
 	}
 
@@ -83,29 +84,45 @@ public class Query {
 		return sql;
 	}
 
-//	게시판 등록
-	public String noticeInsert(String ID, String title, String content) {
-		String sql = "Insert INTO NOTICE VALUES('" + ID + "','" + title + "','" + content + "')";
+//	게시글 등록
+	public String noticeInsert(String NUM, String ID, String title, String content) {
+		String sql = "Insert INTO NOTICE VALUES('" + NUM + "','" + ID + "','" + title + "','" + content + "')";
 		System.out.println(sql);
 		return sql;
 	}
 
-//	게시판 삭제
-	public String noticeDelete(String title, String ID) {
-		String sql = "DELETE FROM NOTICE WHERE TITLE '" + title + "' AND ID '" + ID + "'";
-		return null;
+//	게시글 삭제
+	public String noticeDelete(String num, String title, String ID) {
+		String sql = "DELETE FROM NOTICE WHERE NUM LIKE '" + num + "' AND TITLE LIKE '" + title + "' AND ID LIKE '" + ID + "'";
+		System.out.println(sql);
+		return sql;
 
 	}
 
+//	게시판 수정할 게시글 불러오기
 	public String noticeEdit(String title, String ID) {
 		String sql = "SELECT * FROM NOTICE WHERE TITLE LIKE '" + title + "' AND ID LIKE '" + ID + "'";
 		return sql;
 	}
 
-	public String notice() {
-		String sql = "SELECT ROWNUM, n.* FROM NOTICE n";
+//	게시판 게시글 수정
+	public String editsave(String title, String content, String num) {
+		String sql = "UPDATE NOTICE SET TITLE = '" + title + "', CONTENT = '" + content + "' WHERE NUM = '" + num + "'";
 		return sql;
 	}
-	
-	
+
+//	게시판 글 목록
+	public String notice() {
+		String sql = "SELECT * FROM NOTICE n ORDER by 1";
+		return sql;
+	}
+
+//	게시글 수 확인
+	public String noticenum() {
+		String sql = "SELECT NUM FROM NOTICE";
+		String cntsql = "SELECT COUNT(*) CNT FROM NOTICE";
+//		System.out.println(sql);
+//		return sql;
+		return cntsql;
+	}
 }// class end

@@ -31,12 +31,40 @@ public class Execute { // 쿼리받아서 실행 클래스
 
 	}
 
-	public int runQuery(String sql) {
+//	게시글 수정
+	public String[] eidtQuery(String sql) {
+		String[] strsum = new String[3];
+		try {
+			System.out.println("쿼리 실행");
+			rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				String strTitle = rs.getString("TITLE");
+				String strContent = rs.getString("CONTENT");
+				String num = rs.getString("NUM");
+				System.out.println("쿼리 결과 : " + strTitle + strContent + num);
+				strsum[0] = strTitle;
+				strsum[1] = strContent;
+				strsum[2] = num;
+
+				System.out.println("배열에 넣었을 때 : " + strsum[0] + " " + strsum[1] + " " + strsum[2]);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return strsum;
+	}
+
+//	게시글 수 확인 쿼리 실행
+	public int cntrunQuery(String sql) {
 		int num = 0;
 		try {
 			System.out.println("쿼리 실행");
 			rs = stmt.executeQuery(sql);
 
+			while (rs.next()) {
+				num = rs.getInt("CNT");
+			}
+			System.out.println("CNT : " + num);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -169,23 +197,35 @@ public class Execute { // 쿼리받아서 실행 클래스
 		}
 		return mylist;
 	}
-	
-	public void notice(String sql) {
+
+//	게시판 글 목록
+	public ArrayList<NoticeVo> notice(String sql) {
+		ArrayList<NoticeVo> notelist = new ArrayList<NoticeVo>();
 		try {
 			rs = stmt.executeQuery(sql);
-			while(rs.next()) {
-				String strNum = rs.getString("ROWNUM");
+			while (rs.next()) {
+				String strNum = rs.getString("NUM");
 				String strTitle = rs.getString("TITLE");
 				String strId = rs.getString("ID");
-				
+				NoticeVo data = new NoticeVo(strNum, strTitle, strId);
+				notelist.add(data);
 			}
-			
-			
+
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return notelist;
 	}
-	
+
+//	단순 쿼리 실행
+	public void runQuery(String sql) {
+		try {
+			rs = stmt.executeQuery(sql);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
 
 } // class end

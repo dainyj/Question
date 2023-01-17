@@ -1,21 +1,23 @@
 package db;
 
 public class NoticeVo {
-	private String TITLE, CONTENT, ID, ROWNUM;
+	private String TITLE, CONTENT, ID, NUM;
 
 	public NoticeVo() {
 		super();
 	}
 
-	public NoticeVo(String TITLE, String CONTENT, String ID, String ROWNUM) {
+	public NoticeVo(String NUM, String ID, String TITLE, String CONTENT) {
 		this.TITLE = TITLE;
 		this.CONTENT = CONTENT;
 		this.ID = ID;
-		this.ROWNUM = ROWNUM;
+		this.NUM = NUM;
 	}
 	
-	public NoticeVo(String ROENUM) {
-		
+	public NoticeVo(String NUM, String TITLE, String ID) {
+		this.NUM = NUM;
+		this.TITLE = TITLE;
+		this.ID = ID;
 	}
 
 	public String getTITLE() {
@@ -34,20 +36,20 @@ public class NoticeVo {
 		this.CONTENT = CONTENT;
 	}
 
-	public String setID() {
+	public String getID() {
 		return ID;
 	}
 
-	public void getID(String ID) {
+	public void setID(String ID) {
 		this.ID = ID;
 	}
 
-	public String setROWNUM() {
-		return ROWNUM;
+	public String getNUM() {
+		return NUM;
 	}
 
-	public void getROWNUM(String ROWNUM) {
-		this.ROWNUM = ROWNUM;
+	public void setROWNUM(String NUM) {
+		this.NUM = NUM;
 	}
 
 }

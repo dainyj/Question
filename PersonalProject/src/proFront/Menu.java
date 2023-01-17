@@ -11,7 +11,6 @@ import javax.swing.JLabel;
 
 import db.Execute;
 import menu.Tab;
-import menu.Theme_0;
 import proMiddle.Mypage;
 import proMiddle.Notice;
 import proMiddle.Search;
