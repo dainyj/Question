@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 import db.Execute;
 import db.MyMuseVo;
@@ -71,6 +72,12 @@ public class Mypage extends WindowAdapter implements ActionListener {
 //		tb.getTableHeader().setResizingAllowed(false); // 테이블 사이즈 고정
 //		tb.setEnabled(false); // 테이블 수정 금지// 적용하면 자료 이동이 안됨.
 		p.add(sp);
+		
+//		테이블 가로 넓이 조절
+		TableColumn col0 = tb.getColumnModel().getColumn(0);
+		col0.setPreferredWidth(100);
+		TableColumn col1 = tb.getColumnModel().getColumn(1);
+		col1.setPreferredWidth(5);
 
 		bdel = new JButton("삭제");
 		bdel.setSize(60, 20);

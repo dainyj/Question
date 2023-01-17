@@ -32,7 +32,8 @@ public class Notice implements ActionListener {
 
 	Query qu = new Query();
 	Execute ec = new Execute();
-
+	Write write = new Write();
+	
 	public Notice() {
 		fnote = new JFrame("게시판"); // 박물관 정보 출력프레임 // 탭으로 화면 구현, DB 불러오는 방식 공부
 		fnote.setLayout(null);
@@ -93,9 +94,9 @@ public class Notice implements ActionListener {
 
 	public void startFrame() {
 		fnote.add(sp, new BorderLayout());
-		fnote.add(bsave, new BorderLayout().SOUTH);
-		fnote.add(bedit, new BorderLayout().SOUTH);
-		fnote.add(bdelete, new BorderLayout().SOUTH);
+		fnote.add(bsave, new BorderLayout());
+		fnote.add(bedit, new BorderLayout());
+		fnote.add(bdelete, new BorderLayout());
 		list();
 		fnote.setVisible(true);
 
@@ -107,8 +108,8 @@ public class Notice implements ActionListener {
 		String sql = qu.notice();
 		ArrayList<NoticeVo> noticelist = ec.notice(sql);
 		String list[] = new String[noticelist.size() * 3];
-		System.out.println("게시글 수 : " + noticelist.size());
-		System.out.println("배열 길이 : " + list.length);
+//		System.out.println("게시글 수 : " + noticelist.size());
+//		System.out.println("배열 길이 : " + list.length);
 		for (int i = 0; i < noticelist.size(); i++) {
 			NoticeVo data = (NoticeVo) noticelist.get(i);
 			list[0] = data.getNUM();
@@ -126,10 +127,6 @@ public class Notice implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-//		Query qu = new Query();
-//		Execute ec = new Execute();
-		Write write = new Write();
-
 		ec.connDB();
 		if (e.getActionCommand().equals("등록")) {
 //			새로운 창 열림 거기서 작성 및 수정
@@ -141,11 +138,10 @@ public class Notice implements ActionListener {
 		if (e.getActionCommand().equals("수정")) {
 			int selectRow = tb.getSelectedRow();
 			String selectId = (String) tb.getValueAt(selectRow, 2);
-//			내 아이디와 등록된 글의 아이디가 일치하는지 확인 넣기
 			String writingtitle = (String) tb.getValueAt(selectRow, 1);
 			if (selectId.equals(ID)) {
 				fnote.setVisible(false);
-				System.out.println("match");
+//				System.out.println("match");
 				write.setID(ID);
 				write.edit(writingtitle);
 			} else {
@@ -157,15 +153,14 @@ public class Notice implements ActionListener {
 			Notice notice = new Notice();
 			int selectRow = tb.getSelectedRow();
 			String selectId = (String) tb.getValueAt(selectRow, 2);
-//			내 아이디와 등록된 글의 아이디가 일치하는지 확인 후 삭제 가능하도록 수정 필요
 			String writingNum = (String) tb.getValueAt(selectRow, 0);
 			String writingtitle = (String) tb.getValueAt(selectRow, 1);
 			String writingID = (String) tb.getValueAt(selectRow, 2);
 			if (selectId.equals(ID)) {
-				System.out.println("match");
+//				System.out.println("match");
 				fnote.setVisible(false);
 				String sql = qu.noticeDelete(writingNum, writingtitle, writingID);
-				System.out.println("sql 실행전 : " + sql);
+//				System.out.println("sql 실행전 : " + sql);
 				ec.runQuery(sql);
 				notice.setID(ID);
 				notice.startFrame();

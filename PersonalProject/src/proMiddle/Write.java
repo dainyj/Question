@@ -52,7 +52,6 @@ public class Write implements ActionListener {
 		tf.setLocation(40, 10);
 
 		ta = new JTextArea();
-//		ta.setText("내용 : ");
 
 		sp = new JScrollPane();
 		sp.setViewportView(ta);
@@ -114,13 +113,13 @@ public class Write implements ActionListener {
 		if (e.getActionCommand().equals("등록")) {
 //		DB에 저장 
 			String cntnum = qu.noticenum(); // count 쿼리문
-			System.out.println("실행 쿼리문 :" + cntnum);
+//			System.out.println("실행 쿼리문 :" + cntnum);
 
 			int cntnumber = ec.cntrunQuery(cntnum);
 			int intnumber = 1 + cntnumber;
-			System.out.println("DB 수 : " + cntnumber + " 다음 게시글 순서 :" + intnumber);
+//			System.out.println("DB 수 : " + cntnumber + " 다음 게시글 순서 :" + intnumber);
 			String number = String.valueOf(intnumber);
-			System.out.println(number);
+//			System.out.println(number);
 
 			String title = tf.getText();
 			String content = ta.getText();

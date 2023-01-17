@@ -11,11 +11,12 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class Login extends WindowAdapter implements ActionListener {
 	private JFrame f3;
 	private JButton blogin, ok, sign;
-	private Label lid2, lpwd2, lf, linfo;
+	private JLabel lid2, lpwd2, lf, linfo;
 	private TextField tfid2, tfpwd2;
 	private Dialog info;
 
@@ -50,22 +51,22 @@ public class Login extends WindowAdapter implements ActionListener {
 		ok.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 15));
 
 //		Label setting O
-		lid2 = new Label("ID", Label.CENTER);
+		lid2 = new JLabel("ID", JLabel.CENTER);
 		lid2.setSize(80, 20);
 		lid2.setLocation(30, 80);
 		lid2.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
-		lpwd2 = new Label("PASSWORD", Label.CENTER);
+		lpwd2 = new JLabel("PASSWORD", JLabel.CENTER);
 		lpwd2.setSize(80, 20);
 		lpwd2.setLocation(30, 150);
 		lpwd2.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 		
 		
-		linfo = new Label("a", Label.CENTER); // Dialog
+		linfo = new JLabel("a", JLabel.CENTER); // Dialog
 		linfo.setSize(80, 20);
 		linfo.setLocation(45, 190);
 		linfo.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
-		lf = new Label("로그인 실패", Label.CENTER); // Dialog
+		lf = new JLabel("로그인 실패", JLabel.CENTER); // Dialog
 		lf.setSize(60, 30);
 		lf.setLocation(45, 35);
 

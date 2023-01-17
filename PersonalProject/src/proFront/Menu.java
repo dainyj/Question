@@ -17,7 +17,7 @@ import proMiddle.Search;
 
 public class Menu extends WindowAdapter implements ActionListener {
 	private JFrame f4;
-	private JButton bm1, bm2, bs, bmp, back;
+	private JButton bm1, bm2, bs, bmp;
 	private JLabel lm, line;
 	private String ID;
 	String str;
@@ -60,12 +60,6 @@ public class Menu extends WindowAdapter implements ActionListener {
 		bmp.setLocation(95, 380);
 		bmp.addActionListener(this);
 		bmp.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
-
-		back = new JButton("뒤로");
-		back.setSize(70, 20);
-		back.setLocation(200, 480);
-		back.addActionListener(this);
-		back.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 //		Label setting
 		lm = new JLabel("MENU");
@@ -114,10 +108,6 @@ public class Menu extends WindowAdapter implements ActionListener {
 			mp.startFrame();			
 		}
 
-		if (e.getActionCommand().equals("뒤로")) {
-			Menu mn = new Menu();
-			mn.startFrame();
-		}
 	}
 	
 	public void setID(String ID) {
