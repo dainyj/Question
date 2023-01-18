@@ -1,4 +1,4 @@
-package menu;
+package proMiddle;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -314,9 +314,7 @@ class C2 extends JPanel implements ActionListener {
 			for (int i = 0; i < list.length; i++) {
 				ta.append(list[i]);
 			}
-
 		}
-
 	}
 } // C2 end
 
@@ -335,7 +333,6 @@ class C3 extends JPanel implements ActionListener {
 		b9.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
 //		setLayout(null);
-
 		f = new JFrame("목록");
 		f.setLayout(null);
 		f.setSize(300, 550);

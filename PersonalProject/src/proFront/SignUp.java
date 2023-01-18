@@ -9,6 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import db.PMemberDAO;
+
 public class SignUp extends WindowAdapter implements ActionListener {
 	private JFrame f2, fout;
 	private JButton bsignUp, bout, bout2, bidcheck;

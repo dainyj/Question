@@ -3,7 +3,6 @@ package db;
 public class MyMuseVo {
 	private String NAME;
 	private String CITY;
-	private String ID;
 
 	public MyMuseVo() {
 		super();

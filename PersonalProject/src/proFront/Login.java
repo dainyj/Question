@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import db.PMemberDAO;
+import db.PMemberVo;
 
 public class Login extends WindowAdapter implements ActionListener {
 	private JFrame f3;
@@ -61,14 +65,14 @@ public class Login extends WindowAdapter implements ActionListener {
 		lpwd2.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 		
 		
-		linfo = new JLabel("a", JLabel.CENTER); // Dialog
-		linfo.setSize(80, 20);
-		linfo.setLocation(45, 190);
-		linfo.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
+//		linfo = new JLabel("a", JLabel.CENTER); // Dialog
+//		linfo.setSize(80, 20);
+//		linfo.setLocation(45, 190);
+//		linfo.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 
-		lf = new JLabel("로그인 실패", JLabel.CENTER); // Dialog
-		lf.setSize(60, 30);
-		lf.setLocation(45, 35);
+//		lf = new JLabel("로그인 실패", JLabel.CENTER); // Dialog
+//		lf.setSize(60, 30);
+//		lf.setLocation(45, 35);
 
 //		TextField setting O
 		tfid2 = new TextField(10);
@@ -96,7 +100,7 @@ public class Login extends WindowAdapter implements ActionListener {
 		f3.add(sign);
 //		f3.add(linfo);
 		f3.setVisible(true);
-		info.add(ok);
+//		info.add(ok);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -111,10 +115,11 @@ public class Login extends WindowAdapter implements ActionListener {
 
 		if (e.getActionCommand().equals("로그인")) {
 //			Dialog 적용하기 
-			if (tfid2.getText() == "" && tfpwd2.getText() == "") {
-				info.add(lf);
-				info.setVisible(true);
-			}
+//			if (tfid2.getText() == "" && tfpwd2.getText() == "") {
+//				JOptionPane.showMessageDialog(null, "ID와 비밀번호를 다시 입력해 주세요.");
+////				info.add(lf);
+////				info.setVisible(true);
+//			}
 
 			ArrayList<PMemberVo> list = dao.list(tfid2.getText()); // ID가 DB에 있는지 확인하는 메서드 호출
 
@@ -132,8 +137,9 @@ public class Login extends WindowAdapter implements ActionListener {
 				mn.startFrame(); // 로그인 성공 시 열리는 프레임
 
 			} else {
-				info.add(lf);
-				info.setVisible(true);
+				JOptionPane.showMessageDialog(null, "ID와 비밀번호를 다시 입력해 주세요");
+//				info.add(lf);
+//				info.setVisible(true);
 			}
 		}
 		if (e.getActionCommand().equals("회원가입")) {

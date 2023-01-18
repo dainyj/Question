@@ -1,4 +1,4 @@
-package proFront;
+package db;
 
 public class PMemberVo {
 	private String id;

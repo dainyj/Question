@@ -10,10 +10,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import db.Execute;
-import menu.Tab;
 import proMiddle.Mypage;
 import proMiddle.Notice;
 import proMiddle.Search;
+import proMiddle.Tab;
 
 public class Menu extends WindowAdapter implements ActionListener {
 	private JFrame f4;
@@ -64,7 +64,7 @@ public class Menu extends WindowAdapter implements ActionListener {
 //		Label setting
 		lm = new JLabel("MENU");
 		lm.setSize(120, 30);
-		lm.setLocation(50, 40);
+		lm.setLocation(85, 55);
 		lm.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 40));
 
 		line = new JLabel("- - - - - - - - - - - - - - - - - - - - - - - - - - - - -");

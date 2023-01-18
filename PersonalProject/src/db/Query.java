@@ -119,10 +119,7 @@ public class Query {
 
 //	게시글 수 확인
 	public String noticenum() {
-		String sql = "SELECT NUM FROM NOTICE";
 		String cntsql = "SELECT COUNT(*) CNT FROM NOTICE";
-//		System.out.println(sql);
-//		return sql;
 		return cntsql;
 	}
 }// class end
