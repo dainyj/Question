@@ -62,7 +62,7 @@ public class Introduction extends WindowAdapter implements ActionListener {
 		sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		p.add(sp);  //3. 패널에 스크롤을 추가, 패널에 TA를 직접 추가하지 않는다.
 
-		String intro = "안녕하세요."; // 소개 글 적는 부분
+		String intro = "경기도에 위치한 박물관, 미술관, 전시관을 검색할 수 있는 프로그램입니다.\n회원가입을 하시면 검색한 박물관 정보를 마이페이지에 저장하실 수 있습니다.\n이용해주셔서 감사합니다."; // 소개 글 적는 부분
 		ta.append(intro);
 	}
 

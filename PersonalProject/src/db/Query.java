@@ -93,10 +93,17 @@ public class Query {
 
 //	게시글 삭제
 	public String noticeDelete(String num, String title, String ID) {
-		String sql = "DELETE FROM NOTICE WHERE NUM LIKE '" + num + "' AND TITLE LIKE '" + title + "' AND ID LIKE '" + ID + "'";
+		String sql = "DELETE FROM NOTICE WHERE NUM LIKE '" + num + "' AND TITLE LIKE '" + title + "' AND ID LIKE '" + ID
+				+ "'";
 		System.out.println(sql);
 		return sql;
 
+	}
+
+//	게시글 불러오기
+	public String check(String num, String title) {
+		String sql = "SELECT * FROM NOTICE WHERE NUM LIKE '" + num + "' AND TITLE LIKE '" + title + "'";
+		return sql;
 	}
 
 //	게시판 수정할 게시글 불러오기
@@ -122,4 +129,5 @@ public class Query {
 		String cntsql = "SELECT COUNT(*) CNT FROM NOTICE";
 		return cntsql;
 	}
+
 }// class end

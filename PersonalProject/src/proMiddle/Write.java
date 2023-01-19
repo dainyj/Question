@@ -77,6 +77,36 @@ public class Write implements ActionListener {
 		wt.editStartFrame(title, content);
 		wt.setNum(num);
 	}
+	
+	public void check(String num, String title) {
+		Query qu = new Query();
+		Execute ec = new Execute();
+		Write wt = new Write();
+		Notice notice = new Notice();
+		notice.setID(ID);
+		ec.connDB();
+		String sql = qu.check(num, title);
+		String[]check = ec.eidtQuery(sql);
+		String strt = check[0];
+		String strc = check[1];
+		wt.checkStartFrame(strt, strc);
+		
+//		.setEditable(false); // 수정 X
+		
+	}
+	
+	public void checkStartFrame(String strt, String strc) {
+		f.setTitle("보기");
+		tf.setText(strt);
+		tf.setEditable(false); 
+		ta.setText(strc);
+		ta.setEditable(false);
+		f.add(tf);
+		f.add(sp);
+		f.setVisible(true);
+		
+	}
+	
 
 	public void setNum(String num) {
 		this.num = num;
@@ -107,15 +137,18 @@ public class Write implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Notice notice = new Notice();
+		Write write = new Write();
 		Query qu = new Query();
 		Execute ec = new Execute();
+		write.setID(ID);
+		notice.setID(ID);
 		ec.connDB();
 		if (e.getActionCommand().equals("등록")) {
 //		DB에 저장 
 			String cntnum = qu.noticenum(); // count 쿼리문
 //			System.out.println("실행 쿼리문 :" + cntnum);
 
-			int cntnumber = ec.cntrunQuery(cntnum);
+			int cntnumber = ec.cntrunQuery(cntnum); //게시글 수 확인
 			int intnumber = 1 + cntnumber;
 //			System.out.println("DB 수 : " + cntnumber + " 다음 게시글 순서 :" + intnumber);
 			String number = String.valueOf(intnumber);
@@ -127,6 +160,7 @@ public class Write implements ActionListener {
 			ec.runQuery(sql);
 //			System.out.println(title);
 //			System.out.println(content);
+			write.setID(ID);
 			notice.setID(ID);
 			notice.model.setNumRows(0);// 게시판 초기화 후
 			notice.startFrame(); // 다시 실행
@@ -139,6 +173,7 @@ public class Write implements ActionListener {
 			String sql = qu.editsave(title, content, num);
 			ec.runQuery(sql);
 			f.setVisible(false);
+			write.setID(ID);
 			notice.setID(ID);
 			notice.startFrame();
 		}

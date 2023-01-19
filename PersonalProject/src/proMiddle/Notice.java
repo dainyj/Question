@@ -24,7 +24,7 @@ import db.Query;
 
 public class Notice implements ActionListener {
 	private JFrame fnote;
-	private JButton bsave, bedit, bdelete;
+	private JButton bsave, bedit, bdelete, bopen;
 	private JScrollPane sp;
 	private JTable tb;
 	DefaultTableModel model;
@@ -33,7 +33,7 @@ public class Notice implements ActionListener {
 	Query qu = new Query();
 	Execute ec = new Execute();
 	Write write = new Write();
-	
+
 	public Notice() {
 		fnote = new JFrame("게시판"); // 박물관 정보 출력프레임 // 탭으로 화면 구현, DB 불러오는 방식 공부
 		fnote.setLayout(null);
@@ -73,27 +73,34 @@ public class Notice implements ActionListener {
 		tcm.getColumn(0).setCellRenderer(dtcr); // 지정 열만
 		tcm.getColumn(2).setCellRenderer(dtcr); // 지정 열만
 
+		bopen = new JButton("확인");
+		bopen.setSize(60, 30);
+		bopen.setLocation(150, 450);
+		bopen.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
+		bopen.addActionListener(this);
+
 		bsave = new JButton("등록");
 		bsave.setSize(60, 30);
-		bsave.setLocation(190, 450);
+		bsave.setLocation(220, 450);
 		bsave.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 		bsave.addActionListener(this);
 
 		bedit = new JButton("수정");
 		bedit.setSize(60, 30);
-		bedit.setLocation(260, 450);
+		bedit.setLocation(290, 450);
 		bedit.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 		bedit.addActionListener(this);
 
 		bdelete = new JButton("삭제");
 		bdelete.setSize(60, 30);
-		bdelete.setLocation(330, 450);
+		bdelete.setLocation(360, 450);
 		bdelete.setFont(new Font("kopubworld", Font.ROMAN_BASELINE, 13));
 		bdelete.addActionListener(this);
 	}
 
 	public void startFrame() {
 		fnote.add(sp, new BorderLayout());
+		fnote.add(bopen);
 		fnote.add(bsave, new BorderLayout());
 		fnote.add(bedit, new BorderLayout());
 		fnote.add(bdelete, new BorderLayout());
@@ -127,7 +134,21 @@ public class Notice implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		Notice notice = new Notice();
+		write.setID(ID);
+		notice.setID(ID);
 		ec.connDB();
+
+		if (e.getActionCommand().equals("확인")) {
+			System.out.println("확인");
+			int selectRow = tb.getSelectedRow();
+			String title = (String) tb.getValueAt(selectRow, 1);
+			String num = (String) tb.getValueAt(selectRow, 0);
+//			write.setID(ID);
+			write.check(num, title);
+
+		}
+
 		if (e.getActionCommand().equals("등록")) {
 //			새로운 창 열림 거기서 작성 및 수정
 			write.setID(ID);
@@ -150,7 +171,7 @@ public class Notice implements ActionListener {
 		}
 
 		if (e.getActionCommand().equals("삭제")) {
-			Notice notice = new Notice();
+			
 			int selectRow = tb.getSelectedRow();
 			String selectId = (String) tb.getValueAt(selectRow, 2);
 			String writingNum = (String) tb.getValueAt(selectRow, 0);
@@ -162,6 +183,7 @@ public class Notice implements ActionListener {
 				String sql = qu.noticeDelete(writingNum, writingtitle, writingID);
 //				System.out.println("sql 실행전 : " + sql);
 				ec.runQuery(sql);
+				write.setID(ID);
 				notice.setID(ID);
 				notice.startFrame();
 			} else {
