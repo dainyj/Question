@@ -155,8 +155,43 @@ public class Notice implements ActionListener {
 			write.startFrame();
 			fnote.setVisible(false);
 		}
+		
+		
+		/* 공부 꼭 필요 >구글링한 정보
+		 * 클래스의 trace가 없는 라이브러리에서 발생한 AWT-EventQueue의 OutOfBounds 익셉션의 경우 대부분 개발자가 작성한
+		 * 코드에서의 화면 갱신이 AWT 이벤트 디스페칭 쓰레드 타지 않고, 비동기적으로 실행하기 때문에 발생한 동기화의 문제에서 야기된다. 이
+		 * 문제는 TableModel.addRow(Object[] row)/removeRow(int i), ,
+		 * Component.getComponentAt(int i)등에서 자주 발생하며, 동시 다발적으로 발생하는 경우가 많아서 로컬시스템에 많은
+		 * 부하를 준다. 이런 경우SwingUtilities.invokeLater(또는 invokeAndWait, 응답 지연이 다소 발생하는 경우
+		 * invokeAndWait를 사용하면, 응답을 기다리지 않고, 바로 리턴 한다.)를 사용하면, 대부분 해결 되고, 화면 갱신의 따른 깜빡
+		 * 거림도 없이 부드럽게 넘어간다. 테이블의 removeRow 와 addRow가 빈번히 발생하는 곳에서는 invokeLater를 사용하면, 큰
+		 * 효과를 볼 수 있다.
+		 * <Sample Code>
 
-		if (e.getActionCommand().equals("수정")) {
+DefaultTableModel model = new DefaultTableModel();
+ 
+// model.addRow(row);
+Runnable doAddRow = nwe Runnable() {
+     public void run() {
+         model.addRow(row);
+     }
+};
+SwingUtilities.invokeLater(doAddRow);
+ 
+// while(model.getRowCount() > 0) {
+//       model.removeRow( model.getRowCount() - 1 );
+// }
+Runnable doRemoveRow = nwe Runnable() {
+     public void run() {
+         while(model.getRowCount() > 0) {
+           model.removeRow( model.getRowCount() - 1 );
+         }
+     }
+};
+SwingUtilities.invokeLater(doRemoveRow);
+		 * 
+		 */		
+		if (e.getActionCommand().equals("수정")) { // 동기 비동기 나중에 배우면 다시 확인하기, 
 			int selectRow = tb.getSelectedRow();
 			String selectId = (String) tb.getValueAt(selectRow, 2);
 			String writingtitle = (String) tb.getValueAt(selectRow, 1);
