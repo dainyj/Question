@@ -20,11 +20,11 @@ public class Execute { // 쿼리받아서 실행 클래스
 	public void connDB() { // 드라이버 연결, 계정 연결
 		try {
 			Class.forName(driver); // 드라이버 연결(위에 문자열 선언해둠)
-			System.out.println("jdbc driver loading success.");
+//			System.out.println("jdbc driver loading success.");
 			con = DriverManager.getConnection(url, user, password); // 계정 연결
-			System.out.println("oracle connection success.");
+//			System.out.println("oracle connection success.");
 			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-			System.out.println("statement create success.");
+//			System.out.println("statement create success.");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -41,12 +41,12 @@ public class Execute { // 쿼리받아서 실행 클래스
 				String strTitle = rs.getString("TITLE");
 				String strContent = rs.getString("CONTENT");
 				String num = rs.getString("NUM");
-				System.out.println("쿼리 결과 : " + strTitle + strContent + num);
+//				System.out.println("쿼리 결과 : " + strTitle + strContent + num);
 				strsum[0] = strTitle;
 				strsum[1] = strContent;
 				strsum[2] = num;
 
-				System.out.println("배열에 넣었을 때 : " + strsum[0] + " " + strsum[1] + " " + strsum[2]);
+//				System.out.println("배열에 넣었을 때 : " + strsum[0] + " " + strsum[1] + " " + strsum[2]);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -76,7 +76,7 @@ public class Execute { // 쿼리받아서 실행 클래스
 		ArrayList<MuseVo> muselist = new ArrayList<MuseVo>();
 //		connDB();
 		try {
-			System.out.println("MuseVo에 저장-이름,주소");
+//			System.out.println("MuseVo에 저장-이름,주소");
 //			System.out.println(sql);
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) {
@@ -101,7 +101,7 @@ public class Execute { // 쿼리받아서 실행 클래스
 		ArrayList<MuseVo> muselist = new ArrayList<MuseVo>();
 //		connDB();
 		try {
-			System.out.println("MuseVo에 저장 - 종류,이름,도시");
+//			System.out.println("MuseVo에 저장 - 종류,이름,도시");
 //			System.out.println(sql);
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) {
@@ -123,7 +123,7 @@ public class Execute { // 쿼리받아서 실행 클래스
 //	여러개 출력 프로그램
 	public String[] printResult(String sql) {
 		String strbn = "", stradd = "";
-		System.out.println("list 출력");
+//		System.out.println("list 출력");
 		ArrayList<MuseVo> muselist = list(sql);
 		// list(sql)의 list는 이 클래스 안에 있는 메서드 호출한 것
 		String[] mulist = new String[muselist.size()];
@@ -144,7 +144,7 @@ public class Execute { // 쿼리받아서 실행 클래스
 //		connDB();
 		String mlist = "";
 		try {
-			System.out.println("마이f 선택 후 자세히 보기");
+//			System.out.println("마이f 선택 후 자세히 보기");
 //			stmt.executeQuery(sql);
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
@@ -164,7 +164,7 @@ public class Execute { // 쿼리받아서 실행 클래스
 	public void insertMypage(String sql) {
 //		connDB();
 		try {
-			System.out.println("개인DB에 삽입");
+//			System.out.println("개인DB에 삽입");
 			boolean b = stmt.execute(sql);
 			if (!b) {
 				System.out.println("Insert success.\n");
@@ -181,7 +181,7 @@ public class Execute { // 쿼리받아서 실행 클래스
 //		connDB();
 		ArrayList<MyMuseVo> mylist = new ArrayList<MyMuseVo>();// DB 불러와서 저장할 ArrayList 생성
 		try {
-			System.out.println("마이f 기본 화면에 띄울 데이터 Vo에 저장");
+//			System.out.println("마이f 기본 화면에 띄울 데이터 Vo에 저장");
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				String strName = rs.getString("BIZPLC_NM");
