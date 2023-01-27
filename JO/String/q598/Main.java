@@ -1,32 +1,39 @@
-package q598;
-/*문자를 입력받아 알파벳 문자인 경우에는 그대로 출력하고 숫자인 경우는 
- * 아스키코드값을 출력하는 작업을 반복하다가 기타의 문자가 입력되면 
- * 종료하는 프로그램을 작성하시오.*/
-
-/*입력
-A
-A
-1
-49
-@
-*/
+package String.q598;
 
 import java.util.Scanner;
 
 public class Main {
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		
-		while (true) {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+//        System.out.println((int)'A'+" "+(int)'Z');
+//        System.out.println((int)'a'+" "+(int)'z');
 
-			char A = sc.next().charAt(0);
-//			int N = sc.nextInt();
-			if(0<A&&A<10)
-//			System.out.println(A);
-			System.out.printf("%c",A);
-		}
+//case 1
+        while (true) {
+            char inp = sc.next().charAt(0);
+            if (('A' <= inp && inp <= 'Z') || ('a' <= inp && inp <= 'z')) {
+                System.out.println(inp);
+            } else if ('0' <= inp && inp <= '9') {
+                System.out.printf("%d\n", (int) inp);
+            } else {
+                break;
+            }
+        }
 
-//		sc.close();
-	} // Main end
+//case 2
+//        while(true) {
+//            char inp = sc.next().charAt(0);
+//
+//            if(Character.isAlphabetic(inp)) {
+//                System.out.println(inp);
+//            }else if (Character.isDigit(inp)) {
+//                System.out.printf("%d\n", (int) inp);
+//            }else{
+//                break;
+//            }
+//        }
 
-}
+    }
+}// class end
+
+

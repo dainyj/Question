@@ -1,4 +1,4 @@
-package q599;
+package String.q599;
 
 import java.util.Scanner;
 
@@ -22,9 +22,9 @@ public class Main {
 
 //			방법2
 //			알파벳만 뽑아내는 메서드
-			if (Character.isAlphabetic(str.charAt(i))) {
-				System.out.print(str.charAt(i));
+			if (Character.isAlphabetic(str.charAt(i))) { //알파벳만 골라주는 메서드
 				str = str.toUpperCase(); // 대문자로 변경해주는 메서드
+				System.out.print(str.charAt(i));
 
 			}
 		}
