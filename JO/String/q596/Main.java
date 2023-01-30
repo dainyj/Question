@@ -1,4 +1,4 @@
-package q596;
+package String.q596;
 
 import java.util.Scanner;
 
