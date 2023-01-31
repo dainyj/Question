@@ -13,13 +13,13 @@ public class Main {
             inp[i] = sc.nextInt();
 //            System.out.print(inp[i] + " ");
         }
-        int cnt3=0;
-        int cnt5=0;
-        for (int i = 0; i < inp.length; i++) {
-            if(inp[i]%3==0){
+        int cnt3 = 0;
+        int cnt5 = 0;
+        for (int i : inp) {
+            if (i % 3 == 0) {
                 cnt3++;
             }
-            if(inp[i]%5==0){
+            if (i % 5 == 0) {
                 cnt5++;
             }
         }

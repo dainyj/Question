@@ -1,3 +1,4 @@
+/*
 package q10828;
 
 import java.io.BufferedReader;
@@ -85,3 +86,4 @@ public class Main {
 		sc.close();
 	}
 }
+*/

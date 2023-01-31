@@ -1,3 +1,4 @@
+/*
 package LOGIN;
 
 import java.sql.Connection;
@@ -89,3 +90,4 @@ public class LoginDAO {
 	}
 
 } // class end
+*/

@@ -11,17 +11,17 @@ public class Main {
 		sc.close();
 
 //	tanswer // 자바 버전이 올라감에 따라 이런 기능도 제공하는듯하나 아직 정올에선 통과가 되지 않는다.
-		switch (num) {
-		case 1, 3, 5, 7, 8, 10, 12:
-			System.out.println("31");
-			break;
-		case 2:
-			System.out.println("28");
-			break;
-		case 4, 6, 9, 11:
-			System.out.println("30");
-			break;
-		}
+//		switch (num) {
+//		case 1, 3, 5, 7, 8, 10, 12:
+//			System.out.println("31");
+//			break;
+//		case 2:
+//			System.out.println("28");
+//			break;
+//		case 4, 6, 9, 11:
+//			System.out.println("30");
+//			break;
+//		}
 
 //	방법1	
 
