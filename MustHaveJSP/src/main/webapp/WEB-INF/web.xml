@@ -13,6 +13,15 @@
 		<welcome-file>default.htm</welcome-file>
 	</welcome-file-list>
 
+<!-- 페이징 설정값 -->
+	<context-param>
+		<param-name>POSTS_PER_PAGE</param-name>
+		<param-value>10</param-value>
+	</context-param>
+	<context-param>
+		<param-name>PAGES_PER_BLOCK</param-name>
+		<param-value>5</param-value>
+	</context-param>
 
 
 	<context-param>
