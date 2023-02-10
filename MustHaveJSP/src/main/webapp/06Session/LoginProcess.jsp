@@ -5,9 +5,8 @@
 
 <%  
 // 로그인 폼으로부터 받은 아이이와 패스워드
-String userId = request.getParameter("user-id");
-String userPwd = request.getParameter("user-pw");
-
+String userId = request.getParameter("user_id");
+String userPwd = request.getParameter("user_pw");
 
 String oracleDriver = application.getInitParameter("OracleDriver");
 String oracleURL= application.getInitParameter("OracleURL");
@@ -16,9 +15,13 @@ String oraclePwd= application.getInitParameter("OraclePwd");
 
 
 MemberDAO dao = new MemberDAO(oracleDriver, oracleURL, oracleId, oraclePwd);
-MemberDTO memberDTO = dao.getMemberDTO(userId,userPwd);
+
+
+System.out.println("LoginProcess.jsp : " + userId + ":" + userPwd);
+MemberDTO memberDTO = dao.getMemberDTO(userId, userPwd);
 dao.close();
 
+System.out.println("memberDTO.getName() : " + memberDTO.getName());
 
 if(memberDTO.getId() != null){
 	session.setAttribute("UserId", memberDTO.getId());
@@ -30,14 +33,3 @@ else{
 	request.getRequestDispatcher("LogonForm.jsp").forward(request, response);
 }
 	%>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
-</html>

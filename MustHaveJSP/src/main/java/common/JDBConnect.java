@@ -15,7 +15,7 @@ public class JDBConnect {
 	public ResultSet rs;
 
 	public JDBConnect() {
-		try {
+		try { //WEB-INF의 lib에 ojdbc8.jar를 import한다
 			Class.forName("oracle.jdbc.OracleDriver");
 
 			String url = "jdbc:oracle:thin:@localhost:1521:xe";
