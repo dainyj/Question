@@ -59,7 +59,7 @@ dao.close(); // DB 연결 닫기
 	<h2>목록 보기(List) - 현재 페이지 : <%= pageNum %> (전체 : <%= totalPage %>)</h2>
 	<!-- 검색폼 -->
 	<form method="get">
-		<table border="1" width="90%">
+		<table border="1" width="90%" >
 			<tr>
 				<td align="center"><select name="searchField">
 						<option value="title">제목</option>
@@ -102,9 +102,9 @@ dao.close(); // DB 연결 닫기
 			<td><%=virtualNum%></td>
 			<td align="left"><a href="View.jsp?num=<%=dto.getNum()%>"><%=dto.getTitle()%></a>
 			</td>
-			<td align="center"><%=dto.getId()%></td>
-			<td align="center"><%=dto.getVisitcount()%></td>
-			<td align="center"><%=dto.getPostdate()%></td>
+			<td align="center"><%=dto.getId()%></td>  <!-- 작성자 아이디 -->
+			<td align="center"><%=dto.getVisitcount()%></td> <!-- 조회수 -->
+			<td align="center"><%=dto.getPostdate()%></td>  <!-- 작성일 -->
 		</tr>
 
 		<%
