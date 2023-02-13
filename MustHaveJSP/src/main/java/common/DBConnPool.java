@@ -12,9 +12,9 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class DBConnPool {
-	public Connection conn;
+	public Connection con;
 	public Statement stmt;
-	public PreparedStatement pstmt;
+	public PreparedStatement psmt;
 	public ResultSet rs;
 	
 	public DBConnPool() {
@@ -23,7 +23,7 @@ public class DBConnPool {
 			Context ctx=(Context)initCtx.lookup("java:comp/env");
 			DataSource dataSource=(DataSource)ctx.lookup("dbcp_myoracle");
 			
-			conn=dataSource.getConnection();
+			con=dataSource.getConnection();
 			
 			System.out.println("DB 커넥션 풀 연결 성공");
 		} catch (NamingException e) {
@@ -39,8 +39,8 @@ public class DBConnPool {
 		try {
 			if(rs!=null) rs.close();
 			if(stmt!=null) stmt.close();
-			if(pstmt!=null) pstmt.close();
-			if(conn!=null) conn.close();
+			if(psmt!=null) psmt.close();
+			if(con!=null) con.close();
 			
 			System.out.println("DB 커넥션 풀 자원 반납");
 		}catch(Exception e) {
