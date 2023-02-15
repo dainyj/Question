@@ -13,6 +13,31 @@
 		<welcome-file>default.htm</welcome-file>
 	</welcome-file-list>
 
+<!-- 모델2 게시판 글쓰기 -->
+<servlet>
+	<servlet-name>MVCBoardWrite</servlet-name>
+	<servlet-class>model2.mvcboard.WriteController</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>MVCBoardWrite</servlet-name>
+	<url-pattern>/mvcboard/write.do</url-pattern>
+</servlet-mapping>
+
+<!-- 첨부파일 최대용량 설정 -->
+<context-param>
+	<param-name>maxPostSize</param-name>
+	<param-value>1024000</param-value>
+</context-param>
+
+<!-- 모델2 파일첨부형 게시판 -->
+<servlet>
+	<servlet-name>MVCBoardList</servlet-name>
+	<servlet-class>model2.mvcboard.ListController</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>MVCBoardList</servlet-name>
+	<url-pattern>/mvcboard/list.do</url-pattern>
+</servlet-mapping>
 
 
 <!-- MVC 패턴 적용 회원인증 -->
