@@ -13,34 +13,40 @@
 		<welcome-file>default.htm</welcome-file>
 	</welcome-file-list>
 
-<!-- 모델2 게시판 글쓰기 -->
-<servlet>
-	<servlet-name>MVCBoardWrite</servlet-name>
-	<servlet-class>model2.mvcboard.WriteController</servlet-class>
-</servlet>
-<servlet-mapping>
-	<servlet-name>MVCBoardWrite</servlet-name>
-	<url-pattern>/mvcboard/write.do</url-pattern>
-</servlet-mapping>
+	<!-- 채팅 서버에 접속하기 위한 요청 URL -->
+	<context-param>
+		<param-name>CHAT_ADDR</param-name>
+		<param-value>ws://localhost:8081/MustHaveJSP</param-value>
+	</context-param>
 
-<!-- 첨부파일 최대용량 설정 -->
-<context-param>
-	<param-name>maxPostSize</param-name>
-	<param-value>1024000</param-value>
-</context-param>
+	<!-- 모델2 게시판 글쓰기 -->
+	<servlet>
+		<servlet-name>MVCBoardWrite</servlet-name>
+		<servlet-class>model2.mvcboard.WriteController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MVCBoardWrite</servlet-name>
+		<url-pattern>/mvcboard/write.do</url-pattern>
+	</servlet-mapping>
 
-<!-- 모델2 파일첨부형 게시판 -->
-<servlet>
-	<servlet-name>MVCBoardList</servlet-name>
-	<servlet-class>model2.mvcboard.ListController</servlet-class>
-</servlet>
-<servlet-mapping>
-	<servlet-name>MVCBoardList</servlet-name>
-	<url-pattern>/mvcboard/list.do</url-pattern>
-</servlet-mapping>
+	<!-- 첨부파일 최대용량 설정 -->
+	<context-param>
+		<param-name>maxPostSize</param-name>
+		<param-value>1024000</param-value>
+	</context-param>
+
+	<!-- 모델2 파일첨부형 게시판 -->
+	<servlet>
+		<servlet-name>MVCBoardList</servlet-name>
+		<servlet-class>model2.mvcboard.ListController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MVCBoardList</servlet-name>
+		<url-pattern>/mvcboard/list.do</url-pattern>
+	</servlet-mapping>
 
 
-<!-- MVC 패턴 적용 회원인증 -->
+	<!-- MVC 패턴 적용 회원인증 -->
 	<servlet>
 		<servlet-name>MemberAuth</servlet-name>
 		<servlet-class>servlet.MemberAuth</servlet-class>
@@ -86,7 +92,21 @@
 		<param-value>5</param-value>
 	</context-param>
 
+	<!-- 에러별 출력 페이지 설정 -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/02ImplicitObject/Exception.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>405</error-code>
+		<location>/02ImplicitObject/Exception.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/02ImplicitObject/Exception.jsp</location>
+	</error-page>
 
+	<!-- 초기화 매개변수 -->
 	<context-param>
 		<param-name>INIT_PARAM</param-name>
 		<param-value>web.xml에 저장한 초기화 매개변수</param-value>
