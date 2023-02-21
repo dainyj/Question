@@ -5,7 +5,7 @@
 ****
 *****
 */
-package q2438_star1;
+package src.q2438_star1;
 
 import java.util.Scanner;
 

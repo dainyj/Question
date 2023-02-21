@@ -6,8 +6,6 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int[] cnt = new int[10];
-//        int[]count = { 0,}; //0으로 초기화
-//        int[]num= { 1,}; // 0번만 1 나머지는?
 
         boolean b = true;
         do {
@@ -17,7 +15,7 @@ public class Main {
             else
                 cnt[inp - 1]++;
 
-            System.out.println(inp);
+//            System.out.println(inp);
         } while (b);
         sc.close();
         for (int i = 0; i < cnt.length; i++) {
@@ -28,7 +26,8 @@ public class Main {
 
     }
 }
-
+//        int[]count = { 0,}; //0으로 초기화
+//        int[]num= { 1,}; // 0번만 1 나머지는?
 //case 2--------------------------------------------------------------------------
 //public class Main {
 //    private int[] capitalNum;
